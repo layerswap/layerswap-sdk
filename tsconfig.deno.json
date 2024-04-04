@@ -9,7 +9,6 @@
       "Layerswap/_shims/auto/*": ["deno/_shims/auto/*-deno"],
       "Layerswap/*": ["deno/*"],
       "Layerswap": ["deno/index.ts"],
-      "digest-fetch": ["./typings/digest-fetch"]
     },
     "noEmit": true,
     "declaration": true,
