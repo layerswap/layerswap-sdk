@@ -9,11 +9,6 @@ import * as API from 'Layerswap/resources/index';
 
 export interface ClientOptions {
   /**
-   * Defaults to process.env['LAYERSWAP_LS_API_KEY'].
-   */
-  lsAPIKey?: string | undefined;
-
-  /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
    *
    * Defaults to process.env['LAYERSWAP_BASE_URL'].
@@ -72,15 +67,12 @@ export interface ClientOptions {
 
 /** API Client for interfacing with the Layerswap API. */
 export class Layerswap extends Core.APIClient {
-  lsAPIKey: string;
-
   private _options: ClientOptions;
 
   /**
    * API Client for interfacing with the Layerswap API.
    *
-   * @param {string | undefined} [opts.lsAPIKey=process.env['LAYERSWAP_LS_API_KEY'] ?? undefined]
-   * @param {string} [opts.baseURL=process.env['LAYERSWAP_BASE_URL'] ?? https://api-dev.layerswap.cloud] - Override the default base URL for the API.
+   * @param {string} [opts.baseURL=process.env['LAYERSWAP_BASE_URL'] ?? https://api.layerswap.io] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {number} [opts.httpAgent] - An HTTP agent used to manage HTTP(s) connections.
    * @param {Core.Fetch} [opts.fetch] - Specify a custom `fetch` function implementation.
@@ -88,21 +80,10 @@ export class Layerswap extends Core.APIClient {
    * @param {Core.Headers} opts.defaultHeaders - Default headers to include with every request to the API.
    * @param {Core.DefaultQuery} opts.defaultQuery - Default query parameters to include with every request to the API.
    */
-  constructor({
-    baseURL = Core.readEnv('LAYERSWAP_BASE_URL'),
-    lsAPIKey = Core.readEnv('LAYERSWAP_LS_API_KEY'),
-    ...opts
-  }: ClientOptions = {}) {
-    if (lsAPIKey === undefined) {
-      throw new Errors.LayerswapError(
-        "The LAYERSWAP_LS_API_KEY environment variable is missing or empty; either provide it, or instantiate the Layerswap client with an lsAPIKey option, like new Layerswap({ lsAPIKey: 'My Ls API Key' }).",
-      );
-    }
-
+  constructor({ baseURL = Core.readEnv('LAYERSWAP_BASE_URL'), ...opts }: ClientOptions = {}) {
     const options: ClientOptions = {
-      lsAPIKey,
       ...opts,
-      baseURL: baseURL || `https://api-dev.layerswap.cloud`,
+      baseURL: baseURL || `https://api.layerswap.io`,
     };
 
     super({
@@ -113,12 +94,14 @@ export class Layerswap extends Core.APIClient {
       fetch: options.fetch,
     });
     this._options = options;
-
-    this.lsAPIKey = lsAPIKey;
   }
 
   exchanges: API.Exchanges = new API.Exchanges(this);
-  partnerEndpointsV2: API.PartnerEndpointsV2 = new API.PartnerEndpointsV2(this);
+  networks: API.Networks = new API.Networks(this);
+  sources: API.Sources = new API.Sources(this);
+  destinations: API.Destinations = new API.Destinations(this);
+  limits: API.Limits = new API.Limits(this);
+  quotes: API.Quotes = new API.Quotes(this);
   swaps: API.Swaps = new API.Swaps(this);
 
   protected override defaultQuery(): Core.DefaultQuery | undefined {
@@ -130,10 +113,6 @@ export class Layerswap extends Core.APIClient {
       ...super.defaultHeaders(opts),
       ...this._options.defaultHeaders,
     };
-  }
-
-  protected override authHeaders(opts: Core.FinalRequestOptions): Core.Headers {
-    return { 'X-LS-APIKEY': this.lsAPIKey };
   }
 
   protected override stringifyQuery(query: Record<string, unknown>): string {
@@ -183,18 +162,35 @@ export namespace Layerswap {
   export import RequestOptions = Core.RequestOptions;
 
   export import Exchanges = API.Exchanges;
-  export import APIResponseListExchangeWithTokenGroupsModel = API.APIResponseListExchangeWithTokenGroupsModel;
+  export import ExchangeWithTokenGroups = API.ExchangeWithTokenGroups;
 
-  export import PartnerEndpointsV2 = API.PartnerEndpointsV2;
+  export import Networks = API.Networks;
+  export import NetworkWithTokens = API.NetworkWithTokens;
+
+  export import Sources = API.Sources;
+  export import SourceListParams = API.SourceListParams;
+
+  export import Destinations = API.Destinations;
+  export import DestinationListParams = API.DestinationListParams;
+
+  export import Limits = API.Limits;
+  export import SwapRouteLimits = API.SwapRouteLimits;
+  export import LimitListParams = API.LimitListParams;
+
+  export import Quotes = API.Quotes;
+  export import SwapQuoteResponse = API.SwapQuoteResponse;
+  export import QuoteRetrieveParams = API.QuoteRetrieveParams;
 
   export import Swaps = API.Swaps;
-  export import APIResponseSwapModel = API.APIResponseSwapModel;
-  export import APIResponseSwapResponse = API.APIResponseSwapResponse;
+  export import PreparedSwapResponse = API.PreparedSwapResponse;
+  export import SwapListResponse = API.SwapListResponse;
+  export import SwapResponse = API.SwapResponse;
   export import SwapCreateParams = API.SwapCreateParams;
+  export import SwapRetrieveParams = API.SwapRetrieveParams;
   export import SwapListParams = API.SwapListParams;
 
-  export import APIResponseListNetworkTokenWithFeeModel = API.APIResponseListNetworkTokenWithFeeModel;
-  export import APIResponseListNetworkWithRouteTokensModel = API.APIResponseListNetworkWithRouteTokensModel;
+  export import NetworkToken = API.NetworkToken;
+  export import NetworkWithRouteTokens = API.NetworkWithRouteTokens;
 }
 
 export default Layerswap;

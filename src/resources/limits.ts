@@ -2,24 +2,21 @@
 
 import * as Core from 'Layerswap/core';
 import { APIResource } from 'Layerswap/resource';
-import * as LimitsAPI from 'Layerswap/resources/partner-endpoints-v2/limits';
+import * as LimitsAPI from 'Layerswap/resources/limits';
 
 export class Limits extends APIResource {
-  list(
-    query: LimitListParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<APIResponseSwapRouteLimitsModel> {
-    return this._client.get('/api/v2-alpha/limits', { query, ...options });
+  list(query: LimitListParams, options?: Core.RequestOptions): Core.APIPromise<SwapRouteLimits> {
+    return this._client.get('/api/v2/limits', { query, ...options });
   }
 }
 
-export interface APIResponseSwapRouteLimitsModel {
-  data?: APIResponseSwapRouteLimitsModel.Data;
+export interface SwapRouteLimits {
+  data?: SwapRouteLimits.Data;
 
-  error?: APIResponseSwapRouteLimitsModel.Error;
+  error?: SwapRouteLimits.Error;
 }
 
-export namespace APIResponseSwapRouteLimitsModel {
+export namespace SwapRouteLimits {
   export interface Data {
     max_amount?: number;
 
@@ -40,8 +37,6 @@ export namespace APIResponseSwapRouteLimitsModel {
 }
 
 export interface LimitListParams {
-  deposit_mode: string;
-
   destination_network: string;
 
   destination_token: string;
@@ -51,9 +46,11 @@ export interface LimitListParams {
   source_token: string;
 
   refuel?: boolean;
+
+  use_deposit_address?: boolean;
 }
 
 export namespace Limits {
-  export import APIResponseSwapRouteLimitsModel = LimitsAPI.APIResponseSwapRouteLimitsModel;
+  export import SwapRouteLimits = LimitsAPI.SwapRouteLimits;
   export import LimitListParams = LimitsAPI.LimitListParams;
 }

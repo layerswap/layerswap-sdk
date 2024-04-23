@@ -3,14 +3,11 @@
 import Layerswap from 'Layerswap';
 import { Response } from 'node-fetch';
 
-const layerswap = new Layerswap({
-  lsAPIKey: 'My Ls API Key',
-  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
-});
+const layerswap = new Layerswap({ baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010' });
 
-describe('resource networks', () => {
+describe('resource destinations', () => {
   test('list', async () => {
-    const responsePromise = layerswap.partnerEndpointsV2.networks.list();
+    const responsePromise = layerswap.destinations.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,8 +19,24 @@ describe('resource networks', () => {
 
   test('list: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(layerswap.destinations.list({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+      Layerswap.NotFoundError,
+    );
+  });
+
+  test('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      layerswap.partnerEndpointsV2.networks.list({ path: '/_stainless_unknown_path' }),
+      layerswap.destinations.list(
+        {
+          include_swaps: true,
+          include_unavailable: true,
+          include_unmatched: true,
+          source_network: 'string',
+          source_token: 'string',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
     ).rejects.toThrow(Layerswap.NotFoundError);
   });
 });

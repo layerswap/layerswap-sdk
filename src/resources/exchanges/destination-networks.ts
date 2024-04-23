@@ -9,13 +9,13 @@ export class DestinationNetworks extends APIResource {
   list(
     query: DestinationNetworkListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.APIResponseListNetworkWithRouteTokensModel> {
-    return this._client.get('/api/v2-alpha/exchange_destination_networks', { query, ...options });
+  ): Core.APIPromise<Shared.NetworkWithRouteTokens> {
+    return this._client.get('/api/v2/exchange_destination_networks', { query, ...options });
   }
 }
 
 export interface DestinationNetworkListParams {
-  source_asset_group: string;
+  source_token_group: string;
 
   include_unavailable?: boolean;
 

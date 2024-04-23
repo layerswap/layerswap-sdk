@@ -3,14 +3,11 @@
 import Layerswap from 'Layerswap';
 import { Response } from 'node-fetch';
 
-const layerswap = new Layerswap({
-  lsAPIKey: 'My Ls API Key',
-  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
-});
+const layerswap = new Layerswap({ baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010' });
 
 describe('resource destinationNetworks', () => {
   test('list: only required params', async () => {
-    const responsePromise = layerswap.exchanges.destinationNetworks.list({ source_asset_group: 'string' });
+    const responsePromise = layerswap.exchanges.destinationNetworks.list({ source_token_group: 'string' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,7 +19,7 @@ describe('resource destinationNetworks', () => {
 
   test('list: required and optional params', async () => {
     const response = await layerswap.exchanges.destinationNetworks.list({
-      source_asset_group: 'string',
+      source_token_group: 'string',
       include_unavailable: true,
       include_unmatched: true,
     });

@@ -9,21 +9,29 @@ export class WithdrawalNetworks extends APIResource {
   list(
     query: WithdrawalNetworkListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.APIResponseListNetworkTokenWithFeeModel> {
-    return this._client.get('/api/v2-alpha/exchange_withdrawal_networks', { query, ...options });
+  ): Core.APIPromise<Shared.NetworkToken> {
+    return this._client.get('/api/v2/exchange_withdrawal_networks', { query, ...options });
   }
 }
 
 export interface WithdrawalNetworkListParams {
-  amount: number;
+  destination_network: string;
 
-  destination_exchange: string;
+  /**
+   * Exchange from where you are transfering funds.
+   */
+  destination_token: string;
 
-  destination_token_group: string;
+  /**
+   * Exchange from where you are transfering funds. Example: BINANCE, LSCEX (sandbox)
+   */
+  source_exchange: string;
 
-  source_network: string;
-
-  source_token: string;
+  /**
+   * Token group symbol. Used to group assets such as bridged USDC and Circle USDC.
+   * Example: ETH, USDC
+   */
+  source_token_group: string;
 }
 
 export namespace WithdrawalNetworks {
