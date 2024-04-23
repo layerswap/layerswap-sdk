@@ -23,7 +23,6 @@ describe('instantiate client', () => {
     const client = new Layerswap({
       baseURL: 'http://localhost:5000/',
       defaultHeaders: { 'X-My-Default-Header': '2' },
-      lsAPIKey: 'My Ls API Key',
     });
 
     test('they are used in the request', () => {
@@ -55,7 +54,6 @@ describe('instantiate client', () => {
       const client = new Layerswap({
         baseURL: 'http://localhost:5000/',
         defaultQuery: { apiVersion: 'foo' },
-        lsAPIKey: 'My Ls API Key',
       });
       expect(client.buildURL('/foo', null)).toEqual('http://localhost:5000/foo?apiVersion=foo');
     });
@@ -64,17 +62,12 @@ describe('instantiate client', () => {
       const client = new Layerswap({
         baseURL: 'http://localhost:5000/',
         defaultQuery: { apiVersion: 'foo', hello: 'world' },
-        lsAPIKey: 'My Ls API Key',
       });
       expect(client.buildURL('/foo', null)).toEqual('http://localhost:5000/foo?apiVersion=foo&hello=world');
     });
 
     test('overriding with `undefined`', () => {
-      const client = new Layerswap({
-        baseURL: 'http://localhost:5000/',
-        defaultQuery: { hello: 'world' },
-        lsAPIKey: 'My Ls API Key',
-      });
+      const client = new Layerswap({ baseURL: 'http://localhost:5000/', defaultQuery: { hello: 'world' } });
       expect(client.buildURL('/foo', { hello: undefined })).toEqual('http://localhost:5000/foo');
     });
   });
@@ -82,7 +75,6 @@ describe('instantiate client', () => {
   test('custom fetch', async () => {
     const client = new Layerswap({
       baseURL: 'http://localhost:5000/',
-      lsAPIKey: 'My Ls API Key',
       fetch: (url) => {
         return Promise.resolve(
           new Response(JSON.stringify({ url, custom: true }), {
@@ -99,7 +91,6 @@ describe('instantiate client', () => {
   test('custom signal', async () => {
     const client = new Layerswap({
       baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
-      lsAPIKey: 'My Ls API Key',
       fetch: (...args) => {
         return new Promise((resolve, reject) =>
           setTimeout(
@@ -124,18 +115,12 @@ describe('instantiate client', () => {
 
   describe('baseUrl', () => {
     test('trailing slash', () => {
-      const client = new Layerswap({
-        baseURL: 'http://localhost:5000/custom/path/',
-        lsAPIKey: 'My Ls API Key',
-      });
+      const client = new Layerswap({ baseURL: 'http://localhost:5000/custom/path/' });
       expect(client.buildURL('/foo', null)).toEqual('http://localhost:5000/custom/path/foo');
     });
 
     test('no trailing slash', () => {
-      const client = new Layerswap({
-        baseURL: 'http://localhost:5000/custom/path',
-        lsAPIKey: 'My Ls API Key',
-      });
+      const client = new Layerswap({ baseURL: 'http://localhost:5000/custom/path' });
       expect(client.buildURL('/foo', null)).toEqual('http://localhost:5000/custom/path/foo');
     });
 
@@ -144,55 +129,41 @@ describe('instantiate client', () => {
     });
 
     test('explicit option', () => {
-      const client = new Layerswap({ baseURL: 'https://example.com', lsAPIKey: 'My Ls API Key' });
+      const client = new Layerswap({ baseURL: 'https://example.com' });
       expect(client.baseURL).toEqual('https://example.com');
     });
 
     test('env variable', () => {
       process.env['LAYERSWAP_BASE_URL'] = 'https://example.com/from_env';
-      const client = new Layerswap({ lsAPIKey: 'My Ls API Key' });
+      const client = new Layerswap({});
       expect(client.baseURL).toEqual('https://example.com/from_env');
     });
 
     test('empty env variable', () => {
       process.env['LAYERSWAP_BASE_URL'] = ''; // empty
-      const client = new Layerswap({ lsAPIKey: 'My Ls API Key' });
-      expect(client.baseURL).toEqual('https://api-dev.layerswap.cloud');
+      const client = new Layerswap({});
+      expect(client.baseURL).toEqual('https://api.layerswap.io');
     });
 
     test('blank env variable', () => {
       process.env['LAYERSWAP_BASE_URL'] = '  '; // blank
-      const client = new Layerswap({ lsAPIKey: 'My Ls API Key' });
-      expect(client.baseURL).toEqual('https://api-dev.layerswap.cloud');
+      const client = new Layerswap({});
+      expect(client.baseURL).toEqual('https://api.layerswap.io');
     });
   });
 
   test('maxRetries option is correctly set', () => {
-    const client = new Layerswap({ maxRetries: 4, lsAPIKey: 'My Ls API Key' });
+    const client = new Layerswap({ maxRetries: 4 });
     expect(client.maxRetries).toEqual(4);
 
     // default
-    const client2 = new Layerswap({ lsAPIKey: 'My Ls API Key' });
+    const client2 = new Layerswap({});
     expect(client2.maxRetries).toEqual(2);
-  });
-
-  test('with environment variable arguments', () => {
-    // set options via env var
-    process.env['LAYERSWAP_LS_API_KEY'] = 'My Ls API Key';
-    const client = new Layerswap();
-    expect(client.lsAPIKey).toBe('My Ls API Key');
-  });
-
-  test('with overriden environment variable arguments', () => {
-    // set options via env var
-    process.env['LAYERSWAP_LS_API_KEY'] = 'another My Ls API Key';
-    const client = new Layerswap({ lsAPIKey: 'My Ls API Key' });
-    expect(client.lsAPIKey).toBe('My Ls API Key');
   });
 });
 
 describe('request building', () => {
-  const client = new Layerswap({ lsAPIKey: 'My Ls API Key' });
+  const client = new Layerswap({});
 
   describe('Content-Length', () => {
     test('handles multi-byte characters', () => {
@@ -234,7 +205,7 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
 
-    const client = new Layerswap({ lsAPIKey: 'My Ls API Key', timeout: 10, fetch: testFetch });
+    const client = new Layerswap({ timeout: 10, fetch: testFetch });
 
     expect(await client.request({ path: '/foo', method: 'get' })).toEqual({ a: 1 });
     expect(count).toEqual(2);
@@ -261,7 +232,7 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
 
-    const client = new Layerswap({ lsAPIKey: 'My Ls API Key', fetch: testFetch });
+    const client = new Layerswap({ fetch: testFetch });
 
     expect(await client.request({ path: '/foo', method: 'get' })).toEqual({ a: 1 });
     expect(count).toEqual(2);
@@ -288,7 +259,7 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
 
-    const client = new Layerswap({ lsAPIKey: 'My Ls API Key', fetch: testFetch });
+    const client = new Layerswap({ fetch: testFetch });
 
     expect(await client.request({ path: '/foo', method: 'get' })).toEqual({ a: 1 });
     expect(count).toEqual(2);

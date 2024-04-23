@@ -3,10 +3,7 @@
 import Layerswap from 'Layerswap';
 import { Response } from 'node-fetch';
 
-const layerswap = new Layerswap({
-  lsAPIKey: 'My Ls API Key',
-  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
-});
+const layerswap = new Layerswap({ baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010' });
 
 describe('resource swaps', () => {
   test('create', async () => {
@@ -35,6 +32,17 @@ describe('resource swaps', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       layerswap.swaps.retrieve('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', { path: '/_stainless_unknown_path' }),
+    ).rejects.toThrow(Layerswap.NotFoundError);
+  });
+
+  test('retrieve: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      layerswap.swaps.retrieve(
+        '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+        { sourceAddress: 'string' },
+        { path: '/_stainless_unknown_path' },
+      ),
     ).rejects.toThrow(Layerswap.NotFoundError);
   });
 

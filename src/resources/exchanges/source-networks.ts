@@ -9,8 +9,8 @@ export class SourceNetworks extends APIResource {
   list(
     query: SourceNetworkListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.APIResponseListNetworkWithRouteTokensModel> {
-    return this._client.get('/api/v2-alpha/exchange_source_networks', { query, ...options });
+  ): Core.APIPromise<Shared.NetworkWithRouteTokens> {
+    return this._client.get('/api/v2/exchange_source_networks', { query, ...options });
   }
 }
 

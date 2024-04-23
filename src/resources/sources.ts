@@ -3,23 +3,23 @@
 import * as Core from 'Layerswap/core';
 import { APIResource } from 'Layerswap/resource';
 import { isRequestOptions } from 'Layerswap/core';
-import * as SourcesAPI from 'Layerswap/resources/partner-endpoints-v2/sources';
+import * as SourcesAPI from 'Layerswap/resources/sources';
 import * as Shared from 'Layerswap/resources/shared';
 
 export class Sources extends APIResource {
   list(
     query?: SourceListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.APIResponseListNetworkWithRouteTokensModel>;
-  list(options?: Core.RequestOptions): Core.APIPromise<Shared.APIResponseListNetworkWithRouteTokensModel>;
+  ): Core.APIPromise<Shared.NetworkWithRouteTokens>;
+  list(options?: Core.RequestOptions): Core.APIPromise<Shared.NetworkWithRouteTokens>;
   list(
     query: SourceListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.APIResponseListNetworkWithRouteTokensModel> {
+  ): Core.APIPromise<Shared.NetworkWithRouteTokens> {
     if (isRequestOptions(query)) {
       return this.list({}, query);
     }
-    return this._client.get('/api/v2-alpha/sources', { query, ...options });
+    return this._client.get('/api/v2/sources', { query, ...options });
   }
 }
 

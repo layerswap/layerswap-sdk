@@ -25,14 +25,12 @@ The full API of this library can be found in [api.md](api.md).
 ```js
 import Layerswap from 'Layerswap';
 
-const layerswap = new Layerswap({
-  lsAPIKey: process.env['LAYERSWAP_LS_API_KEY'], // This is the default and can be omitted
-});
+const layerswap = new Layerswap();
 
 async function main() {
-  const apiResponseSwapResponse = await layerswap.swaps.create();
+  const preparedSwapResponse = await layerswap.swaps.create();
 
-  console.log(apiResponseSwapResponse.data);
+  console.log(preparedSwapResponse.data);
 }
 
 main();
@@ -46,12 +44,10 @@ This library includes TypeScript definitions for all request params and response
 ```ts
 import Layerswap from 'Layerswap';
 
-const layerswap = new Layerswap({
-  lsAPIKey: process.env['LAYERSWAP_LS_API_KEY'], // This is the default and can be omitted
-});
+const layerswap = new Layerswap();
 
 async function main() {
-  const apiResponseSwapResponse: Layerswap.APIResponseSwapResponse = await layerswap.swaps.create();
+  const preparedSwapResponse: Layerswap.PreparedSwapResponse = await layerswap.swaps.create();
 }
 
 main();
@@ -68,7 +64,7 @@ a subclass of `APIError` will be thrown:
 <!-- prettier-ignore -->
 ```ts
 async function main() {
-  const apiResponseSwapResponse = await layerswap.swaps.create().catch(async (err) => {
+  const preparedSwapResponse = await layerswap.swaps.create().catch(async (err) => {
     if (err instanceof Layerswap.APIError) {
       console.log(err.status); // 400
       console.log(err.name); // BadRequestError
@@ -153,9 +149,9 @@ const response = await layerswap.swaps.create().asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: apiResponseSwapResponse, response: raw } = await layerswap.swaps.create().withResponse();
+const { data: preparedSwapResponse, response: raw } = await layerswap.swaps.create().withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(apiResponseSwapResponse.data);
+console.log(preparedSwapResponse.data);
 ```
 
 ### Making custom/undocumented requests

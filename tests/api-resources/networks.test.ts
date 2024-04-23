@@ -5,14 +5,9 @@ import { Response } from 'node-fetch';
 
 const layerswap = new Layerswap({ baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010' });
 
-describe('resource depositNetworks', () => {
-  test('list: only required params', async () => {
-    const responsePromise = layerswap.exchanges.depositNetworks.list({
-      destination_exchange: 'string',
-      destination_token_group: 'string',
-      source_network: 'string',
-      source_token: 'string',
-    });
+describe('resource networks', () => {
+  test('list', async () => {
+    const responsePromise = layerswap.networks.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,12 +17,10 @@ describe('resource depositNetworks', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: required and optional params', async () => {
-    const response = await layerswap.exchanges.depositNetworks.list({
-      destination_exchange: 'string',
-      destination_token_group: 'string',
-      source_network: 'string',
-      source_token: 'string',
-    });
+  test('list: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(layerswap.networks.list({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+      Layerswap.NotFoundError,
+    );
   });
 });

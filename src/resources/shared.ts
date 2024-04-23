@@ -1,16 +1,14 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export interface APIResponseListNetworkTokenWithFeeModel {
-  data?: Array<APIResponseListNetworkTokenWithFeeModel.Data> | null;
+export interface NetworkToken {
+  data?: Array<NetworkToken.Data> | null;
 
-  error?: APIResponseListNetworkTokenWithFeeModel.Error;
+  error?: NetworkToken.Error;
 }
 
-export namespace APIResponseListNetworkTokenWithFeeModel {
+export namespace NetworkToken {
   export interface Data {
     token?: Data.Token;
-
-    fee?: Data.Fee;
 
     network?: Data.Network;
   }
@@ -21,8 +19,6 @@ export namespace APIResponseListNetworkTokenWithFeeModel {
 
       decimals?: number;
 
-      is_native?: boolean;
-
       logo?: string;
 
       precision?: number;
@@ -32,16 +28,14 @@ export namespace APIResponseListNetworkTokenWithFeeModel {
       symbol?: string;
     }
 
-    export interface Fee {
-      total_fee?: number;
-
-      total_fee_in_usd?: number;
-    }
-
     export interface Network {
+      token?: Network.Token;
+
       account_explorer_template?: string;
 
       chain_id?: string | null;
+
+      deposit_methods?: Array<string> | null;
 
       display_name?: string;
 
@@ -59,8 +53,22 @@ export namespace APIResponseListNetworkTokenWithFeeModel {
     }
 
     export namespace Network {
+      export interface Token {
+        contract?: string | null;
+
+        decimals?: number;
+
+        logo?: string;
+
+        precision?: number;
+
+        price_in_usd?: number;
+
+        symbol?: string;
+      }
+
       export interface Metadata {
-        evm_multi_call_contract?: string | null;
+        evm_multicall_contract?: string | null;
 
         evm_oracle_contract?: string | null;
 
@@ -78,17 +86,21 @@ export namespace APIResponseListNetworkTokenWithFeeModel {
   }
 }
 
-export interface APIResponseListNetworkWithRouteTokensModel {
-  data?: Array<APIResponseListNetworkWithRouteTokensModel.Data> | null;
+export interface NetworkWithRouteTokens {
+  data?: Array<NetworkWithRouteTokens.Data> | null;
 
-  error?: APIResponseListNetworkWithRouteTokensModel.Error;
+  error?: NetworkWithRouteTokens.Error;
 }
 
-export namespace APIResponseListNetworkWithRouteTokensModel {
+export namespace NetworkWithRouteTokens {
   export interface Data {
+    token?: Data.Token;
+
     account_explorer_template?: string;
 
     chain_id?: string | null;
+
+    deposit_methods?: Array<string> | null;
 
     display_name?: string;
 
@@ -108,8 +120,22 @@ export namespace APIResponseListNetworkWithRouteTokensModel {
   }
 
   export namespace Data {
+    export interface Token {
+      contract?: string | null;
+
+      decimals?: number;
+
+      logo?: string;
+
+      precision?: number;
+
+      price_in_usd?: number;
+
+      symbol?: string;
+    }
+
     export interface Metadata {
-      evm_multi_call_contract?: string | null;
+      evm_multicall_contract?: string | null;
 
       evm_oracle_contract?: string | null;
 
@@ -121,17 +147,93 @@ export namespace APIResponseListNetworkWithRouteTokensModel {
 
       decimals?: number;
 
-      is_native?: boolean;
-
       logo?: string;
 
       precision?: number;
 
       price_in_usd?: number;
 
+      refuel?: Token.Refuel;
+
       status?: string;
 
       symbol?: string;
+    }
+
+    export namespace Token {
+      export interface Refuel {
+        token?: Refuel.Token;
+
+        amount?: number;
+
+        amount_in_usd?: number;
+
+        network?: Refuel.Network;
+      }
+
+      export namespace Refuel {
+        export interface Token {
+          contract?: string | null;
+
+          decimals?: number;
+
+          logo?: string;
+
+          precision?: number;
+
+          price_in_usd?: number;
+
+          symbol?: string;
+        }
+
+        export interface Network {
+          token?: Network.Token;
+
+          account_explorer_template?: string;
+
+          chain_id?: string | null;
+
+          deposit_methods?: Array<string> | null;
+
+          display_name?: string;
+
+          logo?: string;
+
+          metadata?: Network.Metadata;
+
+          name?: string;
+
+          node_url?: string | null;
+
+          transaction_explorer_template?: string;
+
+          type?: string;
+        }
+
+        export namespace Network {
+          export interface Token {
+            contract?: string | null;
+
+            decimals?: number;
+
+            logo?: string;
+
+            precision?: number;
+
+            price_in_usd?: number;
+
+            symbol?: string;
+          }
+
+          export interface Metadata {
+            evm_multicall_contract?: string | null;
+
+            evm_oracle_contract?: string | null;
+
+            listing_date?: string;
+          }
+        }
+      }
     }
   }
 

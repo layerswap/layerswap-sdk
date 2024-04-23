@@ -6,34 +6,19 @@ import * as DepositNetworksAPI from 'Layerswap/resources/exchanges/deposit-netwo
 import * as Shared from 'Layerswap/resources/shared';
 
 export class DepositNetworks extends APIResource {
-  list(
-    query: DepositNetworkListParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.APIResponseListNetworkTokenWithFeeModel> {
-    return this._client.get('/api/v2-alpha/exchange_deposit_networks', { query, ...options });
+  list(query: DepositNetworkListParams, options?: Core.RequestOptions): Core.APIPromise<Shared.NetworkToken> {
+    return this._client.get('/api/v2/exchange_deposit_networks', { query, ...options });
   }
 }
 
 export interface DepositNetworkListParams {
-  amount: number;
+  destination_exchange: string;
 
-  destination_network: string;
+  destination_token_group: string;
 
-  /**
-   * Exchange from where you are transfering funds. Example: BINANCE, LSCEX (sandbox)
-   */
-  destination_token: string;
+  source_network: string;
 
-  /**
-   * Exchange from where you are transfering funds. Example: BINANCE, LSCEX (sandbox)
-   */
-  source_exchange: string;
-
-  /**
-   * Token group symbol. Used to group assets such as bridged USDC and Circle USDC.
-   * Example: ETH, USDC
-   */
-  source_token_group: string;
+  source_token: string;
 }
 
 export namespace DepositNetworks {
