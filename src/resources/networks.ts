@@ -1,22 +1,22 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'Layerswap/core';
-import { APIResource } from 'Layerswap/resource';
-import * as NetworksAPI from 'Layerswap/resources/networks';
+import * as Core from '../core';
+import { APIResource } from '../resource';
+import * as NetworksAPI from './networks';
 
 export class Networks extends APIResource {
-  list(options?: Core.RequestOptions): Core.APIPromise<NetworkWithTokens> {
+  list(options?: Core.RequestOptions): Core.APIPromise<Network> {
     return this._client.get('/api/v2/networks', options);
   }
 }
 
-export interface NetworkWithTokens {
-  data?: Array<NetworkWithTokens.Data> | null;
+export interface Network {
+  data?: Array<Network.Data> | null;
 
-  error?: NetworkWithTokens.Error;
+  error?: Network.Error;
 }
 
-export namespace NetworkWithTokens {
+export namespace Network {
   export interface Data {
     token?: Data.Token;
 
@@ -49,6 +49,8 @@ export namespace NetworkWithTokens {
 
       decimals?: number;
 
+      listing_date?: string;
+
       logo?: string;
 
       precision?: number;
@@ -71,6 +73,8 @@ export namespace NetworkWithTokens {
 
       decimals?: number;
 
+      listing_date?: string;
+
       logo?: string;
 
       precision?: number;
@@ -91,5 +95,5 @@ export namespace NetworkWithTokens {
 }
 
 export namespace Networks {
-  export import NetworkWithTokens = NetworksAPI.NetworkWithTokens;
+  export import Network = NetworksAPI.Network;
 }

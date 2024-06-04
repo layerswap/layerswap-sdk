@@ -1,9 +1,9 @@
 # 👋 Wondering what everything in here does?
 
-`Layerswap` supports a wide variety of runtime environments like Node.js, Deno, Bun, browsers, and various
+`layerswap` supports a wide variety of runtime environments like Node.js, Deno, Bun, browsers, and various
 edge runtimes, as well as both CommonJS (CJS) and EcmaScript Modules (ESM).
 
-To do this, `Layerswap` provides shims for either using `node-fetch` when in Node (because `fetch` is still experimental there) or the global `fetch` API built into the environment when not in Node.
+To do this, `layerswap` provides shims for either using `node-fetch` when in Node (because `fetch` is still experimental there) or the global `fetch` API built into the environment when not in Node.
 
 It uses [conditional exports](https://nodejs.org/api/packages.html#conditional-exports) to
 automatically select the correct shims for each environment. However, conditional exports are a fairly new
@@ -15,32 +15,32 @@ getting the wrong raw `Response` type from `.asResponse()`, for example.
 
 The user can work around these issues by manually importing one of:
 
-- `import 'Layerswap/shims/node'`
-- `import 'Layerswap/shims/web'`
+- `import 'layerswap/shims/node'`
+- `import 'layerswap/shims/web'`
 
 All of the code here in `_shims` handles selecting the automatic default shims or manual overrides.
 
 ### How it works - Runtime
 
-Runtime shims get installed by calling `setShims` exported by `Layerswap/_shims/registry`.
+Runtime shims get installed by calling `setShims` exported by `layerswap/_shims/registry`.
 
-Manually importing `Layerswap/shims/node` or `Layerswap/shims/web`, calls `setShims` with the respective runtime shims.
+Manually importing `layerswap/shims/node` or `layerswap/shims/web`, calls `setShims` with the respective runtime shims.
 
-All client code imports shims from `Layerswap/_shims/index`, which:
+All client code imports shims from `layerswap/_shims/index`, which:
 
 - checks if shims have been set manually
-- if not, calls `setShims` with the shims from `Layerswap/_shims/auto/runtime`
-- re-exports the installed shims from `Layerswap/_shims/registry`.
+- if not, calls `setShims` with the shims from `layerswap/_shims/auto/runtime`
+- re-exports the installed shims from `layerswap/_shims/registry`.
 
-`Layerswap/_shims/auto/runtime` exports web runtime shims.
-If the `node` export condition is set, the export map replaces it with `Layerswap/_shims/auto/runtime-node`.
+`layerswap/_shims/auto/runtime` exports web runtime shims.
+If the `node` export condition is set, the export map replaces it with `layerswap/_shims/auto/runtime-node`.
 
 ### How it works - Type time
 
-All client code imports shim types from `Layerswap/_shims/index`, which selects the manual types from `Layerswap/_shims/manual-types` if they have been declared, otherwise it exports the auto types from `Layerswap/_shims/auto/types`.
+All client code imports shim types from `layerswap/_shims/index`, which selects the manual types from `layerswap/_shims/manual-types` if they have been declared, otherwise it exports the auto types from `layerswap/_shims/auto/types`.
 
-`Layerswap/_shims/manual-types` exports an empty namespace.
-Manually importing `Layerswap/shims/node` or `Layerswap/shims/web` merges declarations into this empty namespace, so they get picked up by `Layerswap/_shims/index`.
+`layerswap/_shims/manual-types` exports an empty namespace.
+Manually importing `layerswap/shims/node` or `layerswap/shims/web` merges declarations into this empty namespace, so they get picked up by `layerswap/_shims/index`.
 
-`Layerswap/_shims/auto/types` exports web type definitions.
-If the `node` export condition is set, the export map replaces it with `Layerswap/_shims/auto/types-node`, though TS only picks this up if `"moduleResolution": "nodenext"` or `"moduleResolution": "bundler"`.
+`layerswap/_shims/auto/types` exports web type definitions.
+If the `node` export condition is set, the export map replaces it with `layerswap/_shims/auto/types-node`, though TS only picks this up if `"moduleResolution": "nodenext"` or `"moduleResolution": "bundler"`.
