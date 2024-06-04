@@ -4,8 +4,8 @@
 /**
  * Types will get added to this namespace when you import one of the following:
  *
- *   import 'Layerswap/shims/node'
- *   import 'Layerswap/shims/web'
+ *   import 'layerswap/shims/node'
+ *   import 'layerswap/shims/web'
  *
  * Importing more than one will cause type and runtime errors.
  */

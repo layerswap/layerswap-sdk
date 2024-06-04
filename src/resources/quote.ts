@@ -1,22 +1,22 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'Layerswap/core';
-import { APIResource } from 'Layerswap/resource';
-import * as QuotesAPI from 'Layerswap/resources/quotes';
+import * as Core from '../core';
+import { APIResource } from '../resource';
+import * as QuoteAPI from './quote';
 
-export class Quotes extends APIResource {
-  retrieve(query: QuoteRetrieveParams, options?: Core.RequestOptions): Core.APIPromise<SwapQuoteResponse> {
+export class QuoteResource extends APIResource {
+  retrieve(query: QuoteRetrieveParams, options?: Core.RequestOptions): Core.APIPromise<Quote> {
     return this._client.get('/api/v2/quote', { query, ...options });
   }
 }
 
-export interface SwapQuoteResponse {
-  data?: SwapQuoteResponse.Data;
+export interface Quote {
+  data?: Quote.Data;
 
-  error?: SwapQuoteResponse.Error;
+  error?: Quote.Error;
 }
 
-export namespace SwapQuoteResponse {
+export namespace Quote {
   export interface Data {
     quote?: Data.Quote;
 
@@ -35,7 +35,11 @@ export namespace SwapQuoteResponse {
 
       receive_amount?: number;
 
+      refuel_in_source?: number | null;
+
       service_fee?: number;
+
+      slippage?: number;
 
       total_fee?: number;
 
@@ -57,6 +61,8 @@ export namespace SwapQuoteResponse {
         contract?: string | null;
 
         decimals?: number;
+
+        listing_date?: string;
 
         logo?: string;
 
@@ -96,6 +102,8 @@ export namespace SwapQuoteResponse {
           contract?: string | null;
 
           decimals?: number;
+
+          listing_date?: string;
 
           logo?: string;
 
@@ -132,6 +140,8 @@ export namespace SwapQuoteResponse {
 
         decimals?: number;
 
+        listing_date?: string;
+
         logo?: string;
 
         precision?: number;
@@ -170,6 +180,8 @@ export namespace SwapQuoteResponse {
           contract?: string | null;
 
           decimals?: number;
+
+          listing_date?: string;
 
           logo?: string;
 
@@ -220,7 +232,7 @@ export interface QuoteRetrieveParams {
   use_deposit_address?: boolean;
 }
 
-export namespace Quotes {
-  export import SwapQuoteResponse = QuotesAPI.SwapQuoteResponse;
-  export import QuoteRetrieveParams = QuotesAPI.QuoteRetrieveParams;
+export namespace QuoteResource {
+  export import Quote = QuoteAPI.Quote;
+  export import QuoteRetrieveParams = QuoteAPI.QuoteRetrieveParams;
 }

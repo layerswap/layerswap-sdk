@@ -1,4 +1,4 @@
-import { APIClient } from 'Layerswap/core';
+import { APIClient } from 'layerswap/core';
 
 const { stringifyQuery } = APIClient.prototype as any;
 
