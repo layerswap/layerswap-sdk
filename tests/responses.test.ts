@@ -1,5 +1,5 @@
-import { createResponseHeaders } from 'Layerswap/core';
-import { Headers } from 'Layerswap/_shims/index';
+import { createResponseHeaders } from 'layerswap/core';
+import { Headers } from 'layerswap/_shims/index';
 
 describe('response parsing', () => {
   // TODO: test unicode characters

@@ -1,9 +1,12 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Layerswap from 'Layerswap';
+import Layerswap from 'layerswap';
 import { Response } from 'node-fetch';
 
-const layerswap = new Layerswap({ baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010' });
+const layerswap = new Layerswap({
+  lsAPIKey: 'My Ls API Key',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+});
 
 describe('resource destinations', () => {
   test('list', async () => {

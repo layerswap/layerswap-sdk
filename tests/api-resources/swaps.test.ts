@@ -1,9 +1,12 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Layerswap from 'Layerswap';
+import Layerswap from 'layerswap';
 import { Response } from 'node-fetch';
 
-const layerswap = new Layerswap({ baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010' });
+const layerswap = new Layerswap({
+  lsAPIKey: 'My Ls API Key',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+});
 
 describe('resource swaps', () => {
   test('create', async () => {
@@ -40,7 +43,7 @@ describe('resource swaps', () => {
     await expect(
       layerswap.swaps.retrieve(
         '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-        { sourceAddress: 'string' },
+        { exclude_deposit_actions: true, source_address: 'string' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Layerswap.NotFoundError);
@@ -58,6 +61,6 @@ describe('resource swaps', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await layerswap.swaps.list({ address: 'string', page: 0 });
+    const response = await layerswap.swaps.list({ address: 'string', include_expired: true, page: 0 });
   });
 });

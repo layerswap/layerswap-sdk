@@ -42,12 +42,12 @@ export let isFsReadStream: Shims['isFsReadStream'] | undefined = undefined;
 export function setShims(shims: Shims, options: { auto: boolean } = { auto: false }) {
   if (auto) {
     throw new Error(
-      `you must \`import 'Layerswap/shims/${shims.kind}'\` before importing anything else from Layerswap`,
+      `you must \`import 'layerswap/shims/${shims.kind}'\` before importing anything else from layerswap`,
     );
   }
   if (kind) {
     throw new Error(
-      `can't \`import 'Layerswap/shims/${shims.kind}'\` after \`import 'Layerswap/shims/${kind}'\``,
+      `can't \`import 'layerswap/shims/${shims.kind}'\` after \`import 'layerswap/shims/${kind}'\``,
     );
   }
   auto = options.auto;

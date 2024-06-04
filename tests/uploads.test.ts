@@ -1,6 +1,6 @@
 import fs from 'fs';
-import { toFile, type ResponseLike } from 'Layerswap/uploads';
-import { File } from 'Layerswap/_shims/index';
+import { toFile, type ResponseLike } from 'layerswap/uploads';
+import { File } from 'layerswap/_shims/index';
 
 class MyClass {
   name: string = 'foo';

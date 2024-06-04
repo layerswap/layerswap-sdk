@@ -1,12 +1,12 @@
 {
-  "name": "Layerswap",
+  "name": "layerswap",
   "version": "0.0.1-alpha.0",
   "description": "The official TypeScript library for the Layerswap API",
   "author": "Layerswap <dev-feedback@Layerswap.com>",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
   "type": "commonjs",
-  "repository": "github:stainless-sdks/Layerswap-node",
+  "repository": "github:layerswap/layerswap-sdk",
   "license": "Apache-2.0",
   "packageManager": "yarn@1.22.22",
   "files": [
@@ -14,26 +14,23 @@
   ],
   "private": false,
   "scripts": {
-    "test": "bin/check-test-server && yarn jest",
-    "build": "bash ./build",
-    "prepack": "echo 'to pack, run yarn build && (cd dist; yarn pack)' && exit 1",
+    "test": "./scripts/test",
+    "build": "./scripts/build",
     "prepublishOnly": "echo 'to publish, run yarn build && (cd dist; yarn publish)' && exit 1",
     "format": "prettier --write --cache --cache-strategy metadata . !dist",
-    "prepare": "if ./scripts/check-is-in-git-install.sh; then npm run build; fi",
+    "prepare": "if ./scripts/utils/check-is-in-git-install.sh; then ./scripts/build; fi",
     "tsn": "ts-node -r tsconfig-paths/register",
-    "lint": "eslint --ext ts,js .",
+    "lint": "./scripts/lint",
     "fix": "eslint --fix --ext ts,js ."
   },
   "dependencies": {
     "@types/node": "^18.11.18",
     "@types/node-fetch": "^2.6.4",
-    "@types/qs": "^6.9.7",
     "abort-controller": "^3.0.0",
     "agentkeepalive": "^4.2.1",
     "form-data-encoder": "1.7.2",
     "formdata-node": "^4.3.2",
     "node-fetch": "^2.6.7",
-    "qs": "^6.10.3",
     "web-streams-polyfill": "^3.2.1"
   },
   "devDependencies": {
@@ -63,8 +60,8 @@
     "./shims/web.mjs"
   ],
   "imports": {
-    "Layerswap": ".",
-    "Layerswap/*": "./src/*"
+    "layerswap": ".",
+    "layerswap/*": "./src/*"
   },
   "exports": {
     "./_shims/auto/*": {
