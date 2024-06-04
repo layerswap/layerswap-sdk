@@ -1,22 +1,22 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'Layerswap/core';
-import { APIResource } from 'Layerswap/resource';
-import * as LimitsAPI from 'Layerswap/resources/limits';
+import * as Core from '../core';
+import { APIResource } from '../resource';
+import * as LimitsAPI from './limits';
 
 export class Limits extends APIResource {
-  list(query: LimitListParams, options?: Core.RequestOptions): Core.APIPromise<SwapRouteLimits> {
+  list(query: LimitListParams, options?: Core.RequestOptions): Core.APIPromise<Limit> {
     return this._client.get('/api/v2/limits', { query, ...options });
   }
 }
 
-export interface SwapRouteLimits {
-  data?: SwapRouteLimits.Data;
+export interface Limit {
+  data?: Limit.Data;
 
-  error?: SwapRouteLimits.Error;
+  error?: Limit.Error;
 }
 
-export namespace SwapRouteLimits {
+export namespace Limit {
   export interface Data {
     max_amount?: number;
 
@@ -51,6 +51,6 @@ export interface LimitListParams {
 }
 
 export namespace Limits {
-  export import SwapRouteLimits = LimitsAPI.SwapRouteLimits;
+  export import Limit = LimitsAPI.Limit;
   export import LimitListParams = LimitsAPI.LimitListParams;
 }

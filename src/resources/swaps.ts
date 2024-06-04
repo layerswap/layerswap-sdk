@@ -1,44 +1,562 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'Layerswap/core';
-import { APIResource } from 'Layerswap/resource';
-import { isRequestOptions } from 'Layerswap/core';
-import * as SwapsAPI from 'Layerswap/resources/swaps';
+import * as Core from '../core';
+import { APIResource } from '../resource';
+import { isRequestOptions } from '../core';
+import * as SwapsAPI from './swaps';
 
 export class Swaps extends APIResource {
-  create(body: SwapCreateParams, options?: Core.RequestOptions): Core.APIPromise<PreparedSwapResponse> {
+  create(body: SwapCreateParams, options?: Core.RequestOptions): Core.APIPromise<PreparedSwap> {
     return this._client.post('/api/v2/swaps', { body, ...options });
   }
 
-  retrieve(
-    swapId: string,
-    query?: SwapRetrieveParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SwapResponse>;
-  retrieve(swapId: string, options?: Core.RequestOptions): Core.APIPromise<SwapResponse>;
+  retrieve(swapId: string, query?: SwapRetrieveParams, options?: Core.RequestOptions): Core.APIPromise<Swap>;
+  retrieve(swapId: string, options?: Core.RequestOptions): Core.APIPromise<Swap>;
   retrieve(
     swapId: string,
     query: SwapRetrieveParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SwapResponse> {
+  ): Core.APIPromise<Swap> {
     if (isRequestOptions(query)) {
       return this.retrieve(swapId, {}, query);
     }
     return this._client.get(`/api/v2/swaps/${swapId}`, { query, ...options });
   }
 
-  list(query: SwapListParams, options?: Core.RequestOptions): Core.APIPromise<SwapListResponse> {
+  list(query: SwapListParams, options?: Core.RequestOptions): Core.APIPromise<ListSwap> {
     return this._client.get('/api/v2/swaps', { query, ...options });
   }
 }
 
-export interface PreparedSwapResponse {
-  data?: PreparedSwapResponse.Data;
+export interface ListSwap {
+  data?: Array<ListSwap.Data> | null;
 
-  error?: PreparedSwapResponse.Error;
+  error?: ListSwap.Error;
 }
 
-export namespace PreparedSwapResponse {
+export namespace ListSwap {
+  export interface Data {
+    quote?: Data.Quote;
+
+    refuel?: Data.Refuel;
+
+    reward?: Data.Reward;
+
+    swap?: Data.Swap;
+  }
+
+  export namespace Data {
+    export interface Quote {
+      avg_completion_time?: string;
+
+      blockchain_fee?: number;
+
+      min_receive_amount?: number;
+
+      receive_amount?: number;
+
+      refuel_in_source?: number | null;
+
+      service_fee?: number;
+
+      slippage?: number;
+
+      total_fee?: number;
+
+      total_fee_in_usd?: number;
+    }
+
+    export interface Refuel {
+      token?: Refuel.Token;
+
+      amount?: number;
+
+      amount_in_usd?: number;
+
+      network?: Refuel.Network;
+    }
+
+    export namespace Refuel {
+      export interface Token {
+        contract?: string | null;
+
+        decimals?: number;
+
+        listing_date?: string;
+
+        logo?: string;
+
+        precision?: number;
+
+        price_in_usd?: number;
+
+        symbol?: string;
+      }
+
+      export interface Network {
+        token?: Network.Token;
+
+        account_explorer_template?: string;
+
+        chain_id?: string | null;
+
+        deposit_methods?: Array<string> | null;
+
+        display_name?: string;
+
+        logo?: string;
+
+        metadata?: Network.Metadata;
+
+        name?: string;
+
+        node_url?: string | null;
+
+        transaction_explorer_template?: string;
+
+        type?: string;
+      }
+
+      export namespace Network {
+        export interface Token {
+          contract?: string | null;
+
+          decimals?: number;
+
+          listing_date?: string;
+
+          logo?: string;
+
+          precision?: number;
+
+          price_in_usd?: number;
+
+          symbol?: string;
+        }
+
+        export interface Metadata {
+          evm_multicall_contract?: string | null;
+
+          evm_oracle_contract?: string | null;
+
+          listing_date?: string;
+        }
+      }
+    }
+
+    export interface Reward {
+      token?: Reward.Token;
+
+      amount?: number;
+
+      amount_in_usd?: number;
+
+      network?: Reward.Network;
+    }
+
+    export namespace Reward {
+      export interface Token {
+        contract?: string | null;
+
+        decimals?: number;
+
+        listing_date?: string;
+
+        logo?: string;
+
+        precision?: number;
+
+        price_in_usd?: number;
+
+        symbol?: string;
+      }
+
+      export interface Network {
+        token?: Network.Token;
+
+        account_explorer_template?: string;
+
+        chain_id?: string | null;
+
+        deposit_methods?: Array<string> | null;
+
+        display_name?: string;
+
+        logo?: string;
+
+        metadata?: Network.Metadata;
+
+        name?: string;
+
+        node_url?: string | null;
+
+        transaction_explorer_template?: string;
+
+        type?: string;
+      }
+
+      export namespace Network {
+        export interface Token {
+          contract?: string | null;
+
+          decimals?: number;
+
+          listing_date?: string;
+
+          logo?: string;
+
+          precision?: number;
+
+          price_in_usd?: number;
+
+          symbol?: string;
+        }
+
+        export interface Metadata {
+          evm_multicall_contract?: string | null;
+
+          evm_oracle_contract?: string | null;
+
+          listing_date?: string;
+        }
+      }
+    }
+
+    export interface Swap {
+      id?: string;
+
+      created_date?: string;
+
+      destination_address?: string;
+
+      destination_exchange?: Swap.DestinationExchange;
+
+      destination_network?: Swap.DestinationNetwork;
+
+      destination_token?: Swap.DestinationToken;
+
+      fail_reason?: string | null;
+
+      metadata?: Swap.Metadata;
+
+      requested_amount?: number;
+
+      source_exchange?: Swap.SourceExchange;
+
+      source_network?: Swap.SourceNetwork;
+
+      source_token?: Swap.SourceToken;
+
+      status?: string;
+
+      transactions?: Array<Swap.Transaction>;
+
+      use_deposit_address?: boolean;
+    }
+
+    export namespace Swap {
+      export interface DestinationExchange {
+        display_name?: string;
+
+        logo?: string;
+
+        metadata?: DestinationExchange.Metadata;
+
+        name?: string;
+      }
+
+      export namespace DestinationExchange {
+        export interface Metadata {
+          listing_date?: string;
+
+          oauth?: Metadata.OAuth;
+        }
+
+        export namespace Metadata {
+          export interface OAuth {
+            authorize_url?: string;
+
+            connect_url?: string;
+          }
+        }
+      }
+
+      export interface DestinationNetwork {
+        token?: DestinationNetwork.Token;
+
+        account_explorer_template?: string;
+
+        chain_id?: string | null;
+
+        deposit_methods?: Array<string> | null;
+
+        display_name?: string;
+
+        logo?: string;
+
+        metadata?: DestinationNetwork.Metadata;
+
+        name?: string;
+
+        node_url?: string | null;
+
+        transaction_explorer_template?: string;
+
+        type?: string;
+      }
+
+      export namespace DestinationNetwork {
+        export interface Token {
+          contract?: string | null;
+
+          decimals?: number;
+
+          listing_date?: string;
+
+          logo?: string;
+
+          precision?: number;
+
+          price_in_usd?: number;
+
+          symbol?: string;
+        }
+
+        export interface Metadata {
+          evm_multicall_contract?: string | null;
+
+          evm_oracle_contract?: string | null;
+
+          listing_date?: string;
+        }
+      }
+
+      export interface DestinationToken {
+        contract?: string | null;
+
+        decimals?: number;
+
+        listing_date?: string;
+
+        logo?: string;
+
+        precision?: number;
+
+        price_in_usd?: number;
+
+        symbol?: string;
+      }
+
+      export interface Metadata {
+        exchange_account?: string | null;
+
+        reference_id?: string | null;
+
+        sequence_number?: number;
+      }
+
+      export interface SourceExchange {
+        display_name?: string;
+
+        logo?: string;
+
+        metadata?: SourceExchange.Metadata;
+
+        name?: string;
+      }
+
+      export namespace SourceExchange {
+        export interface Metadata {
+          listing_date?: string;
+
+          oauth?: Metadata.OAuth;
+        }
+
+        export namespace Metadata {
+          export interface OAuth {
+            authorize_url?: string;
+
+            connect_url?: string;
+          }
+        }
+      }
+
+      export interface SourceNetwork {
+        token?: SourceNetwork.Token;
+
+        account_explorer_template?: string;
+
+        chain_id?: string | null;
+
+        deposit_methods?: Array<string> | null;
+
+        display_name?: string;
+
+        logo?: string;
+
+        metadata?: SourceNetwork.Metadata;
+
+        name?: string;
+
+        node_url?: string | null;
+
+        transaction_explorer_template?: string;
+
+        type?: string;
+      }
+
+      export namespace SourceNetwork {
+        export interface Token {
+          contract?: string | null;
+
+          decimals?: number;
+
+          listing_date?: string;
+
+          logo?: string;
+
+          precision?: number;
+
+          price_in_usd?: number;
+
+          symbol?: string;
+        }
+
+        export interface Metadata {
+          evm_multicall_contract?: string | null;
+
+          evm_oracle_contract?: string | null;
+
+          listing_date?: string;
+        }
+      }
+
+      export interface SourceToken {
+        contract?: string | null;
+
+        decimals?: number;
+
+        listing_date?: string;
+
+        logo?: string;
+
+        precision?: number;
+
+        price_in_usd?: number;
+
+        symbol?: string;
+      }
+
+      export interface Transaction {
+        token?: Transaction.Token;
+
+        amount?: number;
+
+        confirmations?: number;
+
+        from?: string | null;
+
+        max_confirmations?: number;
+
+        network?: Transaction.Network;
+
+        status?: string;
+
+        timestamp?: string;
+
+        to?: string | null;
+
+        transaction_hash?: string | null;
+
+        type?: string;
+      }
+
+      export namespace Transaction {
+        export interface Token {
+          contract?: string | null;
+
+          decimals?: number;
+
+          listing_date?: string;
+
+          logo?: string;
+
+          precision?: number;
+
+          price_in_usd?: number;
+
+          symbol?: string;
+        }
+
+        export interface Network {
+          token?: Network.Token;
+
+          account_explorer_template?: string;
+
+          chain_id?: string | null;
+
+          deposit_methods?: Array<string> | null;
+
+          display_name?: string;
+
+          logo?: string;
+
+          metadata?: Network.Metadata;
+
+          name?: string;
+
+          node_url?: string | null;
+
+          transaction_explorer_template?: string;
+
+          type?: string;
+        }
+
+        export namespace Network {
+          export interface Token {
+            contract?: string | null;
+
+            decimals?: number;
+
+            listing_date?: string;
+
+            logo?: string;
+
+            precision?: number;
+
+            price_in_usd?: number;
+
+            symbol?: string;
+          }
+
+          export interface Metadata {
+            evm_multicall_contract?: string | null;
+
+            evm_oracle_contract?: string | null;
+
+            listing_date?: string;
+          }
+        }
+      }
+    }
+  }
+
+  export interface Error {
+    code?: string;
+
+    message?: string;
+
+    metadata?: Record<string, unknown>;
+  }
+}
+
+export interface PreparedSwap {
+  data?: PreparedSwap.Data;
+
+  error?: PreparedSwap.Error;
+}
+
+export namespace PreparedSwap {
   export interface Data {
     deposit_actions?: Array<Data.DepositAction>;
 
@@ -78,6 +596,8 @@ export namespace PreparedSwapResponse {
 
         decimals?: number;
 
+        listing_date?: string;
+
         logo?: string;
 
         precision?: number;
@@ -92,6 +612,8 @@ export namespace PreparedSwapResponse {
 
         decimals?: number;
 
+        listing_date?: string;
+
         logo?: string;
 
         precision?: number;
@@ -130,6 +652,8 @@ export namespace PreparedSwapResponse {
           contract?: string | null;
 
           decimals?: number;
+
+          listing_date?: string;
 
           logo?: string;
 
@@ -159,7 +683,11 @@ export namespace PreparedSwapResponse {
 
       receive_amount?: number;
 
+      refuel_in_source?: number | null;
+
       service_fee?: number;
+
+      slippage?: number;
 
       total_fee?: number;
 
@@ -181,6 +709,8 @@ export namespace PreparedSwapResponse {
         contract?: string | null;
 
         decimals?: number;
+
+        listing_date?: string;
 
         logo?: string;
 
@@ -220,6 +750,8 @@ export namespace PreparedSwapResponse {
           contract?: string | null;
 
           decimals?: number;
+
+          listing_date?: string;
 
           logo?: string;
 
@@ -256,6 +788,8 @@ export namespace PreparedSwapResponse {
 
         decimals?: number;
 
+        listing_date?: string;
+
         logo?: string;
 
         precision?: number;
@@ -294,6 +828,8 @@ export namespace PreparedSwapResponse {
           contract?: string | null;
 
           decimals?: number;
+
+          listing_date?: string;
 
           logo?: string;
 
@@ -403,6 +939,8 @@ export namespace PreparedSwapResponse {
 
           decimals?: number;
 
+          listing_date?: string;
+
           logo?: string;
 
           precision?: number;
@@ -425,6 +963,8 @@ export namespace PreparedSwapResponse {
         contract?: string | null;
 
         decimals?: number;
+
+        listing_date?: string;
 
         logo?: string;
 
@@ -499,6 +1039,8 @@ export namespace PreparedSwapResponse {
 
           decimals?: number;
 
+          listing_date?: string;
+
           logo?: string;
 
           precision?: number;
@@ -521,6 +1063,8 @@ export namespace PreparedSwapResponse {
         contract?: string | null;
 
         decimals?: number;
+
+        listing_date?: string;
 
         logo?: string;
 
@@ -561,6 +1105,8 @@ export namespace PreparedSwapResponse {
 
           decimals?: number;
 
+          listing_date?: string;
+
           logo?: string;
 
           precision?: number;
@@ -599,6 +1145,8 @@ export namespace PreparedSwapResponse {
             contract?: string | null;
 
             decimals?: number;
+
+            listing_date?: string;
 
             logo?: string;
 
@@ -630,13 +1178,13 @@ export namespace PreparedSwapResponse {
   }
 }
 
-export interface SwapListResponse {
-  data?: Array<SwapListResponse.Data> | null;
+export interface Swap {
+  data?: Swap.Data;
 
-  error?: SwapListResponse.Error;
+  error?: Swap.Error;
 }
 
-export namespace SwapListResponse {
+export namespace Swap {
   export interface Data {
     quote?: Data.Quote;
 
@@ -657,7 +1205,11 @@ export namespace SwapListResponse {
 
       receive_amount?: number;
 
+      refuel_in_source?: number | null;
+
       service_fee?: number;
+
+      slippage?: number;
 
       total_fee?: number;
 
@@ -679,6 +1231,8 @@ export namespace SwapListResponse {
         contract?: string | null;
 
         decimals?: number;
+
+        listing_date?: string;
 
         logo?: string;
 
@@ -718,6 +1272,8 @@ export namespace SwapListResponse {
           contract?: string | null;
 
           decimals?: number;
+
+          listing_date?: string;
 
           logo?: string;
 
@@ -754,6 +1310,8 @@ export namespace SwapListResponse {
 
         decimals?: number;
 
+        listing_date?: string;
+
         logo?: string;
 
         precision?: number;
@@ -792,6 +1350,8 @@ export namespace SwapListResponse {
           contract?: string | null;
 
           decimals?: number;
+
+          listing_date?: string;
 
           logo?: string;
 
@@ -901,6 +1461,8 @@ export namespace SwapListResponse {
 
           decimals?: number;
 
+          listing_date?: string;
+
           logo?: string;
 
           precision?: number;
@@ -923,6 +1485,8 @@ export namespace SwapListResponse {
         contract?: string | null;
 
         decimals?: number;
+
+        listing_date?: string;
 
         logo?: string;
 
@@ -997,6 +1561,8 @@ export namespace SwapListResponse {
 
           decimals?: number;
 
+          listing_date?: string;
+
           logo?: string;
 
           precision?: number;
@@ -1019,6 +1585,8 @@ export namespace SwapListResponse {
         contract?: string | null;
 
         decimals?: number;
+
+        listing_date?: string;
 
         logo?: string;
 
@@ -1059,6 +1627,8 @@ export namespace SwapListResponse {
 
           decimals?: number;
 
+          listing_date?: string;
+
           logo?: string;
 
           precision?: number;
@@ -1097,504 +1667,8 @@ export namespace SwapListResponse {
             contract?: string | null;
 
             decimals?: number;
-
-            logo?: string;
-
-            precision?: number;
-
-            price_in_usd?: number;
-
-            symbol?: string;
-          }
-
-          export interface Metadata {
-            evm_multicall_contract?: string | null;
-
-            evm_oracle_contract?: string | null;
 
             listing_date?: string;
-          }
-        }
-      }
-    }
-  }
-
-  export interface Error {
-    code?: string;
-
-    message?: string;
-
-    metadata?: Record<string, unknown>;
-  }
-}
-
-export interface SwapResponse {
-  data?: SwapResponse.Data;
-
-  error?: SwapResponse.Error;
-}
-
-export namespace SwapResponse {
-  export interface Data {
-    quote?: Data.Quote;
-
-    refuel?: Data.Refuel;
-
-    reward?: Data.Reward;
-
-    swap?: Data.Swap;
-  }
-
-  export namespace Data {
-    export interface Quote {
-      avg_completion_time?: string;
-
-      blockchain_fee?: number;
-
-      min_receive_amount?: number;
-
-      receive_amount?: number;
-
-      service_fee?: number;
-
-      total_fee?: number;
-
-      total_fee_in_usd?: number;
-    }
-
-    export interface Refuel {
-      token?: Refuel.Token;
-
-      amount?: number;
-
-      amount_in_usd?: number;
-
-      network?: Refuel.Network;
-    }
-
-    export namespace Refuel {
-      export interface Token {
-        contract?: string | null;
-
-        decimals?: number;
-
-        logo?: string;
-
-        precision?: number;
-
-        price_in_usd?: number;
-
-        symbol?: string;
-      }
-
-      export interface Network {
-        token?: Network.Token;
-
-        account_explorer_template?: string;
-
-        chain_id?: string | null;
-
-        deposit_methods?: Array<string> | null;
-
-        display_name?: string;
-
-        logo?: string;
-
-        metadata?: Network.Metadata;
-
-        name?: string;
-
-        node_url?: string | null;
-
-        transaction_explorer_template?: string;
-
-        type?: string;
-      }
-
-      export namespace Network {
-        export interface Token {
-          contract?: string | null;
-
-          decimals?: number;
-
-          logo?: string;
-
-          precision?: number;
-
-          price_in_usd?: number;
-
-          symbol?: string;
-        }
-
-        export interface Metadata {
-          evm_multicall_contract?: string | null;
-
-          evm_oracle_contract?: string | null;
-
-          listing_date?: string;
-        }
-      }
-    }
-
-    export interface Reward {
-      token?: Reward.Token;
-
-      amount?: number;
-
-      amount_in_usd?: number;
-
-      network?: Reward.Network;
-    }
-
-    export namespace Reward {
-      export interface Token {
-        contract?: string | null;
-
-        decimals?: number;
-
-        logo?: string;
-
-        precision?: number;
-
-        price_in_usd?: number;
-
-        symbol?: string;
-      }
-
-      export interface Network {
-        token?: Network.Token;
-
-        account_explorer_template?: string;
-
-        chain_id?: string | null;
-
-        deposit_methods?: Array<string> | null;
-
-        display_name?: string;
-
-        logo?: string;
-
-        metadata?: Network.Metadata;
-
-        name?: string;
-
-        node_url?: string | null;
-
-        transaction_explorer_template?: string;
-
-        type?: string;
-      }
-
-      export namespace Network {
-        export interface Token {
-          contract?: string | null;
-
-          decimals?: number;
-
-          logo?: string;
-
-          precision?: number;
-
-          price_in_usd?: number;
-
-          symbol?: string;
-        }
-
-        export interface Metadata {
-          evm_multicall_contract?: string | null;
-
-          evm_oracle_contract?: string | null;
-
-          listing_date?: string;
-        }
-      }
-    }
-
-    export interface Swap {
-      id?: string;
-
-      created_date?: string;
-
-      destination_address?: string;
-
-      destination_exchange?: Swap.DestinationExchange;
-
-      destination_network?: Swap.DestinationNetwork;
-
-      destination_token?: Swap.DestinationToken;
-
-      fail_reason?: string | null;
-
-      metadata?: Swap.Metadata;
-
-      requested_amount?: number;
-
-      source_exchange?: Swap.SourceExchange;
-
-      source_network?: Swap.SourceNetwork;
-
-      source_token?: Swap.SourceToken;
-
-      status?: string;
-
-      transactions?: Array<Swap.Transaction>;
-
-      use_deposit_address?: boolean;
-    }
-
-    export namespace Swap {
-      export interface DestinationExchange {
-        display_name?: string;
-
-        logo?: string;
-
-        metadata?: DestinationExchange.Metadata;
-
-        name?: string;
-      }
-
-      export namespace DestinationExchange {
-        export interface Metadata {
-          listing_date?: string;
-
-          oauth?: Metadata.OAuth;
-        }
-
-        export namespace Metadata {
-          export interface OAuth {
-            authorize_url?: string;
-
-            connect_url?: string;
-          }
-        }
-      }
-
-      export interface DestinationNetwork {
-        token?: DestinationNetwork.Token;
-
-        account_explorer_template?: string;
-
-        chain_id?: string | null;
-
-        deposit_methods?: Array<string> | null;
-
-        display_name?: string;
-
-        logo?: string;
-
-        metadata?: DestinationNetwork.Metadata;
-
-        name?: string;
-
-        node_url?: string | null;
-
-        transaction_explorer_template?: string;
-
-        type?: string;
-      }
-
-      export namespace DestinationNetwork {
-        export interface Token {
-          contract?: string | null;
-
-          decimals?: number;
-
-          logo?: string;
-
-          precision?: number;
-
-          price_in_usd?: number;
-
-          symbol?: string;
-        }
-
-        export interface Metadata {
-          evm_multicall_contract?: string | null;
-
-          evm_oracle_contract?: string | null;
-
-          listing_date?: string;
-        }
-      }
-
-      export interface DestinationToken {
-        contract?: string | null;
-
-        decimals?: number;
-
-        logo?: string;
-
-        precision?: number;
-
-        price_in_usd?: number;
-
-        symbol?: string;
-      }
-
-      export interface Metadata {
-        exchange_account?: string | null;
-
-        reference_id?: string | null;
-
-        sequence_number?: number;
-      }
-
-      export interface SourceExchange {
-        display_name?: string;
-
-        logo?: string;
-
-        metadata?: SourceExchange.Metadata;
-
-        name?: string;
-      }
-
-      export namespace SourceExchange {
-        export interface Metadata {
-          listing_date?: string;
-
-          oauth?: Metadata.OAuth;
-        }
-
-        export namespace Metadata {
-          export interface OAuth {
-            authorize_url?: string;
-
-            connect_url?: string;
-          }
-        }
-      }
-
-      export interface SourceNetwork {
-        token?: SourceNetwork.Token;
-
-        account_explorer_template?: string;
-
-        chain_id?: string | null;
-
-        deposit_methods?: Array<string> | null;
-
-        display_name?: string;
-
-        logo?: string;
-
-        metadata?: SourceNetwork.Metadata;
-
-        name?: string;
-
-        node_url?: string | null;
-
-        transaction_explorer_template?: string;
-
-        type?: string;
-      }
-
-      export namespace SourceNetwork {
-        export interface Token {
-          contract?: string | null;
-
-          decimals?: number;
-
-          logo?: string;
-
-          precision?: number;
-
-          price_in_usd?: number;
-
-          symbol?: string;
-        }
-
-        export interface Metadata {
-          evm_multicall_contract?: string | null;
-
-          evm_oracle_contract?: string | null;
-
-          listing_date?: string;
-        }
-      }
-
-      export interface SourceToken {
-        contract?: string | null;
-
-        decimals?: number;
-
-        logo?: string;
-
-        precision?: number;
-
-        price_in_usd?: number;
-
-        symbol?: string;
-      }
-
-      export interface Transaction {
-        token?: Transaction.Token;
-
-        amount?: number;
-
-        confirmations?: number;
-
-        from?: string | null;
-
-        max_confirmations?: number;
-
-        network?: Transaction.Network;
-
-        status?: string;
-
-        timestamp?: string;
-
-        to?: string | null;
-
-        transaction_hash?: string | null;
-
-        type?: string;
-      }
-
-      export namespace Transaction {
-        export interface Token {
-          contract?: string | null;
-
-          decimals?: number;
-
-          logo?: string;
-
-          precision?: number;
-
-          price_in_usd?: number;
-
-          symbol?: string;
-        }
-
-        export interface Network {
-          token?: Network.Token;
-
-          account_explorer_template?: string;
-
-          chain_id?: string | null;
-
-          deposit_methods?: Array<string> | null;
-
-          display_name?: string;
-
-          logo?: string;
-
-          metadata?: Network.Metadata;
-
-          name?: string;
-
-          node_url?: string | null;
-
-          transaction_explorer_template?: string;
-
-          type?: string;
-        }
-
-        export namespace Network {
-          export interface Token {
-            contract?: string | null;
-
-            decimals?: number;
 
             logo?: string;
 
@@ -1652,22 +1726,28 @@ export interface SwapCreateParams {
   source_token?: string;
 
   use_deposit_address?: boolean;
+
+  use_new_deposit_address?: boolean | null;
 }
 
 export interface SwapRetrieveParams {
-  sourceAddress?: string;
+  exclude_deposit_actions?: boolean;
+
+  source_address?: string;
 }
 
 export interface SwapListParams {
   address: string;
 
+  include_expired?: boolean;
+
   page?: number;
 }
 
 export namespace Swaps {
-  export import PreparedSwapResponse = SwapsAPI.PreparedSwapResponse;
-  export import SwapListResponse = SwapsAPI.SwapListResponse;
-  export import SwapResponse = SwapsAPI.SwapResponse;
+  export import ListSwap = SwapsAPI.ListSwap;
+  export import PreparedSwap = SwapsAPI.PreparedSwap;
+  export import Swap = SwapsAPI.Swap;
   export import SwapCreateParams = SwapsAPI.SwapCreateParams;
   export import SwapRetrieveParams = SwapsAPI.SwapRetrieveParams;
   export import SwapListParams = SwapsAPI.SwapListParams;

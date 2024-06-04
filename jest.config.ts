@@ -7,9 +7,9 @@ const config: JestConfigWithTsJest = {
     '^.+\\.(t|j)sx?$': ['@swc/jest', { sourceMaps: 'inline' }],
   },
   moduleNameMapper: {
-    '^Layerswap$': '<rootDir>/src/index.ts',
-    '^Layerswap/_shims/auto/(.*)$': '<rootDir>/src/_shims/auto/$1-node',
-    '^Layerswap/(.*)$': '<rootDir>/src/$1',
+    '^layerswap$': '<rootDir>/src/index.ts',
+    '^layerswap/_shims/auto/(.*)$': '<rootDir>/src/_shims/auto/$1-node',
+    '^layerswap/(.*)$': '<rootDir>/src/$1',
   },
   modulePathIgnorePatterns: [
     '<rootDir>/ecosystem-tests/',
@@ -17,6 +17,7 @@ const config: JestConfigWithTsJest = {
     '<rootDir>/deno/',
     '<rootDir>/deno_tests/',
   ],
+  testPathIgnorePatterns: ['scripts'],
 };
 
 export default config;

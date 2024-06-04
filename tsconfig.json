@@ -9,9 +9,9 @@
     "esModuleInterop": true,
     "baseUrl": "./",
     "paths": {
-      "Layerswap/_shims/auto/*": ["src/_shims/auto/*-node"],
-      "Layerswap/*": ["src/*"],
-      "Layerswap": ["src/index.ts"],
+      "layerswap/_shims/auto/*": ["src/_shims/auto/*-node"],
+      "layerswap/*": ["src/*"],
+      "layerswap": ["src/index.ts"],
     },
     "noEmit": true,
 

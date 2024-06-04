@@ -6,9 +6,9 @@
     "rootDir": "./deno",
     "lib": ["es2020", "DOM"],
     "paths": {
-      "Layerswap/_shims/auto/*": ["deno/_shims/auto/*-deno"],
-      "Layerswap/*": ["deno/*"],
-      "Layerswap": ["deno/index.ts"],
+      "layerswap/_shims/auto/*": ["deno/_shims/auto/*-deno"],
+      "layerswap/*": ["deno/*"],
+      "layerswap": ["deno/index.ts"],
     },
     "noEmit": true,
     "declaration": true,

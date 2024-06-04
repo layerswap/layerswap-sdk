@@ -1,6 +1,6 @@
-import { multipartFormRequestOptions, createForm } from 'Layerswap/core';
-import { Blob } from 'Layerswap/_shims/index';
-import { toFile } from 'Layerswap';
+import { multipartFormRequestOptions, createForm } from 'layerswap/core';
+import { Blob } from 'layerswap/_shims/index';
+import { toFile } from 'layerswap';
 
 describe('form data validation', () => {
   test('valid values do not error', async () => {
