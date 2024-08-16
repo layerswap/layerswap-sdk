@@ -193,6 +193,7 @@ export namespace Layerswap {
   export import NetworkWithRouteTokensAPIResponse = API.NetworkWithRouteTokensAPIResponse;
   export import NetworkWithTokensAPIResponse = API.NetworkWithTokensAPIResponse;
   export import PreparedSwapAPIResponse = API.PreparedSwapAPIResponse;
+  export import PreparedSwapResponse = API.PreparedSwapResponse;
   export import Quote = API.Quote;
   export import Swap = API.Swap;
   export import SwapAPIResponse = API.SwapAPIResponse;
