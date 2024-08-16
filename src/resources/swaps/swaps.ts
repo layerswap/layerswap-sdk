@@ -112,23 +112,11 @@ export namespace NetworkWithRouteTokensAPIResponse {
 
       price_in_usd?: number;
 
-      refuel?: Token.Refuel;
+      refuel?: SwapsAPI.TokenWithAmount;
 
       status?: string;
 
       symbol?: string;
-    }
-
-    export namespace Token {
-      export interface Refuel {
-        token?: Shared.Token;
-
-        amount?: number;
-
-        amount_in_usd?: number;
-
-        network?: Shared.Network;
-      }
     }
   }
 
@@ -205,9 +193,9 @@ export namespace PreparedSwapAPIResponse {
 
     quote?: SwapsAPI.Quote;
 
-    refuel?: Data.Refuel;
+    refuel?: SwapsAPI.TokenWithAmount;
 
-    reward?: Data.Reward;
+    reward?: SwapsAPI.TokenWithAmount;
 
     swap?: SwapsAPI.Swap;
   }
@@ -231,26 +219,6 @@ export namespace PreparedSwapAPIResponse {
       to_address?: string;
 
       type?: string;
-    }
-
-    export interface Refuel {
-      token?: Shared.Token;
-
-      amount?: number;
-
-      amount_in_usd?: number;
-
-      network?: Shared.Network;
-    }
-
-    export interface Reward {
-      token?: Shared.Token;
-
-      amount?: number;
-
-      amount_in_usd?: number;
-
-      network?: Shared.Network;
     }
   }
 
@@ -444,63 +412,19 @@ export namespace SwapQuoteAPIResponse {
 export interface SwapQuoteResponse {
   quote?: Quote;
 
-  refuel?: SwapQuoteResponse.Refuel;
+  refuel?: TokenWithAmount;
 
-  reward?: SwapQuoteResponse.Reward;
-}
-
-export namespace SwapQuoteResponse {
-  export interface Refuel {
-    token?: Shared.Token;
-
-    amount?: number;
-
-    amount_in_usd?: number;
-
-    network?: Shared.Network;
-  }
-
-  export interface Reward {
-    token?: Shared.Token;
-
-    amount?: number;
-
-    amount_in_usd?: number;
-
-    network?: Shared.Network;
-  }
+  reward?: TokenWithAmount;
 }
 
 export interface SwapResponse {
   quote?: Quote;
 
-  refuel?: SwapResponse.Refuel;
+  refuel?: TokenWithAmount;
 
-  reward?: SwapResponse.Reward;
+  reward?: TokenWithAmount;
 
   swap?: Swap;
-}
-
-export namespace SwapResponse {
-  export interface Refuel {
-    token?: Shared.Token;
-
-    amount?: number;
-
-    amount_in_usd?: number;
-
-    network?: Shared.Network;
-  }
-
-  export interface Reward {
-    token?: Shared.Token;
-
-    amount?: number;
-
-    amount_in_usd?: number;
-
-    network?: Shared.Network;
-  }
 }
 
 export interface SwapRouteLimitsAPIResponse {
@@ -527,6 +451,16 @@ export namespace SwapRouteLimitsAPIResponse {
 
     metadata?: Record<string, unknown>;
   }
+}
+
+export interface TokenWithAmount {
+  token?: Shared.Token;
+
+  amount?: number;
+
+  amount_in_usd?: number;
+
+  network?: Shared.Network;
 }
 
 export interface SwapCreateParams {
@@ -585,6 +519,7 @@ export namespace Swaps {
   export import SwapQuoteResponse = SwapsAPI.SwapQuoteResponse;
   export import SwapResponse = SwapsAPI.SwapResponse;
   export import SwapRouteLimitsAPIResponse = SwapsAPI.SwapRouteLimitsAPIResponse;
+  export import TokenWithAmount = SwapsAPI.TokenWithAmount;
   export import SwapCreateParams = SwapsAPI.SwapCreateParams;
   export import SwapRetrieveParams = SwapsAPI.SwapRetrieveParams;
   export import SwapListParams = SwapsAPI.SwapListParams;

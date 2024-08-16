@@ -26,6 +26,7 @@ Types:
 - <code><a href="./src/resources/swaps/swaps.ts">SwapQuoteResponse</a></code>
 - <code><a href="./src/resources/swaps/swaps.ts">SwapResponse</a></code>
 - <code><a href="./src/resources/swaps/swaps.ts">SwapRouteLimitsAPIResponse</a></code>
+- <code><a href="./src/resources/swaps/swaps.ts">TokenWithAmount</a></code>
 
 Methods:
 
