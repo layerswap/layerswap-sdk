@@ -14,6 +14,7 @@ export {
   SwapQuoteResponse,
   SwapResponse,
   SwapRouteLimitsAPIResponse,
+  TokenWithAmount,
   SwapCreateParams,
   SwapRetrieveParams,
   SwapListParams,
