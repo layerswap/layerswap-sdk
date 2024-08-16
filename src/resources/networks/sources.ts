@@ -33,6 +33,8 @@ export interface SourceListParams {
   include_unavailable?: boolean;
 
   include_unmatched?: boolean;
+
+  network_types?: Array<string>;
 }
 
 export namespace Sources {

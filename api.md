@@ -48,7 +48,7 @@ Methods:
 
 Methods:
 
-- <code title="get /api/v2/networks">client.networks.<a href="./src/resources/networks/networks.ts">list</a>() -> NetworkWithTokens</code>
+- <code title="get /api/v2/networks">client.networks.<a href="./src/resources/networks/networks.ts">list</a>({ ...params }) -> NetworkWithTokens</code>
 
 ## Sources
 
