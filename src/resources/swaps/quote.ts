@@ -6,7 +6,10 @@ import * as QuoteAPI from './quote';
 import * as SwapsAPI from './swaps';
 
 export class Quote extends APIResource {
-  retrieve(query: QuoteRetrieveParams, options?: Core.RequestOptions): Core.APIPromise<SwapsAPI.SwapQuote> {
+  retrieve(
+    query: QuoteRetrieveParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SwapsAPI.SwapQuoteAPIResponse> {
     return this._client.get('/api/v2/quote', { query, ...options });
   }
 }

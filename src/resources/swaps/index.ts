@@ -2,15 +2,17 @@
 
 export { LimitListParams, Limits } from './limits';
 export {
-  ListSwap,
-  NetworkWithRouteTokens,
-  NetworkWithTokens,
-  PreparedSwap,
+  ListSwapAPIResponse,
+  NetworkWithRouteTokensAPIResponse,
+  NetworkWithTokensAPIResponse,
+  PreparedSwapAPIResponse,
   Quote,
   Swap,
-  SwapQuote,
-  SwapRouteLimits,
+  SwapAPIResponse,
+  SwapQuoteAPIResponse,
+  SwapQuoteResponse,
   SwapResponse,
+  SwapRouteLimitsAPIResponse,
   SwapCreateParams,
   SwapRetrieveParams,
   SwapListParams,
