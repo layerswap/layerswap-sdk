@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.1.0-alpha.5 (2024-08-16)
+
+Full Changelog: [v0.1.0-alpha.4...v0.1.0-alpha.5](https://github.com/layerswap/layerswap-sdk/compare/v0.1.0-alpha.4...v0.1.0-alpha.5)
+
+### Features
+
+* **api:** update via SDK Studio ([#17](https://github.com/layerswap/layerswap-sdk/issues/17)) ([ed85066](https://github.com/layerswap/layerswap-sdk/commit/ed85066443e89f5141dd77a3c881745bc189dc6e))
+* **api:** update via SDK Studio ([#19](https://github.com/layerswap/layerswap-sdk/issues/19)) ([35307a1](https://github.com/layerswap/layerswap-sdk/commit/35307a181c4bf9a1b1c63b5a45906f20aa1662d2))
+* **api:** update via SDK Studio ([#20](https://github.com/layerswap/layerswap-sdk/issues/20)) ([b703f4a](https://github.com/layerswap/layerswap-sdk/commit/b703f4a45e72c55db29e3de97029afe57fa1cb69))
+* **api:** update via SDK Studio ([#21](https://github.com/layerswap/layerswap-sdk/issues/21)) ([dc78682](https://github.com/layerswap/layerswap-sdk/commit/dc7868268fdc84c2bf0465bca22e4422e2659934))
+
 ## 0.1.0-alpha.4 (2024-08-16)
 
 Full Changelog: [v0.1.0-alpha.3...v0.1.0-alpha.4](https://github.com/layerswap/layerswap-sdk/compare/v0.1.0-alpha.3...v0.1.0-alpha.4)
