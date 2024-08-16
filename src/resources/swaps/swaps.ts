@@ -37,162 +37,12 @@ export class Swaps extends APIResource {
 }
 
 export interface ListSwap {
-  data?: Array<ListSwap.Data> | null;
+  data?: Array<SwapResponse> | null;
 
   error?: ListSwap.Error;
 }
 
 export namespace ListSwap {
-  export interface Data {
-    quote?: SwapsAPI.QuoteModel;
-
-    refuel?: Data.Refuel;
-
-    reward?: Data.Reward;
-
-    swap?: Data.Swap;
-  }
-
-  export namespace Data {
-    export interface Refuel {
-      token?: Shared.Token;
-
-      amount?: number;
-
-      amount_in_usd?: number;
-
-      network?: Shared.Network;
-    }
-
-    export interface Reward {
-      token?: Shared.Token;
-
-      amount?: number;
-
-      amount_in_usd?: number;
-
-      network?: Shared.Network;
-    }
-
-    export interface Swap {
-      id?: string;
-
-      created_date?: string;
-
-      destination_address?: string;
-
-      destination_exchange?: Swap.DestinationExchange;
-
-      destination_network?: Shared.Network;
-
-      destination_token?: Shared.Token;
-
-      fail_reason?: string | null;
-
-      metadata?: Swap.Metadata;
-
-      requested_amount?: number;
-
-      source_exchange?: Swap.SourceExchange;
-
-      source_network?: Shared.Network;
-
-      source_token?: Shared.Token;
-
-      status?: string;
-
-      transactions?: Array<Swap.Transaction>;
-
-      use_deposit_address?: boolean;
-    }
-
-    export namespace Swap {
-      export interface DestinationExchange {
-        display_name?: string;
-
-        logo?: string;
-
-        metadata?: DestinationExchange.Metadata;
-
-        name?: string;
-      }
-
-      export namespace DestinationExchange {
-        export interface Metadata {
-          listing_date?: string;
-
-          oauth?: Metadata.OAuth;
-        }
-
-        export namespace Metadata {
-          export interface OAuth {
-            authorize_url?: string;
-
-            connect_url?: string;
-          }
-        }
-      }
-
-      export interface Metadata {
-        exchange_account?: string | null;
-
-        reference_id?: string | null;
-
-        sequence_number?: number;
-      }
-
-      export interface SourceExchange {
-        display_name?: string;
-
-        logo?: string;
-
-        metadata?: SourceExchange.Metadata;
-
-        name?: string;
-      }
-
-      export namespace SourceExchange {
-        export interface Metadata {
-          listing_date?: string;
-
-          oauth?: Metadata.OAuth;
-        }
-
-        export namespace Metadata {
-          export interface OAuth {
-            authorize_url?: string;
-
-            connect_url?: string;
-          }
-        }
-      }
-
-      export interface Transaction {
-        token?: Shared.Token;
-
-        amount?: number;
-
-        confirmations?: number;
-
-        from?: string | null;
-
-        max_confirmations?: number;
-
-        network?: Shared.Network;
-
-        status?: string;
-
-        timestamp?: string;
-
-        to?: string | null;
-
-        transaction_hash?: string | null;
-
-        type?: string;
-      }
-    }
-  }
-
   export interface Error {
     code?: string;
 
@@ -555,162 +405,12 @@ export interface QuoteModel {
 }
 
 export interface Swap {
-  data?: Swap.Data;
+  data?: SwapResponse;
 
   error?: Swap.Error;
 }
 
 export namespace Swap {
-  export interface Data {
-    quote?: SwapsAPI.QuoteModel;
-
-    refuel?: Data.Refuel;
-
-    reward?: Data.Reward;
-
-    swap?: Data.Swap;
-  }
-
-  export namespace Data {
-    export interface Refuel {
-      token?: Shared.Token;
-
-      amount?: number;
-
-      amount_in_usd?: number;
-
-      network?: Shared.Network;
-    }
-
-    export interface Reward {
-      token?: Shared.Token;
-
-      amount?: number;
-
-      amount_in_usd?: number;
-
-      network?: Shared.Network;
-    }
-
-    export interface Swap {
-      id?: string;
-
-      created_date?: string;
-
-      destination_address?: string;
-
-      destination_exchange?: Swap.DestinationExchange;
-
-      destination_network?: Shared.Network;
-
-      destination_token?: Shared.Token;
-
-      fail_reason?: string | null;
-
-      metadata?: Swap.Metadata;
-
-      requested_amount?: number;
-
-      source_exchange?: Swap.SourceExchange;
-
-      source_network?: Shared.Network;
-
-      source_token?: Shared.Token;
-
-      status?: string;
-
-      transactions?: Array<Swap.Transaction>;
-
-      use_deposit_address?: boolean;
-    }
-
-    export namespace Swap {
-      export interface DestinationExchange {
-        display_name?: string;
-
-        logo?: string;
-
-        metadata?: DestinationExchange.Metadata;
-
-        name?: string;
-      }
-
-      export namespace DestinationExchange {
-        export interface Metadata {
-          listing_date?: string;
-
-          oauth?: Metadata.OAuth;
-        }
-
-        export namespace Metadata {
-          export interface OAuth {
-            authorize_url?: string;
-
-            connect_url?: string;
-          }
-        }
-      }
-
-      export interface Metadata {
-        exchange_account?: string | null;
-
-        reference_id?: string | null;
-
-        sequence_number?: number;
-      }
-
-      export interface SourceExchange {
-        display_name?: string;
-
-        logo?: string;
-
-        metadata?: SourceExchange.Metadata;
-
-        name?: string;
-      }
-
-      export namespace SourceExchange {
-        export interface Metadata {
-          listing_date?: string;
-
-          oauth?: Metadata.OAuth;
-        }
-
-        export namespace Metadata {
-          export interface OAuth {
-            authorize_url?: string;
-
-            connect_url?: string;
-          }
-        }
-      }
-
-      export interface Transaction {
-        token?: Shared.Token;
-
-        amount?: number;
-
-        confirmations?: number;
-
-        from?: string | null;
-
-        max_confirmations?: number;
-
-        network?: Shared.Network;
-
-        status?: string;
-
-        timestamp?: string;
-
-        to?: string | null;
-
-        transaction_hash?: string | null;
-
-        type?: string;
-      }
-    }
-  }
-
   export interface Error {
     code?: string;
 
@@ -792,6 +492,156 @@ export namespace SwapRouteLimits {
   }
 }
 
+export interface SwapResponse {
+  quote?: QuoteModel;
+
+  refuel?: SwapResponse.Refuel;
+
+  reward?: SwapResponse.Reward;
+
+  swap?: SwapResponse.Swap;
+}
+
+export namespace SwapResponse {
+  export interface Refuel {
+    token?: Shared.Token;
+
+    amount?: number;
+
+    amount_in_usd?: number;
+
+    network?: Shared.Network;
+  }
+
+  export interface Reward {
+    token?: Shared.Token;
+
+    amount?: number;
+
+    amount_in_usd?: number;
+
+    network?: Shared.Network;
+  }
+
+  export interface Swap {
+    id?: string;
+
+    created_date?: string;
+
+    destination_address?: string;
+
+    destination_exchange?: Swap.DestinationExchange;
+
+    destination_network?: Shared.Network;
+
+    destination_token?: Shared.Token;
+
+    fail_reason?: string | null;
+
+    metadata?: Swap.Metadata;
+
+    requested_amount?: number;
+
+    source_exchange?: Swap.SourceExchange;
+
+    source_network?: Shared.Network;
+
+    source_token?: Shared.Token;
+
+    status?: string;
+
+    transactions?: Array<Swap.Transaction>;
+
+    use_deposit_address?: boolean;
+  }
+
+  export namespace Swap {
+    export interface DestinationExchange {
+      display_name?: string;
+
+      logo?: string;
+
+      metadata?: DestinationExchange.Metadata;
+
+      name?: string;
+    }
+
+    export namespace DestinationExchange {
+      export interface Metadata {
+        listing_date?: string;
+
+        oauth?: Metadata.OAuth;
+      }
+
+      export namespace Metadata {
+        export interface OAuth {
+          authorize_url?: string;
+
+          connect_url?: string;
+        }
+      }
+    }
+
+    export interface Metadata {
+      exchange_account?: string | null;
+
+      reference_id?: string | null;
+
+      sequence_number?: number;
+    }
+
+    export interface SourceExchange {
+      display_name?: string;
+
+      logo?: string;
+
+      metadata?: SourceExchange.Metadata;
+
+      name?: string;
+    }
+
+    export namespace SourceExchange {
+      export interface Metadata {
+        listing_date?: string;
+
+        oauth?: Metadata.OAuth;
+      }
+
+      export namespace Metadata {
+        export interface OAuth {
+          authorize_url?: string;
+
+          connect_url?: string;
+        }
+      }
+    }
+
+    export interface Transaction {
+      token?: Shared.Token;
+
+      amount?: number;
+
+      confirmations?: number;
+
+      from?: string | null;
+
+      max_confirmations?: number;
+
+      network?: Shared.Network;
+
+      status?: string;
+
+      timestamp?: string;
+
+      to?: string | null;
+
+      transaction_hash?: string | null;
+
+      type?: string;
+    }
+  }
+}
+
 export interface SwapCreateParams {
   amount?: number;
 
@@ -845,6 +695,7 @@ export namespace Swaps {
   export import Swap = SwapsAPI.Swap;
   export import SwapQuote = SwapsAPI.SwapQuote;
   export import SwapRouteLimits = SwapsAPI.SwapRouteLimits;
+  export import SwapResponse = SwapsAPI.SwapResponse;
   export import SwapCreateParams = SwapsAPI.SwapCreateParams;
   export import SwapRetrieveParams = SwapsAPI.SwapRetrieveParams;
   export import SwapListParams = SwapsAPI.SwapListParams;
