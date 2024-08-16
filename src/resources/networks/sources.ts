@@ -10,12 +10,12 @@ export class Sources extends APIResource {
   list(
     query?: SourceListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SwapsAPI.NetworkWithRouteTokens>;
-  list(options?: Core.RequestOptions): Core.APIPromise<SwapsAPI.NetworkWithRouteTokens>;
+  ): Core.APIPromise<SwapsAPI.NetworkWithRouteTokensAPIResponse>;
+  list(options?: Core.RequestOptions): Core.APIPromise<SwapsAPI.NetworkWithRouteTokensAPIResponse>;
   list(
     query: SourceListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SwapsAPI.NetworkWithRouteTokens> {
+  ): Core.APIPromise<SwapsAPI.NetworkWithRouteTokensAPIResponse> {
     if (isRequestOptions(query)) {
       return this.list({}, query);
     }

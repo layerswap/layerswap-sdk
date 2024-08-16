@@ -12,12 +12,15 @@ export class Networks extends APIResource {
   sources: SourcesAPI.Sources = new SourcesAPI.Sources(this._client);
   destinations: DestinationsAPI.Destinations = new DestinationsAPI.Destinations(this._client);
 
-  list(query?: NetworkListParams, options?: Core.RequestOptions): Core.APIPromise<SwapsAPI.NetworkWithTokens>;
-  list(options?: Core.RequestOptions): Core.APIPromise<SwapsAPI.NetworkWithTokens>;
+  list(
+    query?: NetworkListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SwapsAPI.NetworkWithTokensAPIResponse>;
+  list(options?: Core.RequestOptions): Core.APIPromise<SwapsAPI.NetworkWithTokensAPIResponse>;
   list(
     query: NetworkListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SwapsAPI.NetworkWithTokens> {
+  ): Core.APIPromise<SwapsAPI.NetworkWithTokensAPIResponse> {
     if (isRequestOptions(query)) {
       return this.list({}, query);
     }
