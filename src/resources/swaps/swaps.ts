@@ -3,6 +3,7 @@
 import { APIResource } from '../../resource';
 import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
+import { Quote } from './quote';
 import * as SwapsAPI from './swaps';
 import * as Shared from '../shared';
 import * as DepositActionsAPI from './deposit-actions';
@@ -198,7 +199,7 @@ export namespace PreparedSwap {
   export interface Data {
     deposit_actions?: Array<Data.DepositAction>;
 
-    quote?: SwapsAPI.QuoteModel;
+    quote?: SwapsAPI.Quote;
 
     refuel?: Data.Refuel;
 
@@ -376,7 +377,7 @@ export namespace PreparedSwap {
   }
 }
 
-export interface QuoteModel {
+export interface Quote {
   avg_completion_time?: string;
 
   blockchain_fee?: number;
@@ -428,7 +429,7 @@ export interface SwapQuote {
 
 export namespace SwapQuote {
   export interface Data {
-    quote?: SwapsAPI.QuoteModel;
+    quote?: SwapsAPI.Quote;
 
     refuel?: Data.Refuel;
 
@@ -493,7 +494,7 @@ export namespace SwapRouteLimits {
 }
 
 export interface SwapResponse {
-  quote?: QuoteModel;
+  quote?: Quote;
 
   refuel?: SwapResponse.Refuel;
 
@@ -691,7 +692,7 @@ export namespace Swaps {
   export import NetworkWithRouteTokens = SwapsAPI.NetworkWithRouteTokens;
   export import NetworkWithTokens = SwapsAPI.NetworkWithTokens;
   export import PreparedSwap = SwapsAPI.PreparedSwap;
-  export import QuoteModel = SwapsAPI.QuoteModel;
+  export import Quote = SwapsAPI.Quote;
   export import Swap = SwapsAPI.Swap;
   export import SwapQuote = SwapsAPI.SwapQuote;
   export import SwapRouteLimits = SwapsAPI.SwapRouteLimits;
@@ -704,6 +705,5 @@ export namespace Swaps {
   export import DepositActionListParams = DepositActionsAPI.DepositActionListParams;
   export import Limits = LimitsAPI.Limits;
   export import LimitListParams = LimitsAPI.LimitListParams;
-  export import Quote = QuoteAPI.Quote;
   export import QuoteRetrieveParams = QuoteAPI.QuoteRetrieveParams;
 }
