@@ -223,49 +223,19 @@ export interface TokenWithAmount {
 export interface SwapCreateResponse {
   data?: PreparedSwapResponse;
 
-  error?: SwapCreateResponse.Error;
-}
-
-export namespace SwapCreateResponse {
-  export interface Error {
-    code?: string;
-
-    message?: string;
-
-    metadata?: Record<string, unknown>;
-  }
+  error?: Shared.APIError;
 }
 
 export interface SwapRetrieveResponse {
   data?: SwapResponse;
 
-  error?: SwapRetrieveResponse.Error;
-}
-
-export namespace SwapRetrieveResponse {
-  export interface Error {
-    code?: string;
-
-    message?: string;
-
-    metadata?: Record<string, unknown>;
-  }
+  error?: Shared.APIError;
 }
 
 export interface SwapListResponse {
   data?: Array<SwapResponse> | null;
 
-  error?: SwapListResponse.Error;
-}
-
-export namespace SwapListResponse {
-  export interface Error {
-    code?: string;
-
-    message?: string;
-
-    metadata?: Record<string, unknown>;
-  }
+  error?: Shared.APIError;
 }
 
 export interface SwapCreateParams {

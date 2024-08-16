@@ -28,7 +28,7 @@ export class DepositActions extends APIResource {
 export interface ListTransferDepositAction {
   data?: Array<ListTransferDepositAction.Data> | null;
 
-  error?: ListTransferDepositAction.Error;
+  error?: Shared.APIError;
 }
 
 export namespace ListTransferDepositAction {
@@ -50,14 +50,6 @@ export namespace ListTransferDepositAction {
     to_address?: string;
 
     type?: string;
-  }
-
-  export interface Error {
-    code?: string;
-
-    message?: string;
-
-    metadata?: Record<string, unknown>;
   }
 }
 

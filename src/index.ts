@@ -205,7 +205,9 @@ export namespace Layerswap {
   export import NetworkListResponse = API.NetworkListResponse;
   export import NetworkListParams = API.NetworkListParams;
 
+  export import APIError = API.APIError;
   export import Network = API.Network;
+  export import NetworkMetadata = API.NetworkMetadata;
   export import Token = API.Token;
 }
 

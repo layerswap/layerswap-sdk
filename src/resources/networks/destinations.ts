@@ -27,7 +27,7 @@ export class Destinations extends APIResource {
 export interface DestinationListResponse {
   data?: Array<DestinationListResponse.Data> | null;
 
-  error?: DestinationListResponse.Error;
+  error?: Shared.APIError;
 }
 
 export namespace DestinationListResponse {
@@ -44,7 +44,7 @@ export namespace DestinationListResponse {
 
     logo?: string;
 
-    metadata?: Data.Metadata;
+    metadata?: Shared.NetworkMetadata;
 
     name?: string;
 
@@ -58,14 +58,6 @@ export namespace DestinationListResponse {
   }
 
   export namespace Data {
-    export interface Metadata {
-      evm_multicall_contract?: string | null;
-
-      evm_oracle_contract?: string | null;
-
-      listing_date?: string;
-    }
-
     export interface Token {
       contract?: string | null;
 
@@ -85,14 +77,6 @@ export namespace DestinationListResponse {
 
       symbol?: string;
     }
-  }
-
-  export interface Error {
-    code?: string;
-
-    message?: string;
-
-    metadata?: Record<string, unknown>;
   }
 }
 

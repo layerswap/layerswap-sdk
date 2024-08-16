@@ -28,7 +28,7 @@ export class Networks extends APIResource {
 export interface NetworkListResponse {
   data?: Array<NetworkListResponse.Data> | null;
 
-  error?: NetworkListResponse.Error;
+  error?: Shared.APIError;
 }
 
 export namespace NetworkListResponse {
@@ -45,7 +45,7 @@ export namespace NetworkListResponse {
 
     logo?: string;
 
-    metadata?: Data.Metadata;
+    metadata?: Shared.NetworkMetadata;
 
     name?: string;
 
@@ -56,24 +56,6 @@ export namespace NetworkListResponse {
     transaction_explorer_template?: string;
 
     type?: string;
-  }
-
-  export namespace Data {
-    export interface Metadata {
-      evm_multicall_contract?: string | null;
-
-      evm_oracle_contract?: string | null;
-
-      listing_date?: string;
-    }
-  }
-
-  export interface Error {
-    code?: string;
-
-    message?: string;
-
-    metadata?: Record<string, unknown>;
   }
 }
 
