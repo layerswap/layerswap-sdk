@@ -189,14 +189,18 @@ export namespace Layerswap {
   export import Health = API.Health;
 
   export import Swaps = API.Swaps;
-  export import ListSwap = API.ListSwap;
-  export import NetworkWithRouteTokens = API.NetworkWithRouteTokens;
-  export import NetworkWithTokens = API.NetworkWithTokens;
-  export import PreparedSwap = API.PreparedSwap;
+  export import ListSwapAPIResponse = API.ListSwapAPIResponse;
+  export import NetworkWithRouteTokensAPIResponse = API.NetworkWithRouteTokensAPIResponse;
+  export import NetworkWithTokensAPIResponse = API.NetworkWithTokensAPIResponse;
+  export import PreparedSwapAPIResponse = API.PreparedSwapAPIResponse;
   export import Quote = API.Quote;
   export import Swap = API.Swap;
-  export import SwapQuote = API.SwapQuote;
-  export import SwapRouteLimits = API.SwapRouteLimits;
+  export import SwapAPIResponse = API.SwapAPIResponse;
+  export import SwapQuoteAPIResponse = API.SwapQuoteAPIResponse;
+  export import SwapQuoteResponse = API.SwapQuoteResponse;
+  export import SwapResponse = API.SwapResponse;
+  export import SwapRouteLimitsAPIResponse = API.SwapRouteLimitsAPIResponse;
+  export import TokenWithAmount = API.TokenWithAmount;
   export import SwapCreateParams = API.SwapCreateParams;
   export import SwapRetrieveParams = API.SwapRetrieveParams;
   export import SwapListParams = API.SwapListParams;
