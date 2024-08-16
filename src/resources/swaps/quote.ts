@@ -46,17 +46,7 @@ export interface Quote {
 export interface QuoteRetrieveResponse {
   data?: SwapsAPI.SwapQuoteResponse;
 
-  error?: QuoteRetrieveResponse.Error;
-}
-
-export namespace QuoteRetrieveResponse {
-  export interface Error {
-    code?: string;
-
-    message?: string;
-
-    metadata?: Record<string, unknown>;
-  }
+  error?: Shared.APIError;
 }
 
 export interface QuoteRetrieveParams {
