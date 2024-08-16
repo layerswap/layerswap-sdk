@@ -23,6 +23,7 @@ Types:
 - <code><a href="./src/resources/swaps/swaps.ts">Swap</a></code>
 - <code><a href="./src/resources/swaps/swaps.ts">SwapQuote</a></code>
 - <code><a href="./src/resources/swaps/swaps.ts">SwapRouteLimits</a></code>
+- <code><a href="./src/resources/swaps/swaps.ts">SwapResponse</a></code>
 
 Methods:
 

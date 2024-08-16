@@ -10,6 +10,7 @@ export {
   Swap,
   SwapQuote,
   SwapRouteLimits,
+  SwapResponse,
   SwapCreateParams,
   SwapRetrieveParams,
   SwapListParams,
