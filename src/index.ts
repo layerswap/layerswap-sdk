@@ -197,6 +197,7 @@ export namespace Layerswap {
   export import Swap = API.Swap;
   export import SwapQuote = API.SwapQuote;
   export import SwapRouteLimits = API.SwapRouteLimits;
+  export import SwapResponse = API.SwapResponse;
   export import SwapCreateParams = API.SwapCreateParams;
   export import SwapRetrieveParams = API.SwapRetrieveParams;
   export import SwapListParams = API.SwapListParams;
