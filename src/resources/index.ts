@@ -14,4 +14,4 @@ export {
   SwapListParams,
   Swaps,
 } from './swaps/swaps';
-export { Networks } from './networks/networks';
+export { NetworkListParams, Networks } from './networks/networks';
