@@ -19,6 +19,7 @@ Types:
 - <code><a href="./src/resources/swaps/swaps.ts">NetworkWithRouteTokensAPIResponse</a></code>
 - <code><a href="./src/resources/swaps/swaps.ts">NetworkWithTokensAPIResponse</a></code>
 - <code><a href="./src/resources/swaps/swaps.ts">PreparedSwapAPIResponse</a></code>
+- <code><a href="./src/resources/swaps/swaps.ts">PreparedSwapResponse</a></code>
 - <code><a href="./src/resources/swaps/swaps.ts">Quote</a></code>
 - <code><a href="./src/resources/swaps/swaps.ts">Swap</a></code>
 - <code><a href="./src/resources/swaps/swaps.ts">SwapAPIResponse</a></code>

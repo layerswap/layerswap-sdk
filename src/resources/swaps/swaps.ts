@@ -182,52 +182,52 @@ export namespace NetworkWithTokensAPIResponse {
 }
 
 export interface PreparedSwapAPIResponse {
-  data?: PreparedSwapAPIResponse.Data;
+  data?: PreparedSwapResponse;
 
   error?: PreparedSwapAPIResponse.Error;
 }
 
 export namespace PreparedSwapAPIResponse {
-  export interface Data {
-    deposit_actions?: Array<Data.DepositAction>;
-
-    quote?: SwapsAPI.Quote;
-
-    refuel?: SwapsAPI.TokenWithAmount;
-
-    reward?: SwapsAPI.TokenWithAmount;
-
-    swap?: SwapsAPI.Swap;
-  }
-
-  export namespace Data {
-    export interface DepositAction {
-      token?: Shared.Token;
-
-      amount?: number;
-
-      amount_in_base_units?: string;
-
-      call_data?: string | null;
-
-      fee_token?: Shared.Token;
-
-      network?: Shared.Network;
-
-      order?: number;
-
-      to_address?: string;
-
-      type?: string;
-    }
-  }
-
   export interface Error {
     code?: string;
 
     message?: string;
 
     metadata?: Record<string, unknown>;
+  }
+}
+
+export interface PreparedSwapResponse {
+  deposit_actions?: Array<PreparedSwapResponse.DepositAction>;
+
+  quote?: Quote;
+
+  refuel?: TokenWithAmount;
+
+  reward?: TokenWithAmount;
+
+  swap?: Swap;
+}
+
+export namespace PreparedSwapResponse {
+  export interface DepositAction {
+    token?: Shared.Token;
+
+    amount?: number;
+
+    amount_in_base_units?: string;
+
+    call_data?: string | null;
+
+    fee_token?: Shared.Token;
+
+    network?: Shared.Network;
+
+    order?: number;
+
+    to_address?: string;
+
+    type?: string;
   }
 }
 
@@ -512,6 +512,7 @@ export namespace Swaps {
   export import NetworkWithRouteTokensAPIResponse = SwapsAPI.NetworkWithRouteTokensAPIResponse;
   export import NetworkWithTokensAPIResponse = SwapsAPI.NetworkWithTokensAPIResponse;
   export import PreparedSwapAPIResponse = SwapsAPI.PreparedSwapAPIResponse;
+  export import PreparedSwapResponse = SwapsAPI.PreparedSwapResponse;
   export import Quote = SwapsAPI.Quote;
   export import Swap = SwapsAPI.Swap;
   export import SwapAPIResponse = SwapsAPI.SwapAPIResponse;

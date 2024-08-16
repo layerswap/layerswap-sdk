@@ -6,6 +6,7 @@ export {
   NetworkWithRouteTokensAPIResponse,
   NetworkWithTokensAPIResponse,
   PreparedSwapAPIResponse,
+  PreparedSwapResponse,
   Quote,
   Swap,
   SwapAPIResponse,
