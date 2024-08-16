@@ -193,6 +193,7 @@ export namespace Layerswap {
   export import NetworkWithRouteTokens = API.NetworkWithRouteTokens;
   export import NetworkWithTokens = API.NetworkWithTokens;
   export import PreparedSwap = API.PreparedSwap;
+  export import Quote = API.Quote;
   export import Swap = API.Swap;
   export import SwapQuote = API.SwapQuote;
   export import SwapRouteLimits = API.SwapRouteLimits;
@@ -202,6 +203,9 @@ export namespace Layerswap {
 
   export import Networks = API.Networks;
   export import NetworkListParams = API.NetworkListParams;
+
+  export import Network = API.Network;
+  export import Token = API.Token;
 }
 
 export default Layerswap;
