@@ -9,8 +9,24 @@ export class Quote extends APIResource {
   retrieve(
     query: QuoteRetrieveParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SwapsAPI.SwapQuoteAPIResponse> {
+  ): Core.APIPromise<QuoteRetrieveResponse> {
     return this._client.get('/api/v2/quote', { query, ...options });
+  }
+}
+
+export interface QuoteRetrieveResponse {
+  data?: SwapsAPI.SwapQuoteResponse;
+
+  error?: QuoteRetrieveResponse.Error;
+}
+
+export namespace QuoteRetrieveResponse {
+  export interface Error {
+    code?: string;
+
+    message?: string;
+
+    metadata?: Record<string, unknown>;
   }
 }
 
@@ -35,5 +51,6 @@ export interface QuoteRetrieveParams {
 }
 
 export namespace Quote {
+  export import QuoteRetrieveResponse = QuoteAPI.QuoteRetrieveResponse;
   export import QuoteRetrieveParams = QuoteAPI.QuoteRetrieveParams;
 }

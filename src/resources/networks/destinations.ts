@@ -4,22 +4,95 @@ import { APIResource } from '../../resource';
 import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as DestinationsAPI from './destinations';
+import * as Shared from '../shared';
 import * as SwapsAPI from '../swaps/swaps';
 
 export class Destinations extends APIResource {
   list(
     query?: DestinationListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SwapsAPI.NetworkWithRouteTokensAPIResponse>;
-  list(options?: Core.RequestOptions): Core.APIPromise<SwapsAPI.NetworkWithRouteTokensAPIResponse>;
+  ): Core.APIPromise<DestinationListResponse>;
+  list(options?: Core.RequestOptions): Core.APIPromise<DestinationListResponse>;
   list(
     query: DestinationListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SwapsAPI.NetworkWithRouteTokensAPIResponse> {
+  ): Core.APIPromise<DestinationListResponse> {
     if (isRequestOptions(query)) {
       return this.list({}, query);
     }
     return this._client.get('/api/v2/destinations', { query, ...options });
+  }
+}
+
+export interface DestinationListResponse {
+  data?: Array<DestinationListResponse.Data> | null;
+
+  error?: DestinationListResponse.Error;
+}
+
+export namespace DestinationListResponse {
+  export interface Data {
+    token?: Shared.Token;
+
+    account_explorer_template?: string;
+
+    chain_id?: string | null;
+
+    deposit_methods?: Array<string> | null;
+
+    display_name?: string;
+
+    logo?: string;
+
+    metadata?: Data.Metadata;
+
+    name?: string;
+
+    node_url?: string | null;
+
+    tokens?: Array<Data.Token>;
+
+    transaction_explorer_template?: string;
+
+    type?: string;
+  }
+
+  export namespace Data {
+    export interface Metadata {
+      evm_multicall_contract?: string | null;
+
+      evm_oracle_contract?: string | null;
+
+      listing_date?: string;
+    }
+
+    export interface Token {
+      contract?: string | null;
+
+      decimals?: number;
+
+      listing_date?: string;
+
+      logo?: string;
+
+      precision?: number;
+
+      price_in_usd?: number;
+
+      refuel?: SwapsAPI.TokenWithAmount;
+
+      status?: string;
+
+      symbol?: string;
+    }
+  }
+
+  export interface Error {
+    code?: string;
+
+    message?: string;
+
+    metadata?: Record<string, unknown>;
   }
 }
 
@@ -38,5 +111,6 @@ export interface DestinationListParams {
 }
 
 export namespace Destinations {
+  export import DestinationListResponse = DestinationsAPI.DestinationListResponse;
   export import DestinationListParams = DestinationsAPI.DestinationListParams;
 }
