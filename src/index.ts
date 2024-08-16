@@ -3,6 +3,7 @@
 import * as Errors from './error';
 import * as Uploads from './uploads';
 import { type Agent } from './_shims/index';
+import * as qs from 'qs';
 import * as Core from './core';
 import * as API from './resources/index';
 
@@ -138,6 +139,10 @@ export class Layerswap extends Core.APIClient {
     return { 'X-LS-APIKEY': this.apiKey };
   }
 
+  protected override stringifyQuery(query: Record<string, unknown>): string {
+    return qs.stringify(query, { arrayFormat: 'comma' });
+  }
+
   static Layerswap = this;
   static DEFAULT_TIMEOUT = 60000; // 1 minute
 
@@ -196,6 +201,7 @@ export namespace Layerswap {
   export import SwapListParams = API.SwapListParams;
 
   export import Networks = API.Networks;
+  export import NetworkListParams = API.NetworkListParams;
 }
 
 export default Layerswap;
