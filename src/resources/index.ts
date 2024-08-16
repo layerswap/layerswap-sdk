@@ -2,22 +2,18 @@
 
 export * from './shared';
 export { Health } from './health';
+export { NetworkListResponse, NetworkListParams, Networks } from './networks/networks';
 export {
-  ListSwapAPIResponse,
-  NetworkWithRouteTokensAPIResponse,
-  NetworkWithTokensAPIResponse,
-  PreparedSwapAPIResponse,
-  Quote,
+  PreparedSwapResponse,
   Swap,
-  SwapAPIResponse,
-  SwapQuoteAPIResponse,
   SwapQuoteResponse,
   SwapResponse,
-  SwapRouteLimitsAPIResponse,
   TokenWithAmount,
+  SwapCreateResponse,
+  SwapRetrieveResponse,
+  SwapListResponse,
   SwapCreateParams,
   SwapRetrieveParams,
   SwapListParams,
   Swaps,
 } from './swaps/swaps';
-export { NetworkListParams, Networks } from './networks/networks';

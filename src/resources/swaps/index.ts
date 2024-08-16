@@ -1,23 +1,19 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { LimitListParams, Limits } from './limits';
+export { LimitListResponse, LimitListParams, Limits } from './limits';
+export { ListTransferDepositAction, DepositActionListParams, DepositActions } from './deposit-actions';
 export {
-  ListSwapAPIResponse,
-  NetworkWithRouteTokensAPIResponse,
-  NetworkWithTokensAPIResponse,
-  PreparedSwapAPIResponse,
-  Quote,
+  PreparedSwapResponse,
   Swap,
-  SwapAPIResponse,
-  SwapQuoteAPIResponse,
   SwapQuoteResponse,
   SwapResponse,
-  SwapRouteLimitsAPIResponse,
   TokenWithAmount,
+  SwapCreateResponse,
+  SwapRetrieveResponse,
+  SwapListResponse,
   SwapCreateParams,
   SwapRetrieveParams,
   SwapListParams,
   Swaps,
 } from './swaps';
-export { ListTransferDepositAction, DepositActionListParams, DepositActions } from './deposit-actions';
-export { QuoteRetrieveParams, Quote } from './quote';
+export { Quote, QuoteRetrieveResponse, QuoteRetrieveParams, QuoteResource } from './quote';

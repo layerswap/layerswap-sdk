@@ -27,9 +27,9 @@ const client = new Layerswap({
 });
 
 async function main() {
-  const preparedSwapAPIResponse = await client.swaps.create();
+  const swapCreateResponse = await client.swaps.create();
 
-  console.log(preparedSwapAPIResponse.data);
+  console.log(swapCreateResponse.data);
 }
 
 main();
@@ -48,7 +48,7 @@ const client = new Layerswap({
 });
 
 async function main() {
-  const preparedSwapAPIResponse: Layerswap.PreparedSwapAPIResponse = await client.swaps.create();
+  const swapCreateResponse: Layerswap.SwapCreateResponse = await client.swaps.create();
 }
 
 main();
@@ -65,7 +65,7 @@ a subclass of `APIError` will be thrown:
 <!-- prettier-ignore -->
 ```ts
 async function main() {
-  const preparedSwapAPIResponse = await client.swaps.create().catch(async (err) => {
+  const swapCreateResponse = await client.swaps.create().catch(async (err) => {
     if (err instanceof Layerswap.APIError) {
       console.log(err.status); // 400
       console.log(err.name); // BadRequestError
@@ -150,9 +150,9 @@ const response = await client.swaps.create().asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: preparedSwapAPIResponse, response: raw } = await client.swaps.create().withResponse();
+const { data: swapCreateResponse, response: raw } = await client.swaps.create().withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(preparedSwapAPIResponse.data);
+console.log(swapCreateResponse.data);
 ```
 
 ### Making custom/undocumented requests

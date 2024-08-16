@@ -1,5 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+export interface APIError {
+  code?: string;
+
+  message?: string;
+
+  metadata?: Record<string, unknown>;
+}
+
 export interface Network {
   token?: Token;
 
@@ -13,7 +21,7 @@ export interface Network {
 
   logo?: string;
 
-  metadata?: Network.Metadata;
+  metadata?: NetworkMetadata;
 
   name?: string;
 
@@ -24,14 +32,12 @@ export interface Network {
   type?: string;
 }
 
-export namespace Network {
-  export interface Metadata {
-    evm_multicall_contract?: string | null;
+export interface NetworkMetadata {
+  evm_multicall_contract?: string | null;
 
-    evm_oracle_contract?: string | null;
+  evm_oracle_contract?: string | null;
 
-    listing_date?: string;
-  }
+  listing_date?: string;
 }
 
 export interface Token {
