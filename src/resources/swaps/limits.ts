@@ -6,7 +6,10 @@ import * as LimitsAPI from './limits';
 import * as SwapsAPI from './swaps';
 
 export class Limits extends APIResource {
-  list(query: LimitListParams, options?: Core.RequestOptions): Core.APIPromise<SwapsAPI.SwapRouteLimits> {
+  list(
+    query: LimitListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SwapsAPI.SwapRouteLimitsAPIResponse> {
     return this._client.get('/api/v2/limits', { query, ...options });
   }
 }
