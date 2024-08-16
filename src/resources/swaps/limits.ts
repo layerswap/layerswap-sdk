@@ -3,6 +3,7 @@
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
 import * as LimitsAPI from './limits';
+import * as Shared from '../shared';
 
 export class Limits extends APIResource {
   list(query: LimitListParams, options?: Core.RequestOptions): Core.APIPromise<LimitListResponse> {
@@ -13,7 +14,7 @@ export class Limits extends APIResource {
 export interface LimitListResponse {
   data?: LimitListResponse.Data;
 
-  error?: LimitListResponse.Error;
+  error?: Shared.APIError;
 }
 
 export namespace LimitListResponse {
@@ -25,14 +26,6 @@ export namespace LimitListResponse {
     min_amount?: number;
 
     min_amount_in_usd?: number;
-  }
-
-  export interface Error {
-    code?: string;
-
-    message?: string;
-
-    metadata?: Record<string, unknown>;
   }
 }
 

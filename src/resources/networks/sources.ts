@@ -24,7 +24,7 @@ export class Sources extends APIResource {
 export interface SourceListResponse {
   data?: Array<SourceListResponse.Data> | null;
 
-  error?: SourceListResponse.Error;
+  error?: Shared.APIError;
 }
 
 export namespace SourceListResponse {
@@ -41,7 +41,7 @@ export namespace SourceListResponse {
 
     logo?: string;
 
-    metadata?: Data.Metadata;
+    metadata?: Shared.NetworkMetadata;
 
     name?: string;
 
@@ -55,14 +55,6 @@ export namespace SourceListResponse {
   }
 
   export namespace Data {
-    export interface Metadata {
-      evm_multicall_contract?: string | null;
-
-      evm_oracle_contract?: string | null;
-
-      listing_date?: string;
-    }
-
     export interface Token {
       contract?: string | null;
 
@@ -82,14 +74,6 @@ export namespace SourceListResponse {
 
       symbol?: string;
     }
-  }
-
-  export interface Error {
-    code?: string;
-
-    message?: string;
-
-    metadata?: Record<string, unknown>;
   }
 }
 
