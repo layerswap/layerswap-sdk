@@ -4,7 +4,6 @@ export { LimitListResponse, LimitListParams, Limits } from './limits';
 export { ListTransferDepositAction, DepositActionListParams, DepositActions } from './deposit-actions';
 export {
   PreparedSwapResponse,
-  Quote,
   Swap,
   SwapQuoteResponse,
   SwapResponse,
@@ -17,4 +16,4 @@ export {
   SwapListParams,
   Swaps,
 } from './swaps';
-export { QuoteRetrieveResponse, QuoteRetrieveParams, Quote } from './quote';
+export { Quote, QuoteRetrieveResponse, QuoteRetrieveParams, QuoteResource } from './quote';
