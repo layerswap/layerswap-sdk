@@ -3,15 +3,44 @@
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
 import * as QuoteAPI from './quote';
+import * as Shared from '../shared';
 import * as SwapsAPI from './swaps';
 
-export class Quote extends APIResource {
+export class QuoteResource extends APIResource {
   retrieve(
     query: QuoteRetrieveParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<QuoteRetrieveResponse> {
     return this._client.get('/api/v2/quote', { query, ...options });
   }
+}
+
+export interface Quote {
+  avg_completion_time?: string;
+
+  blockchain_fee?: number;
+
+  destination_network?: Shared.Network;
+
+  destination_token?: Shared.Token;
+
+  min_receive_amount?: number;
+
+  receive_amount?: number;
+
+  refuel_in_source?: number | null;
+
+  service_fee?: number;
+
+  slippage?: number;
+
+  source_network?: Shared.Network;
+
+  source_token?: Shared.Token;
+
+  total_fee?: number;
+
+  total_fee_in_usd?: number;
 }
 
 export interface QuoteRetrieveResponse {
@@ -50,7 +79,8 @@ export interface QuoteRetrieveParams {
   use_deposit_address?: boolean;
 }
 
-export namespace Quote {
+export namespace QuoteResource {
+  export import Quote = QuoteAPI.Quote;
   export import QuoteRetrieveResponse = QuoteAPI.QuoteRetrieveResponse;
   export import QuoteRetrieveParams = QuoteAPI.QuoteRetrieveParams;
 }

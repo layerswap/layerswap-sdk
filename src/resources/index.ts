@@ -5,7 +5,6 @@ export { Health } from './health';
 export { NetworkListResponse, NetworkListParams, Networks } from './networks/networks';
 export {
   PreparedSwapResponse,
-  Quote,
   Swap,
   SwapQuoteResponse,
   SwapResponse,

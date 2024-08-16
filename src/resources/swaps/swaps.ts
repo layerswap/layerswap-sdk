@@ -3,7 +3,6 @@
 import { APIResource } from '../../resource';
 import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
-import { Quote } from './quote';
 import * as SwapsAPI from './swaps';
 import * as Shared from '../shared';
 import * as DepositActionsAPI from './deposit-actions';
@@ -13,7 +12,7 @@ import * as QuoteAPI from './quote';
 export class Swaps extends APIResource {
   depositActions: DepositActionsAPI.DepositActions = new DepositActionsAPI.DepositActions(this._client);
   limits: LimitsAPI.Limits = new LimitsAPI.Limits(this._client);
-  quote: QuoteAPI.Quote = new QuoteAPI.Quote(this._client);
+  quote: QuoteAPI.QuoteResource = new QuoteAPI.QuoteResource(this._client);
 
   create(body: SwapCreateParams, options?: Core.RequestOptions): Core.APIPromise<SwapCreateResponse> {
     return this._client.post('/api/v2/swaps', { body, ...options });
@@ -44,7 +43,7 @@ export class Swaps extends APIResource {
 export interface PreparedSwapResponse {
   deposit_actions?: Array<PreparedSwapResponse.DepositAction>;
 
-  quote?: Quote;
+  quote?: QuoteAPI.Quote;
 
   refuel?: TokenWithAmount;
 
@@ -73,34 +72,6 @@ export namespace PreparedSwapResponse {
 
     type?: string;
   }
-}
-
-export interface Quote {
-  avg_completion_time?: string;
-
-  blockchain_fee?: number;
-
-  destination_network?: Shared.Network;
-
-  destination_token?: Shared.Token;
-
-  min_receive_amount?: number;
-
-  receive_amount?: number;
-
-  refuel_in_source?: number | null;
-
-  service_fee?: number;
-
-  slippage?: number;
-
-  source_network?: Shared.Network;
-
-  source_token?: Shared.Token;
-
-  total_fee?: number;
-
-  total_fee_in_usd?: number;
 }
 
 export interface Swap {
@@ -222,7 +193,7 @@ export namespace Swap {
 }
 
 export interface SwapQuoteResponse {
-  quote?: Quote;
+  quote?: QuoteAPI.Quote;
 
   refuel?: TokenWithAmount;
 
@@ -230,7 +201,7 @@ export interface SwapQuoteResponse {
 }
 
 export interface SwapResponse {
-  quote?: Quote;
+  quote?: QuoteAPI.Quote;
 
   refuel?: TokenWithAmount;
 
@@ -343,7 +314,6 @@ export interface SwapListParams {
 
 export namespace Swaps {
   export import PreparedSwapResponse = SwapsAPI.PreparedSwapResponse;
-  export import Quote = SwapsAPI.Quote;
   export import Swap = SwapsAPI.Swap;
   export import SwapQuoteResponse = SwapsAPI.SwapQuoteResponse;
   export import SwapResponse = SwapsAPI.SwapResponse;
@@ -360,6 +330,8 @@ export namespace Swaps {
   export import Limits = LimitsAPI.Limits;
   export import LimitListResponse = LimitsAPI.LimitListResponse;
   export import LimitListParams = LimitsAPI.LimitListParams;
+  export import QuoteResource = QuoteAPI.QuoteResource;
+  export import Quote = QuoteAPI.Quote;
   export import QuoteRetrieveResponse = QuoteAPI.QuoteRetrieveResponse;
   export import QuoteRetrieveParams = QuoteAPI.QuoteRetrieveParams;
 }
