@@ -190,7 +190,6 @@ export namespace Layerswap {
 
   export import Swaps = API.Swaps;
   export import PreparedSwapResponse = API.PreparedSwapResponse;
-  export import Quote = API.Quote;
   export import Swap = API.Swap;
   export import SwapQuoteResponse = API.SwapQuoteResponse;
   export import SwapResponse = API.SwapResponse;

@@ -16,7 +16,6 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/swaps/swaps.ts">PreparedSwapResponse</a></code>
-- <code><a href="./src/resources/swaps/swaps.ts">Quote</a></code>
 - <code><a href="./src/resources/swaps/swaps.ts">Swap</a></code>
 - <code><a href="./src/resources/swaps/swaps.ts">SwapQuoteResponse</a></code>
 - <code><a href="./src/resources/swaps/swaps.ts">SwapResponse</a></code>
@@ -55,6 +54,7 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/swaps/quote.ts">Quote</a></code>
 - <code><a href="./src/resources/swaps/quote.ts">QuoteRetrieveResponse</a></code>
 
 Methods:
