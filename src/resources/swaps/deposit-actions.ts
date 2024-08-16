@@ -4,6 +4,7 @@ import { APIResource } from '../../resource';
 import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as DepositActionsAPI from './deposit-actions';
+import * as Shared from '../shared';
 
 export class DepositActions extends APIResource {
   list(
@@ -32,7 +33,7 @@ export interface ListTransferDepositAction {
 
 export namespace ListTransferDepositAction {
   export interface Data {
-    token?: Data.Token;
+    token?: Shared.Token;
 
     amount?: number;
 
@@ -40,99 +41,15 @@ export namespace ListTransferDepositAction {
 
     call_data?: string | null;
 
-    fee_token?: Data.FeeToken;
+    fee_token?: Shared.Token;
 
-    network?: Data.Network;
+    network?: Shared.Network;
 
     order?: number;
 
     to_address?: string;
 
     type?: string;
-  }
-
-  export namespace Data {
-    export interface Token {
-      contract?: string | null;
-
-      decimals?: number;
-
-      listing_date?: string;
-
-      logo?: string;
-
-      precision?: number;
-
-      price_in_usd?: number;
-
-      symbol?: string;
-    }
-
-    export interface FeeToken {
-      contract?: string | null;
-
-      decimals?: number;
-
-      listing_date?: string;
-
-      logo?: string;
-
-      precision?: number;
-
-      price_in_usd?: number;
-
-      symbol?: string;
-    }
-
-    export interface Network {
-      token?: Network.Token;
-
-      account_explorer_template?: string;
-
-      chain_id?: string | null;
-
-      deposit_methods?: Array<string> | null;
-
-      display_name?: string;
-
-      logo?: string;
-
-      metadata?: Network.Metadata;
-
-      name?: string;
-
-      node_url?: string | null;
-
-      transaction_explorer_template?: string;
-
-      type?: string;
-    }
-
-    export namespace Network {
-      export interface Token {
-        contract?: string | null;
-
-        decimals?: number;
-
-        listing_date?: string;
-
-        logo?: string;
-
-        precision?: number;
-
-        price_in_usd?: number;
-
-        symbol?: string;
-      }
-
-      export interface Metadata {
-        evm_multicall_contract?: string | null;
-
-        evm_oracle_contract?: string | null;
-
-        listing_date?: string;
-      }
-    }
   }
 
   export interface Error {

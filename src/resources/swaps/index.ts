@@ -6,6 +6,7 @@ export {
   NetworkWithRouteTokens,
   NetworkWithTokens,
   PreparedSwap,
+  Quote,
   Swap,
   SwapQuote,
   SwapRouteLimits,
