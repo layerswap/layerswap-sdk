@@ -30,6 +30,8 @@ export interface DestinationListParams {
 
   include_unmatched?: boolean;
 
+  network_types?: Array<string>;
+
   source_network?: string;
 
   source_token?: string;

@@ -1,11 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+export * from './shared';
 export { Health } from './health';
 export {
   ListSwap,
   NetworkWithRouteTokens,
   NetworkWithTokens,
   PreparedSwap,
+  Quote,
   Swap,
   SwapQuote,
   SwapRouteLimits,
@@ -14,4 +16,4 @@ export {
   SwapListParams,
   Swaps,
 } from './swaps/swaps';
-export { Networks } from './networks/networks';
+export { NetworkListParams, Networks } from './networks/networks';
