@@ -26,37 +26,9 @@ export class Networks extends APIResource {
 }
 
 export interface NetworkListResponse {
-  data?: Array<NetworkListResponse.Data> | null;
+  data?: Array<Shared.NetworkWithTokens> | null;
 
   error?: Shared.APIError;
-}
-
-export namespace NetworkListResponse {
-  export interface Data {
-    token?: Shared.Token;
-
-    account_explorer_template?: string;
-
-    chain_id?: string | null;
-
-    deposit_methods?: Array<string> | null;
-
-    display_name?: string;
-
-    logo?: string;
-
-    metadata?: Shared.NetworkMetadata;
-
-    name?: string;
-
-    node_url?: string | null;
-
-    tokens?: Array<Shared.Token>;
-
-    transaction_explorer_template?: string;
-
-    type?: string;
-  }
 }
 
 export interface NetworkListParams {
