@@ -5,6 +5,7 @@ Types:
 - <code><a href="./src/resources/shared.ts">APIError</a></code>
 - <code><a href="./src/resources/shared.ts">Network</a></code>
 - <code><a href="./src/resources/shared.ts">NetworkMetadata</a></code>
+- <code><a href="./src/resources/shared.ts">NetworkWithTokens</a></code>
 - <code><a href="./src/resources/shared.ts">Token</a></code>
 
 # Health

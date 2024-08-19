@@ -40,6 +40,32 @@ export interface NetworkMetadata {
   listing_date?: string;
 }
 
+export interface NetworkWithTokens {
+  token?: Token;
+
+  account_explorer_template?: string;
+
+  chain_id?: string | null;
+
+  deposit_methods?: Array<string> | null;
+
+  display_name?: string;
+
+  logo?: string;
+
+  metadata?: NetworkMetadata;
+
+  name?: string;
+
+  node_url?: string | null;
+
+  tokens?: Array<Token>;
+
+  transaction_explorer_template?: string;
+
+  type?: string;
+}
+
 export interface Token {
   contract?: string | null;
 
