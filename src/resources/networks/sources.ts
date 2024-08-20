@@ -51,7 +51,7 @@ export namespace SourceListResponse {
 
     transaction_explorer_template?: string;
 
-    type?: string;
+    type?: 'evm' | 'starknet' | 'solana' | 'cosmos' | 'starkex' | 'zksynclite' | 'ton' | 'paradex' | 'tron';
   }
 
   export namespace Data {
@@ -88,7 +88,9 @@ export interface SourceListParams {
 
   include_unmatched?: boolean;
 
-  network_types?: Array<string>;
+  network_types?: Array<
+    'evm' | 'starknet' | 'solana' | 'cosmos' | 'starkex' | 'zksynclite' | 'ton' | 'paradex' | 'tron'
+  >;
 }
 
 export namespace Sources {

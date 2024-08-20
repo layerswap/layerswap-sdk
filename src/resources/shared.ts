@@ -29,7 +29,7 @@ export interface Network {
 
   transaction_explorer_template?: string;
 
-  type?: string;
+  type?: 'evm' | 'starknet' | 'solana' | 'cosmos' | 'starkex' | 'zksynclite' | 'ton' | 'paradex' | 'tron';
 }
 
 export interface NetworkMetadata {
@@ -63,7 +63,7 @@ export interface NetworkWithTokens {
 
   transaction_explorer_template?: string;
 
-  type?: string;
+  type?: 'evm' | 'starknet' | 'solana' | 'cosmos' | 'starkex' | 'zksynclite' | 'ton' | 'paradex' | 'tron';
 }
 
 export interface Token {

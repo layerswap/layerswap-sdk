@@ -31,7 +31,7 @@ describe('resource networks', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.networks.list(
-        { network_types: ['string', 'string', 'string'] },
+        { network_types: ['evm', 'starknet', 'solana'] },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Layerswap.NotFoundError);

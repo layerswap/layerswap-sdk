@@ -32,7 +32,9 @@ export interface NetworkListResponse {
 }
 
 export interface NetworkListParams {
-  network_types?: Array<string>;
+  network_types?: Array<
+    'evm' | 'starknet' | 'solana' | 'cosmos' | 'starkex' | 'zksynclite' | 'ton' | 'paradex' | 'tron'
+  >;
 }
 
 export namespace Networks {
