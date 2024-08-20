@@ -37,7 +37,7 @@ describe('resource sources', () => {
           include_swaps: true,
           include_unavailable: true,
           include_unmatched: true,
-          network_types: ['string', 'string', 'string'],
+          network_types: ['evm', 'starknet', 'solana'],
         },
         { path: '/_stainless_unknown_path' },
       ),
