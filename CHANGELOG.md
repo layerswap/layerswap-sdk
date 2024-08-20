@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-alpha.7 (2024-08-20)
+
+Full Changelog: [v0.1.0-alpha.6...v0.1.0-alpha.7](https://github.com/layerswap/layerswap-sdk/compare/v0.1.0-alpha.6...v0.1.0-alpha.7)
+
+### Features
+
+* **api:** OpenAPI spec update via Stainless API ([#26](https://github.com/layerswap/layerswap-sdk/issues/26)) ([9f64f8a](https://github.com/layerswap/layerswap-sdk/commit/9f64f8a4da475b9cb9c28e52126fabeb61d88977))
+
 ## 0.1.0-alpha.6 (2024-08-19)
 
 Full Changelog: [v0.1.0-alpha.5...v0.1.0-alpha.6](https://github.com/layerswap/layerswap-sdk/compare/v0.1.0-alpha.5...v0.1.0-alpha.6)
