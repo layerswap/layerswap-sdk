@@ -71,6 +71,8 @@ export interface Token {
 
   decimals?: number;
 
+  display_asset?: string;
+
   listing_date?: string;
 
   logo?: string;

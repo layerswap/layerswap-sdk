@@ -60,6 +60,8 @@ export namespace SourceListResponse {
 
       decimals?: number;
 
+      display_asset?: string;
+
       listing_date?: string;
 
       logo?: string;
