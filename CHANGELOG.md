@@ -1,5 +1,30 @@
 # Changelog
 
+## 0.1.0-alpha.8 (2024-09-27)
+
+Full Changelog: [v0.1.0-alpha.7...v0.1.0-alpha.8](https://github.com/layerswap/layerswap-sdk/compare/v0.1.0-alpha.7...v0.1.0-alpha.8)
+
+### Features
+
+* **api:** OpenAPI spec update via Stainless API ([#34](https://github.com/layerswap/layerswap-sdk/issues/34)) ([d1b3f2e](https://github.com/layerswap/layerswap-sdk/commit/d1b3f2ea420d794c637c2d522bd150f53f3ffde9))
+* **api:** OpenAPI spec update via Stainless API ([#37](https://github.com/layerswap/layerswap-sdk/issues/37)) ([c849de7](https://github.com/layerswap/layerswap-sdk/commit/c849de758ab235061e06f071daaac6b7fe2ff1ec))
+
+
+### Bug Fixes
+
+* **client:** correct File construction from node-fetch Responses ([#33](https://github.com/layerswap/layerswap-sdk/issues/33)) ([5020614](https://github.com/layerswap/layerswap-sdk/commit/50206147eeebe3e47c11c5b9649923d3a699c1a7))
+
+
+### Chores
+
+* **ci:** check for build errors ([#29](https://github.com/layerswap/layerswap-sdk/issues/29)) ([105505e](https://github.com/layerswap/layerswap-sdk/commit/105505e6fbc98239d5162df773187833105186be))
+* **ci:** install deps via ./script/bootstrap ([#32](https://github.com/layerswap/layerswap-sdk/issues/32)) ([aa787b9](https://github.com/layerswap/layerswap-sdk/commit/aa787b9cfc1c7e8496875db2ddf22247322e9808))
+* **internal:** codegen related update ([#38](https://github.com/layerswap/layerswap-sdk/issues/38)) ([34529b8](https://github.com/layerswap/layerswap-sdk/commit/34529b861af21e322533dbbacacb11d1f0cc58a3))
+* **internal:** codegen related update ([#39](https://github.com/layerswap/layerswap-sdk/issues/39)) ([c121b6b](https://github.com/layerswap/layerswap-sdk/commit/c121b6bc1af8b7dea65713cb9bf67d29936474dd))
+* **internal:** dependency updates ([#35](https://github.com/layerswap/layerswap-sdk/issues/35)) ([e0f51ee](https://github.com/layerswap/layerswap-sdk/commit/e0f51ee0cb2732966e86f33b8dd959849b16193d))
+* **internal:** minor bump qs version ([#36](https://github.com/layerswap/layerswap-sdk/issues/36)) ([b08139d](https://github.com/layerswap/layerswap-sdk/commit/b08139d06a2658cfba83634a55d6024b3f820486))
+* run tsc as part of lint script ([#31](https://github.com/layerswap/layerswap-sdk/issues/31)) ([16d417d](https://github.com/layerswap/layerswap-sdk/commit/16d417d7014425bd20b2edac932d02c57543ecc4))
+
 ## 0.1.0-alpha.7 (2024-08-20)
 
 Full Changelog: [v0.1.0-alpha.6...v0.1.0-alpha.7](https://github.com/layerswap/layerswap-sdk/compare/v0.1.0-alpha.6...v0.1.0-alpha.7)
