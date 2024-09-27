@@ -174,6 +174,10 @@ export namespace Swap {
 
     confirmations?: number;
 
+    fee_amount?: number | null;
+
+    fee_token?: Shared.Token;
+
     from?: string | null;
 
     max_confirmations?: number;
