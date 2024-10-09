@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.0-alpha.9 (2024-10-09)
+
+Full Changelog: [v0.1.0-alpha.8...v0.1.0-alpha.9](https://github.com/layerswap/layerswap-sdk/compare/v0.1.0-alpha.8...v0.1.0-alpha.9)
+
+### Chores
+
+* **internal:** codegen related update ([#41](https://github.com/layerswap/layerswap-sdk/issues/41)) ([03acf3f](https://github.com/layerswap/layerswap-sdk/commit/03acf3f35eec5fdb076bd0514fd72185c2e89fa8))
+* **internal:** pass props through internal parser ([#43](https://github.com/layerswap/layerswap-sdk/issues/43)) ([37e21d6](https://github.com/layerswap/layerswap-sdk/commit/37e21d634f0c8c89cb0176b208b07f9b99490c3c))
+
 ## 0.1.0-alpha.8 (2024-09-27)
 
 Full Changelog: [v0.1.0-alpha.7...v0.1.0-alpha.8](https://github.com/layerswap/layerswap-sdk/compare/v0.1.0-alpha.7...v0.1.0-alpha.8)
