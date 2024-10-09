@@ -27,9 +27,15 @@ const client = new Layerswap({
 });
 
 async function main() {
-  const swap = await client.swaps.create();
+  const quote = await client.swaps.quote.retrieve({
+    amount: 123,
+    destination_network: 'ARBITRUM_MAINNET',
+    destination_token: 'ETH',
+    source_network: 'OPTIMISM_MAINNET',
+    source_token: 'ETH',
+  });
 
-  console.log(swap.data);
+  console.log(quote.data);
 }
 
 main();
@@ -48,7 +54,14 @@ const client = new Layerswap({
 });
 
 async function main() {
-  const swap: Layerswap.SwapCreateResponse = await client.swaps.create();
+  const params: Layerswap.Swaps.QuoteRetrieveParams = {
+    amount: 0,
+    destination_network: 'destination_network',
+    destination_token: 'destination_token',
+    source_network: 'source_network',
+    source_token: 'source_token',
+  };
+  const quote: Layerswap.Swaps.QuoteRetrieveResponse = await client.swaps.quote.retrieve(params);
 }
 
 main();
@@ -65,15 +78,23 @@ a subclass of `APIError` will be thrown:
 <!-- prettier-ignore -->
 ```ts
 async function main() {
-  const swap = await client.swaps.create().catch(async (err) => {
-    if (err instanceof Layerswap.APIError) {
-      console.log(err.status); // 400
-      console.log(err.name); // BadRequestError
-      console.log(err.headers); // {server: 'nginx', ...}
-    } else {
-      throw err;
-    }
-  });
+  const quote = await client.swaps.quote
+    .retrieve({
+      amount: 0,
+      destination_network: 'destination_network',
+      destination_token: 'destination_token',
+      source_network: 'source_network',
+      source_token: 'source_token',
+    })
+    .catch(async (err) => {
+      if (err instanceof Layerswap.APIError) {
+        console.log(err.status); // 400
+        console.log(err.name); // BadRequestError
+        console.log(err.headers); // {server: 'nginx', ...}
+      } else {
+        throw err;
+      }
+    });
 }
 
 main();
@@ -108,7 +129,7 @@ const client = new Layerswap({
 });
 
 // Or, configure per-request:
-await client.swaps.create({
+await client.swaps.quote.retrieve({ amount: 0, destination_network: 'destination_network', destination_token: 'destination_token', source_network: 'source_network', source_token: 'source_token' }, {
   maxRetries: 5,
 });
 ```
@@ -125,7 +146,7 @@ const client = new Layerswap({
 });
 
 // Override per-request:
-await client.swaps.create({
+await client.swaps.quote.retrieve({ amount: 0, destination_network: 'destination_network', destination_token: 'destination_token', source_network: 'source_network', source_token: 'source_token' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -146,13 +167,29 @@ You can also use the `.withResponse()` method to get the raw `Response` along wi
 ```ts
 const client = new Layerswap();
 
-const response = await client.swaps.create().asResponse();
+const response = await client.swaps.quote
+  .retrieve({
+    amount: 0,
+    destination_network: 'destination_network',
+    destination_token: 'destination_token',
+    source_network: 'source_network',
+    source_token: 'source_token',
+  })
+  .asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: swap, response: raw } = await client.swaps.create().withResponse();
+const { data: quote, response: raw } = await client.swaps.quote
+  .retrieve({
+    amount: 0,
+    destination_network: 'destination_network',
+    destination_token: 'destination_token',
+    source_network: 'source_network',
+    source_token: 'source_token',
+  })
+  .withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(swap.data);
+console.log(quote.data);
 ```
 
 ### Making custom/undocumented requests
@@ -256,9 +293,18 @@ const client = new Layerswap({
 });
 
 // Override per-request:
-await client.swaps.create({
-  httpAgent: new http.Agent({ keepAlive: false }),
-});
+await client.swaps.quote.retrieve(
+  {
+    amount: 0,
+    destination_network: 'destination_network',
+    destination_token: 'destination_token',
+    source_network: 'source_network',
+    source_token: 'source_token',
+  },
+  {
+    httpAgent: new http.Agent({ keepAlive: false }),
+  },
+);
 ```
 
 ## Semantic versioning
