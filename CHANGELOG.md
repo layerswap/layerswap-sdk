@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-alpha.10 (2024-10-09)
+
+Full Changelog: [v0.1.0-alpha.9...v0.1.0-alpha.10](https://github.com/layerswap/layerswap-sdk/compare/v0.1.0-alpha.9...v0.1.0-alpha.10)
+
+### Features
+
+* **api:** manual updates ([#45](https://github.com/layerswap/layerswap-sdk/issues/45)) ([629ae81](https://github.com/layerswap/layerswap-sdk/commit/629ae81d401d6602e56e0a66ea02328485a88741))
+
 ## 0.1.0-alpha.9 (2024-10-09)
 
 Full Changelog: [v0.1.0-alpha.8...v0.1.0-alpha.9](https://github.com/layerswap/layerswap-sdk/compare/v0.1.0-alpha.8...v0.1.0-alpha.9)
