@@ -71,6 +71,8 @@ export interface Token {
 
   decimals?: number;
 
+  destination_rank?: number;
+
   display_asset?: string;
 
   listing_date?: string;
@@ -80,6 +82,8 @@ export interface Token {
   precision?: number;
 
   price_in_usd?: number;
+
+  source_rank?: number;
 
   symbol?: string;
 }

@@ -60,6 +60,8 @@ export namespace SourceListResponse {
 
       decimals?: number;
 
+      destination_rank?: number;
+
       display_asset?: string;
 
       listing_date?: string;
@@ -71,6 +73,8 @@ export namespace SourceListResponse {
       price_in_usd?: number;
 
       refuel?: SwapsAPI.TokenWithAmount;
+
+      source_rank?: number;
 
       status?: string;
 
