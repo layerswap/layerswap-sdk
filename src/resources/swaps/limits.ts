@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as LimitsAPI from './limits';
 import * as Shared from '../shared';
 
 export class Limits extends APIResource {
@@ -43,7 +42,6 @@ export interface LimitListParams {
   use_deposit_address?: boolean;
 }
 
-export namespace Limits {
-  export import LimitListResponse = LimitsAPI.LimitListResponse;
-  export import LimitListParams = LimitsAPI.LimitListParams;
+export declare namespace Limits {
+  export { type LimitListResponse as LimitListResponse, type LimitListParams as LimitListParams };
 }

@@ -3,7 +3,6 @@
 import { APIResource } from '../../resource';
 import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
-import * as DestinationsAPI from './destinations';
 import * as Shared from '../shared';
 import * as SwapsAPI from '../swaps/swaps';
 
@@ -54,7 +53,17 @@ export namespace DestinationListResponse {
 
     transaction_explorer_template?: string;
 
-    type?: 'evm' | 'starknet' | 'solana' | 'cosmos' | 'starkex' | 'zksynclite' | 'ton' | 'paradex' | 'tron';
+    type?:
+      | 'evm'
+      | 'starknet'
+      | 'solana'
+      | 'cosmos'
+      | 'starkex'
+      | 'zksynclite'
+      | 'ton'
+      | 'paradex'
+      | 'tron'
+      | 'fuel';
   }
 
   export namespace Data {
@@ -94,7 +103,7 @@ export interface DestinationListParams {
   include_unmatched?: boolean;
 
   network_types?: Array<
-    'evm' | 'starknet' | 'solana' | 'cosmos' | 'starkex' | 'zksynclite' | 'ton' | 'paradex' | 'tron'
+    'evm' | 'starknet' | 'solana' | 'cosmos' | 'starkex' | 'zksynclite' | 'ton' | 'paradex' | 'tron' | 'fuel'
   >;
 
   source_network?: string;
@@ -102,7 +111,9 @@ export interface DestinationListParams {
   source_token?: string;
 }
 
-export namespace Destinations {
-  export import DestinationListResponse = DestinationsAPI.DestinationListResponse;
-  export import DestinationListParams = DestinationsAPI.DestinationListParams;
+export declare namespace Destinations {
+  export {
+    type DestinationListResponse as DestinationListResponse,
+    type DestinationListParams as DestinationListParams,
+  };
 }
