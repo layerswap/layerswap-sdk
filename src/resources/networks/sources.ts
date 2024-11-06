@@ -3,7 +3,6 @@
 import { APIResource } from '../../resource';
 import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
-import * as SourcesAPI from './sources';
 import * as Shared from '../shared';
 import * as SwapsAPI from '../swaps/swaps';
 
@@ -51,7 +50,17 @@ export namespace SourceListResponse {
 
     transaction_explorer_template?: string;
 
-    type?: 'evm' | 'starknet' | 'solana' | 'cosmos' | 'starkex' | 'zksynclite' | 'ton' | 'paradex' | 'tron';
+    type?:
+      | 'evm'
+      | 'starknet'
+      | 'solana'
+      | 'cosmos'
+      | 'starkex'
+      | 'zksynclite'
+      | 'ton'
+      | 'paradex'
+      | 'tron'
+      | 'fuel';
   }
 
   export namespace Data {
@@ -95,11 +104,10 @@ export interface SourceListParams {
   include_unmatched?: boolean;
 
   network_types?: Array<
-    'evm' | 'starknet' | 'solana' | 'cosmos' | 'starkex' | 'zksynclite' | 'ton' | 'paradex' | 'tron'
+    'evm' | 'starknet' | 'solana' | 'cosmos' | 'starkex' | 'zksynclite' | 'ton' | 'paradex' | 'tron' | 'fuel'
   >;
 }
 
-export namespace Sources {
-  export import SourceListResponse = SourcesAPI.SourceListResponse;
-  export import SourceListParams = SourcesAPI.SourceListParams;
+export declare namespace Sources {
+  export { type SourceListResponse as SourceListResponse, type SourceListParams as SourceListParams };
 }

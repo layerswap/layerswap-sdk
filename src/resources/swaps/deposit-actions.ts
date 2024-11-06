@@ -3,7 +3,6 @@
 import { APIResource } from '../../resource';
 import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
-import * as DepositActionsAPI from './deposit-actions';
 import * as Shared from '../shared';
 
 export class DepositActions extends APIResource {
@@ -57,7 +56,9 @@ export interface DepositActionListParams {
   source_address?: string;
 }
 
-export namespace DepositActions {
-  export import ListTransferDepositAction = DepositActionsAPI.ListTransferDepositAction;
-  export import DepositActionListParams = DepositActionsAPI.DepositActionListParams;
+export declare namespace DepositActions {
+  export {
+    type ListTransferDepositAction as ListTransferDepositAction,
+    type DepositActionListParams as DepositActionListParams,
+  };
 }

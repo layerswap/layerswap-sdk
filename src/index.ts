@@ -1,11 +1,27 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Errors from './error';
-import * as Uploads from './uploads';
 import { type Agent } from './_shims/index';
 import * as qs from './internal/qs';
 import * as Core from './core';
+import * as Errors from './error';
+import * as Uploads from './uploads';
 import * as API from './resources/index';
+import { Health } from './resources/health';
+import { NetworkListParams, NetworkListResponse, Networks } from './resources/networks/networks';
+import {
+  PreparedSwapResponse,
+  Swap,
+  SwapCreateParams,
+  SwapCreateResponse,
+  SwapListParams,
+  SwapListResponse,
+  SwapQuoteResponse,
+  SwapResponse,
+  SwapRetrieveParams,
+  SwapRetrieveResponse,
+  Swaps,
+  TokenWithAmount,
+} from './resources/swaps/swaps';
 
 export interface ClientOptions {
   /**
@@ -164,7 +180,7 @@ export class Layerswap extends Core.APIClient {
   static fileFromPath = Uploads.fileFromPath;
 }
 
-export const {
+export {
   LayerswapError,
   APIError,
   APIConnectionError,
@@ -178,38 +194,46 @@ export const {
   InternalServerError,
   PermissionDeniedError,
   UnprocessableEntityError,
-} = Errors;
+} from './error';
 
 export import toFile = Uploads.toFile;
 export import fileFromPath = Uploads.fileFromPath;
 
-export namespace Layerswap {
-  export import RequestOptions = Core.RequestOptions;
+Layerswap.Health = Health;
+Layerswap.Swaps = Swaps;
+Layerswap.Networks = Networks;
 
-  export import Health = API.Health;
+export declare namespace Layerswap {
+  export type RequestOptions = Core.RequestOptions;
 
-  export import Swaps = API.Swaps;
-  export import PreparedSwapResponse = API.PreparedSwapResponse;
-  export import Swap = API.Swap;
-  export import SwapQuoteResponse = API.SwapQuoteResponse;
-  export import SwapResponse = API.SwapResponse;
-  export import TokenWithAmount = API.TokenWithAmount;
-  export import SwapCreateResponse = API.SwapCreateResponse;
-  export import SwapRetrieveResponse = API.SwapRetrieveResponse;
-  export import SwapListResponse = API.SwapListResponse;
-  export import SwapCreateParams = API.SwapCreateParams;
-  export import SwapRetrieveParams = API.SwapRetrieveParams;
-  export import SwapListParams = API.SwapListParams;
+  export { Health as Health };
 
-  export import Networks = API.Networks;
-  export import NetworkListResponse = API.NetworkListResponse;
-  export import NetworkListParams = API.NetworkListParams;
+  export {
+    Swaps as Swaps,
+    type PreparedSwapResponse as PreparedSwapResponse,
+    type Swap as Swap,
+    type SwapQuoteResponse as SwapQuoteResponse,
+    type SwapResponse as SwapResponse,
+    type TokenWithAmount as TokenWithAmount,
+    type SwapCreateResponse as SwapCreateResponse,
+    type SwapRetrieveResponse as SwapRetrieveResponse,
+    type SwapListResponse as SwapListResponse,
+    type SwapCreateParams as SwapCreateParams,
+    type SwapRetrieveParams as SwapRetrieveParams,
+    type SwapListParams as SwapListParams,
+  };
 
-  export import APIError = API.APIError;
-  export import Network = API.Network;
-  export import NetworkMetadata = API.NetworkMetadata;
-  export import NetworkWithTokens = API.NetworkWithTokens;
-  export import Token = API.Token;
+  export {
+    Networks as Networks,
+    type NetworkListResponse as NetworkListResponse,
+    type NetworkListParams as NetworkListParams,
+  };
+
+  export type APIError = API.APIError;
+  export type Network = API.Network;
+  export type NetworkMetadata = API.NetworkMetadata;
+  export type NetworkWithTokens = API.NetworkWithTokens;
+  export type Token = API.Token;
 }
 
 export default Layerswap;

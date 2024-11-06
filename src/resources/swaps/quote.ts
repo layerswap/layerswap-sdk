@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as QuoteAPI from './quote';
 import * as Shared from '../shared';
 import * as SwapsAPI from './swaps';
 
@@ -69,8 +68,10 @@ export interface QuoteRetrieveParams {
   use_deposit_address?: boolean;
 }
 
-export namespace QuoteResource {
-  export import Quote = QuoteAPI.Quote;
-  export import QuoteRetrieveResponse = QuoteAPI.QuoteRetrieveResponse;
-  export import QuoteRetrieveParams = QuoteAPI.QuoteRetrieveParams;
+export declare namespace QuoteResource {
+  export {
+    type Quote as Quote,
+    type QuoteRetrieveResponse as QuoteRetrieveResponse,
+    type QuoteRetrieveParams as QuoteRetrieveParams,
+  };
 }
