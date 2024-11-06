@@ -3,11 +3,13 @@
 import { APIResource } from '../../resource';
 import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
-import * as SwapsAPI from './swaps';
 import * as Shared from '../shared';
 import * as DepositActionsAPI from './deposit-actions';
+import { DepositActionListParams, DepositActions, ListTransferDepositAction } from './deposit-actions';
 import * as LimitsAPI from './limits';
+import { LimitListParams, LimitListResponse, Limits } from './limits';
 import * as QuoteAPI from './quote';
+import { Quote, QuoteResource, QuoteRetrieveParams, QuoteRetrieveResponse } from './quote';
 
 export class Swaps extends APIResource {
   depositActions: DepositActionsAPI.DepositActions = new DepositActionsAPI.DepositActions(this._client);
@@ -286,26 +288,41 @@ export interface SwapListParams {
   page?: number;
 }
 
-export namespace Swaps {
-  export import PreparedSwapResponse = SwapsAPI.PreparedSwapResponse;
-  export import Swap = SwapsAPI.Swap;
-  export import SwapQuoteResponse = SwapsAPI.SwapQuoteResponse;
-  export import SwapResponse = SwapsAPI.SwapResponse;
-  export import TokenWithAmount = SwapsAPI.TokenWithAmount;
-  export import SwapCreateResponse = SwapsAPI.SwapCreateResponse;
-  export import SwapRetrieveResponse = SwapsAPI.SwapRetrieveResponse;
-  export import SwapListResponse = SwapsAPI.SwapListResponse;
-  export import SwapCreateParams = SwapsAPI.SwapCreateParams;
-  export import SwapRetrieveParams = SwapsAPI.SwapRetrieveParams;
-  export import SwapListParams = SwapsAPI.SwapListParams;
-  export import DepositActions = DepositActionsAPI.DepositActions;
-  export import ListTransferDepositAction = DepositActionsAPI.ListTransferDepositAction;
-  export import DepositActionListParams = DepositActionsAPI.DepositActionListParams;
-  export import Limits = LimitsAPI.Limits;
-  export import LimitListResponse = LimitsAPI.LimitListResponse;
-  export import LimitListParams = LimitsAPI.LimitListParams;
-  export import QuoteResource = QuoteAPI.QuoteResource;
-  export import Quote = QuoteAPI.Quote;
-  export import QuoteRetrieveResponse = QuoteAPI.QuoteRetrieveResponse;
-  export import QuoteRetrieveParams = QuoteAPI.QuoteRetrieveParams;
+Swaps.DepositActions = DepositActions;
+Swaps.Limits = Limits;
+Swaps.QuoteResource = QuoteResource;
+
+export declare namespace Swaps {
+  export {
+    type PreparedSwapResponse as PreparedSwapResponse,
+    type Swap as Swap,
+    type SwapQuoteResponse as SwapQuoteResponse,
+    type SwapResponse as SwapResponse,
+    type TokenWithAmount as TokenWithAmount,
+    type SwapCreateResponse as SwapCreateResponse,
+    type SwapRetrieveResponse as SwapRetrieveResponse,
+    type SwapListResponse as SwapListResponse,
+    type SwapCreateParams as SwapCreateParams,
+    type SwapRetrieveParams as SwapRetrieveParams,
+    type SwapListParams as SwapListParams,
+  };
+
+  export {
+    DepositActions as DepositActions,
+    type ListTransferDepositAction as ListTransferDepositAction,
+    type DepositActionListParams as DepositActionListParams,
+  };
+
+  export {
+    Limits as Limits,
+    type LimitListResponse as LimitListResponse,
+    type LimitListParams as LimitListParams,
+  };
+
+  export {
+    QuoteResource as QuoteResource,
+    type Quote as Quote,
+    type QuoteRetrieveResponse as QuoteRetrieveResponse,
+    type QuoteRetrieveParams as QuoteRetrieveParams,
+  };
 }
