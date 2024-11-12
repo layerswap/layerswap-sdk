@@ -180,29 +180,9 @@ export class Layerswap extends Core.APIClient {
   static fileFromPath = Uploads.fileFromPath;
 }
 
-export {
-  LayerswapError,
-  APIError,
-  APIConnectionError,
-  APIConnectionTimeoutError,
-  APIUserAbortError,
-  NotFoundError,
-  ConflictError,
-  RateLimitError,
-  BadRequestError,
-  AuthenticationError,
-  InternalServerError,
-  PermissionDeniedError,
-  UnprocessableEntityError,
-} from './error';
-
-export import toFile = Uploads.toFile;
-export import fileFromPath = Uploads.fileFromPath;
-
 Layerswap.Health = Health;
 Layerswap.Swaps = Swaps;
 Layerswap.Networks = Networks;
-
 export declare namespace Layerswap {
   export type RequestOptions = Core.RequestOptions;
 
@@ -235,5 +215,22 @@ export declare namespace Layerswap {
   export type NetworkWithTokens = API.NetworkWithTokens;
   export type Token = API.Token;
 }
+
+export { toFile, fileFromPath } from '@layerswap/sdk/uploads';
+export {
+  LayerswapError,
+  APIError,
+  APIConnectionError,
+  APIConnectionTimeoutError,
+  APIUserAbortError,
+  NotFoundError,
+  ConflictError,
+  RateLimitError,
+  BadRequestError,
+  AuthenticationError,
+  InternalServerError,
+  PermissionDeniedError,
+  UnprocessableEntityError,
+} from '@layerswap/sdk/error';
 
 export default Layerswap;
