@@ -216,7 +216,7 @@ export declare namespace Layerswap {
   export type Token = API.Token;
 }
 
-export { toFile, fileFromPath } from '@layerswap/sdk/uploads';
+export { toFile, fileFromPath } from './uploads';
 export {
   LayerswapError,
   APIError,
@@ -231,6 +231,6 @@ export {
   InternalServerError,
   PermissionDeniedError,
   UnprocessableEntityError,
-} from '@layerswap/sdk/error';
+} from './error';
 
 export default Layerswap;
