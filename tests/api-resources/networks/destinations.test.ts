@@ -35,7 +35,7 @@ describe('resource destinations', () => {
           include_swaps: true,
           include_unavailable: true,
           include_unmatched: true,
-          network_types: ['evm', 'starknet', 'solana'],
+          network_types: ['evm'],
           source_network: 'source_network',
           source_token: 'source_token',
         },
