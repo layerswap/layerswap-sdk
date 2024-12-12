@@ -7,6 +7,9 @@ import * as Shared from '../shared';
 import * as SwapsAPI from '../swaps/swaps';
 
 export class Sources extends APIResource {
+  /**
+   * Retrieves all available source routes.
+   */
   list(query?: SourceListParams, options?: Core.RequestOptions): Core.APIPromise<SourceListResponse>;
   list(options?: Core.RequestOptions): Core.APIPromise<SourceListResponse>;
   list(
