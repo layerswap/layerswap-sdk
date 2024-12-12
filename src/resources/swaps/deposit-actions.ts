@@ -6,6 +6,9 @@ import * as Core from '../../core';
 import * as Shared from '../shared';
 
 export class DepositActions extends APIResource {
+  /**
+   * Retrieves the deposit actions for a specific swap.
+   */
   list(
     swapId: string,
     query?: DepositActionListParams,

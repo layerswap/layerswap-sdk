@@ -16,10 +16,16 @@ export class Swaps extends APIResource {
   limits: LimitsAPI.Limits = new LimitsAPI.Limits(this._client);
   quote: QuoteAPI.QuoteResource = new QuoteAPI.QuoteResource(this._client);
 
+  /**
+   * Creates a new swap based on the provided request.
+   */
   create(body: SwapCreateParams, options?: Core.RequestOptions): Core.APIPromise<SwapCreateResponse> {
     return this._client.post('/api/v2/swaps', { body, ...options });
   }
 
+  /**
+   * Retrieves the details of a specific swap by its ID.
+   */
   retrieve(
     swapId: string,
     query?: SwapRetrieveParams,
@@ -37,6 +43,9 @@ export class Swaps extends APIResource {
     return this._client.get(`/api/v2/swaps/${swapId}`, { query, ...options });
   }
 
+  /**
+   * Retrieves a list of all swaps.
+   */
   list(query: SwapListParams, options?: Core.RequestOptions): Core.APIPromise<SwapListResponse> {
     return this._client.get('/api/v2/swaps', { query, ...options });
   }

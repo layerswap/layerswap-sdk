@@ -5,6 +5,9 @@ import * as Core from '../../core';
 import * as Shared from '../shared';
 
 export class Limits extends APIResource {
+  /**
+   * Retrieves the limits for swap route.
+   */
   list(query: LimitListParams, options?: Core.RequestOptions): Core.APIPromise<LimitListResponse> {
     return this._client.get('/api/v2/limits', { query, ...options });
   }

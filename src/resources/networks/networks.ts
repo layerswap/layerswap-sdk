@@ -13,6 +13,9 @@ export class Networks extends APIResource {
   sources: SourcesAPI.Sources = new SourcesAPI.Sources(this._client);
   destinations: DestinationsAPI.Destinations = new DestinationsAPI.Destinations(this._client);
 
+  /**
+   * Retrieves a list of available networks with their tokens.
+   */
   list(query?: NetworkListParams, options?: Core.RequestOptions): Core.APIPromise<NetworkListResponse>;
   list(options?: Core.RequestOptions): Core.APIPromise<NetworkListResponse>;
   list(
