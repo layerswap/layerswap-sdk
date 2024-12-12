@@ -7,6 +7,9 @@ import * as Shared from '../shared';
 import * as SwapsAPI from '../swaps/swaps';
 
 export class Destinations extends APIResource {
+  /**
+   * Retrieves all available destination routes.
+   */
   list(
     query?: DestinationListParams,
     options?: Core.RequestOptions,

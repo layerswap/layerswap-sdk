@@ -6,6 +6,9 @@ import * as Shared from '../shared';
 import * as SwapsAPI from './swaps';
 
 export class QuoteResource extends APIResource {
+  /**
+   * Retrieves a swap quote based on the provided route request.
+   */
   retrieve(
     query: QuoteRetrieveParams,
     options?: Core.RequestOptions,
