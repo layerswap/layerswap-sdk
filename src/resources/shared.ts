@@ -48,6 +48,8 @@ export interface NetworkMetadata {
   evm_oracle_contract?: string | null;
 
   listing_date?: string;
+
+  zks_paymaster_contract?: string | null;
 }
 
 export interface NetworkWithTokens {
