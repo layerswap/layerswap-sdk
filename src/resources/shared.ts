@@ -49,6 +49,8 @@ export interface NetworkMetadata {
 
   listing_date?: string;
 
+  watchdog_contract?: string | null;
+
   zks_paymaster_contract?: string | null;
 }
 
