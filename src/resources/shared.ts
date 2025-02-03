@@ -17,6 +17,8 @@ export interface Network {
 
   deposit_methods?: Array<string> | null;
 
+  destination_rank?: number;
+
   display_name?: string;
 
   logo?: string;
@@ -26,6 +28,8 @@ export interface Network {
   name?: string;
 
   node_url?: string | null;
+
+  source_rank?: number;
 
   transaction_explorer_template?: string;
 
@@ -63,6 +67,8 @@ export interface NetworkWithTokens {
 
   deposit_methods?: Array<string> | null;
 
+  destination_rank?: number;
+
   display_name?: string;
 
   logo?: string;
@@ -72,6 +78,8 @@ export interface NetworkWithTokens {
   name?: string;
 
   node_url?: string | null;
+
+  source_rank?: number;
 
   tokens?: Array<Token>;
 

@@ -42,6 +42,8 @@ export namespace DestinationListResponse {
 
     deposit_methods?: Array<string> | null;
 
+    destination_rank?: number;
+
     display_name?: string;
 
     logo?: string;
@@ -51,6 +53,8 @@ export namespace DestinationListResponse {
     name?: string;
 
     node_url?: string | null;
+
+    source_rank?: number;
 
     tokens?: Array<Data.Token>;
 
