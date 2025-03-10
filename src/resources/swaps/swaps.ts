@@ -58,7 +58,7 @@ export interface PreparedSwapResponse {
 
   refuel?: TokenWithAmount;
 
-  reward?: TokenWithAmount;
+  reward?: PreparedSwapResponse.Reward;
 
   swap?: Swap;
 }
@@ -82,6 +82,20 @@ export namespace PreparedSwapResponse {
     to_address?: string;
 
     type?: string;
+  }
+
+  export interface Reward {
+    token?: Shared.Token;
+
+    amount?: number;
+
+    amount_in_usd?: number;
+
+    campaign_type?: string;
+
+    network?: Shared.Network;
+
+    nft_contract_address?: string | null;
   }
 }
 
@@ -212,7 +226,23 @@ export interface SwapQuoteResponse {
 
   refuel?: TokenWithAmount;
 
-  reward?: TokenWithAmount;
+  reward?: SwapQuoteResponse.Reward;
+}
+
+export namespace SwapQuoteResponse {
+  export interface Reward {
+    token?: Shared.Token;
+
+    amount?: number;
+
+    amount_in_usd?: number;
+
+    campaign_type?: string;
+
+    network?: Shared.Network;
+
+    nft_contract_address?: string | null;
+  }
 }
 
 export interface SwapResponse {
@@ -220,9 +250,25 @@ export interface SwapResponse {
 
   refuel?: TokenWithAmount;
 
-  reward?: TokenWithAmount;
+  reward?: SwapResponse.Reward;
 
   swap?: Swap;
+}
+
+export namespace SwapResponse {
+  export interface Reward {
+    token?: Shared.Token;
+
+    amount?: number;
+
+    amount_in_usd?: number;
+
+    campaign_type?: string;
+
+    network?: Shared.Network;
+
+    nft_contract_address?: string | null;
+  }
 }
 
 export interface TokenWithAmount {
