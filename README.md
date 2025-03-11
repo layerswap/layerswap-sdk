@@ -6,7 +6,7 @@ This library provides convenient access to the Layerswap REST API from server-si
 
 The REST API documentation can be found on [layerswapapi.readme.io](https://layerswapapi.readme.io/). The full API of this library can be found in [api.md](api.md).
 
-It is generated with [Stainless](https://www.stainlessapi.com/).
+It is generated with [Stainless](https://www.stainless.com/).
 
 ## Installation
 
