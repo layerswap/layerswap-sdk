@@ -43,7 +43,8 @@ export interface Network {
     | 'ton'
     | 'paradex'
     | 'tron'
-    | 'fuel';
+    | 'fuel'
+    | 'bitcoin';
 }
 
 export interface NetworkMetadata {
@@ -95,7 +96,8 @@ export interface NetworkWithTokens {
     | 'ton'
     | 'paradex'
     | 'tron'
-    | 'fuel';
+    | 'fuel'
+    | 'bitcoin';
 }
 
 export interface Token {
