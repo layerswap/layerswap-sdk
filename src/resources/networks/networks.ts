@@ -37,7 +37,17 @@ export interface NetworkListResponse {
 
 export interface NetworkListParams {
   network_types?: Array<
-    'evm' | 'starknet' | 'solana' | 'cosmos' | 'starkex' | 'zksynclite' | 'ton' | 'paradex' | 'tron' | 'fuel'
+    | 'evm'
+    | 'starknet'
+    | 'solana'
+    | 'cosmos'
+    | 'starkex'
+    | 'zksynclite'
+    | 'ton'
+    | 'paradex'
+    | 'tron'
+    | 'fuel'
+    | 'bitcoin'
   >;
 }
 

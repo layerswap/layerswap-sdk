@@ -67,7 +67,8 @@ export namespace SourceListResponse {
       | 'ton'
       | 'paradex'
       | 'tron'
-      | 'fuel';
+      | 'fuel'
+      | 'bitcoin';
   }
 
   export namespace Data {
@@ -111,7 +112,17 @@ export interface SourceListParams {
   include_unmatched?: boolean;
 
   network_types?: Array<
-    'evm' | 'starknet' | 'solana' | 'cosmos' | 'starkex' | 'zksynclite' | 'ton' | 'paradex' | 'tron' | 'fuel'
+    | 'evm'
+    | 'starknet'
+    | 'solana'
+    | 'cosmos'
+    | 'starkex'
+    | 'zksynclite'
+    | 'ton'
+    | 'paradex'
+    | 'tron'
+    | 'fuel'
+    | 'bitcoin'
   >;
 }
 
