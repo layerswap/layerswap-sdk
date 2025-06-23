@@ -26,19 +26,15 @@ const client = new Layerswap({
   apiKey: process.env['LAYERSWAP_API_KEY'], // This is the default and can be omitted
 });
 
-async function main() {
-  const quote = await client.swaps.quote.retrieve({
-    amount: 123,
-    destination_network: 'ARBITRUM_MAINNET',
-    destination_token: 'ETH',
-    source_network: 'OPTIMISM_MAINNET',
-    source_token: 'ETH',
-  });
+const quote = await client.swaps.quote.retrieve({
+  amount: 0,
+  destination_network: 'ARBITRUM_MAINNET',
+  destination_token: 'ETH',
+  source_network: 'OPTIMISM_MAINNET',
+  source_token: 'ETH',
+});
 
-  console.log(quote.data);
-}
-
-main();
+console.log(quote.data);
 ```
 
 ### Request & Response types
@@ -53,18 +49,14 @@ const client = new Layerswap({
   apiKey: process.env['LAYERSWAP_API_KEY'], // This is the default and can be omitted
 });
 
-async function main() {
-  const params: Layerswap.Swaps.QuoteRetrieveParams = {
-    amount: 0,
-    destination_network: 'destination_network',
-    destination_token: 'destination_token',
-    source_network: 'source_network',
-    source_token: 'source_token',
-  };
-  const quote: Layerswap.Swaps.QuoteRetrieveResponse = await client.swaps.quote.retrieve(params);
-}
-
-main();
+const params: Layerswap.Swaps.QuoteRetrieveParams = {
+  amount: 0,
+  destination_network: 'destination_network',
+  destination_token: 'destination_token',
+  source_network: 'source_network',
+  source_token: 'source_token',
+};
+const quote: Layerswap.Swaps.QuoteRetrieveResponse = await client.swaps.quote.retrieve(params);
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
@@ -77,30 +69,26 @@ a subclass of `APIError` will be thrown:
 
 <!-- prettier-ignore -->
 ```ts
-async function main() {
-  const quote = await client.swaps.quote
-    .retrieve({
-      amount: 0,
-      destination_network: 'destination_network',
-      destination_token: 'destination_token',
-      source_network: 'source_network',
-      source_token: 'source_token',
-    })
-    .catch(async (err) => {
-      if (err instanceof Layerswap.APIError) {
-        console.log(err.status); // 400
-        console.log(err.name); // BadRequestError
-        console.log(err.headers); // {server: 'nginx', ...}
-      } else {
-        throw err;
-      }
-    });
-}
-
-main();
+const quote = await client.swaps.quote
+  .retrieve({
+    amount: 0,
+    destination_network: 'destination_network',
+    destination_token: 'destination_token',
+    source_network: 'source_network',
+    source_token: 'source_token',
+  })
+  .catch(async (err) => {
+    if (err instanceof Layerswap.APIError) {
+      console.log(err.status); // 400
+      console.log(err.name); // BadRequestError
+      console.log(err.headers); // {server: 'nginx', ...}
+    } else {
+      throw err;
+    }
+  });
 ```
 
-Error codes are as followed:
+Error codes are as follows:
 
 | Status Code | Error Type                 |
 | ----------- | -------------------------- |

@@ -125,6 +125,7 @@ export class Layerswap extends Core.APIClient {
 
     super({
       baseURL: options.baseURL!,
+      baseURLOverridden: baseURL ? baseURL !== 'https://api.layerswap.io' : false,
       timeout: options.timeout ?? 60000 /* 1 minute */,
       httpAgent: options.httpAgent,
       maxRetries: options.maxRetries,
@@ -139,6 +140,13 @@ export class Layerswap extends Core.APIClient {
   health: API.Health = new API.Health(this);
   swaps: API.Swaps = new API.Swaps(this);
   networks: API.Networks = new API.Networks(this);
+
+  /**
+   * Check whether the base URL is set to its default.
+   */
+  #baseURLOverridden(): boolean {
+    return this.baseURL !== 'https://api.layerswap.io';
+  }
 
   protected override defaultQuery(): Core.DefaultQuery | undefined {
     return this._options.defaultQuery;

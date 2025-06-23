@@ -8,6 +8,14 @@ import * as Shared from '../shared';
 export class DepositActions extends APIResource {
   /**
    * Retrieves the deposit actions for a specific swap.
+   *
+   * @example
+   * ```ts
+   * const listTransferDepositAction =
+   *   await client.swaps.depositActions.list(
+   *     '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   *   );
+   * ```
    */
   list(
     swapId: string,

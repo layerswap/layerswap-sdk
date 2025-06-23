@@ -18,6 +18,18 @@ export class Swaps extends APIResource {
 
   /**
    * Creates a new swap based on the provided request.
+   *
+   * @example
+   * ```ts
+   * const swap = await client.swaps.create({
+   *   amount: 0.0042,
+   *   destination_address: '0x',
+   *   destination_network: 'ARBITRUM_MAINNET',
+   *   destination_token: 'ETH',
+   *   source_network: 'ETHEREUM_MAINNET',
+   *   source_token: 'ETH',
+   * });
+   * ```
    */
   create(body: SwapCreateParams, options?: Core.RequestOptions): Core.APIPromise<SwapCreateResponse> {
     return this._client.post('/api/v2/swaps', { body, ...options });
@@ -25,6 +37,13 @@ export class Swaps extends APIResource {
 
   /**
    * Retrieves the details of a specific swap by its ID.
+   *
+   * @example
+   * ```ts
+   * const swap = await client.swaps.retrieve(
+   *   '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+   * );
+   * ```
    */
   retrieve(
     swapId: string,
@@ -45,6 +64,13 @@ export class Swaps extends APIResource {
 
   /**
    * Retrieves a list of all swaps.
+   *
+   * @example
+   * ```ts
+   * const swaps = await client.swaps.list({
+   *   address: 'address',
+   * });
+   * ```
    */
   list(query: SwapListParams, options?: Core.RequestOptions): Core.APIPromise<SwapListResponse> {
     return this._client.get('/api/v2/swaps', { query, ...options });
