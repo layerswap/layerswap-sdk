@@ -2,7 +2,7 @@
 
 import type { Layerswap } from './index';
 
-export class APIResource {
+export abstract class APIResource {
   protected _client: Layerswap;
 
   constructor(client: Layerswap) {

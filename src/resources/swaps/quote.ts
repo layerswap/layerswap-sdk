@@ -8,6 +8,17 @@ import * as SwapsAPI from './swaps';
 export class QuoteResource extends APIResource {
   /**
    * Retrieves a swap quote based on the provided route request.
+   *
+   * @example
+   * ```ts
+   * const quote = await client.swaps.quote.retrieve({
+   *   amount: 0,
+   *   destination_network: 'destination_network',
+   *   destination_token: 'destination_token',
+   *   source_network: 'source_network',
+   *   source_token: 'source_token',
+   * });
+   * ```
    */
   retrieve(
     query: QuoteRetrieveParams,
@@ -25,6 +36,8 @@ export interface Quote {
   destination_network?: Shared.Network;
 
   destination_token?: Shared.Token;
+
+  fee_discount?: number;
 
   min_receive_amount?: number;
 
