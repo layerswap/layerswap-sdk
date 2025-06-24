@@ -5,7 +5,7 @@ export interface APIError {
 
   message?: string;
 
-  metadata?: Record<string, unknown>;
+  metadata?: { [key: string]: unknown };
 }
 
 export interface Network {
