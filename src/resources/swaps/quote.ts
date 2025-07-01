@@ -45,6 +45,8 @@ export interface Quote {
 
   refuel_in_source?: number | null;
 
+  requested_amount?: number;
+
   service_fee?: number;
 
   slippage?: number;
