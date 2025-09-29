@@ -7,11 +7,10 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "esModuleInterop": true,
-    "baseUrl": "./",
     "paths": {
-      "@layerswap/sdk/_shims/auto/*": ["src/_shims/auto/*-node"],
-      "@layerswap/sdk/*": ["src/*"],
-      "@layerswap/sdk": ["src/index.ts"]
+      "@layerswap/sdk/_shims/auto/*": ["./src/_shims/auto/*-node"],
+      "@layerswap/sdk/*": ["./src/*"],
+      "@layerswap/sdk": ["./src/index.ts"]
     },
     "noEmit": true,
 

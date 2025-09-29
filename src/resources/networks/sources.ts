@@ -68,7 +68,8 @@ export namespace SourceListResponse {
       | 'paradex'
       | 'tron'
       | 'fuel'
-      | 'bitcoin';
+      | 'bitcoin'
+      | 'hyperliquid';
   }
 
   export namespace Data {
@@ -123,6 +124,7 @@ export interface SourceListParams {
     | 'tron'
     | 'fuel'
     | 'bitcoin'
+    | 'hyperliquid'
   >;
 }
 

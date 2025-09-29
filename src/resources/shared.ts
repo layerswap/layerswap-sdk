@@ -44,7 +44,8 @@ export interface Network {
     | 'paradex'
     | 'tron'
     | 'fuel'
-    | 'bitcoin';
+    | 'bitcoin'
+    | 'hyperliquid';
 }
 
 export interface NetworkMetadata {
@@ -97,7 +98,8 @@ export interface NetworkWithTokens {
     | 'paradex'
     | 'tron'
     | 'fuel'
-    | 'bitcoin';
+    | 'bitcoin'
+    | 'hyperliquid';
 }
 
 export interface Token {

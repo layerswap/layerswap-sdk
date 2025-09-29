@@ -5,8 +5,8 @@
   "compilerOptions": {
     "rootDir": "./dist/src",
     "paths": {
-      "@layerswap/sdk/*": ["dist/src/*"],
-      "@layerswap/sdk": ["dist/src/index.ts"],
+      "@layerswap/sdk/*": ["./dist/src/*"],
+      "@layerswap/sdk": ["./dist/src/index.ts"],
     },
     "noEmit": false,
     "declaration": true,

@@ -42,6 +42,8 @@ export interface ClientOptions {
    *
    * Note that request timeouts are retried by default, so in a worst-case scenario you may wait
    * much longer than this timeout before the promise succeeds or fails.
+   *
+   * @unit milliseconds
    */
   timeout?: number | undefined;
 
@@ -191,6 +193,7 @@ export class Layerswap extends Core.APIClient {
 Layerswap.Health = Health;
 Layerswap.Swaps = Swaps;
 Layerswap.Networks = Networks;
+
 export declare namespace Layerswap {
   export type RequestOptions = Core.RequestOptions;
 
