@@ -1,4 +1,4 @@
 configured_endpoints: 10
-openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/babgev%2Flayerswap-d1e323570eb87917d3c2c8afafbfb25922d75c5726044426768fbe978b71365a.yml
-openapi_spec_hash: 26d42c14da7aed72f4f072d1eb76e8f1
+openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/babgev%2Flayerswap-7ef28075e2f4fe9332af29a90c7930da86493234d9973c10c2804191706c54f9.yml
+openapi_spec_hash: d1bf81829143a988598cf8e0542cf36b
 config_hash: c54b23009f612fcc914964f7a1327a91

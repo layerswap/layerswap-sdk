@@ -71,7 +71,8 @@ export namespace DestinationListResponse {
       | 'paradex'
       | 'tron'
       | 'fuel'
-      | 'bitcoin';
+      | 'bitcoin'
+      | 'hyperliquid';
   }
 
   export namespace Data {
@@ -122,6 +123,7 @@ export interface DestinationListParams {
     | 'tron'
     | 'fuel'
     | 'bitcoin'
+    | 'hyperliquid'
   >;
 
   source_network?: string;

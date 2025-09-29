@@ -48,6 +48,7 @@ export interface NetworkListParams {
     | 'tron'
     | 'fuel'
     | 'bitcoin'
+    | 'hyperliquid'
   >;
 }
 
