@@ -340,6 +340,8 @@ export interface SwapCreateParams {
 
   refuel?: boolean;
 
+  refund_address?: string | null;
+
   slippage?: string | null;
 
   source_address?: string | null;
