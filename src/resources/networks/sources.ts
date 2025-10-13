@@ -82,6 +82,8 @@ export namespace SourceListResponse {
 
       display_asset?: string;
 
+      group?: string | null;
+
       listing_date?: string;
 
       logo?: string;
