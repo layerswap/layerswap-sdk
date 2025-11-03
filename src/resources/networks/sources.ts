@@ -108,6 +108,8 @@ export interface SourceListParams {
 
   destination_token?: string;
 
+  has_deposit_address?: boolean;
+
   include_swaps?: boolean;
 
   include_unavailable?: boolean;
