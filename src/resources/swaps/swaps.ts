@@ -300,7 +300,7 @@ export interface SwapListResponse {
 }
 
 export interface SwapCreateParams {
-  amount?: number;
+  amount?: number | null;
 
   destination_address?: string;
 
