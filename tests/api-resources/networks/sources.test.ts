@@ -34,6 +34,7 @@ describe('resource sources', () => {
         {
           destination_network: 'destination_network',
           destination_token: 'destination_token',
+          has_deposit_address: true,
           include_swaps: true,
           include_unavailable: true,
           include_unmatched: true,
