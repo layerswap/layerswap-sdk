@@ -30,6 +30,8 @@ export interface Quote {
 
   min_receive_amount?: number;
 
+  rate?: number;
+
   receive_amount?: number;
 
   refuel_in_source?: number | null;
