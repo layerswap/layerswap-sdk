@@ -51,6 +51,8 @@ export namespace SourceListResponse {
 
     node_url?: string | null;
 
+    nodes?: Array<string> | null;
+
     source_rank?: number;
 
     tokens?: Array<Data.Token>;
