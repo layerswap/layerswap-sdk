@@ -54,6 +54,8 @@ export namespace DestinationListResponse {
 
     node_url?: string | null;
 
+    nodes?: Array<string> | null;
+
     source_rank?: number;
 
     tokens?: Array<Data.Token>;

@@ -29,6 +29,8 @@ export interface Network {
 
   node_url?: string | null;
 
+  nodes?: Array<string> | null;
+
   source_rank?: number;
 
   transaction_explorer_template?: string;
@@ -80,6 +82,8 @@ export interface NetworkWithTokens {
   name?: string;
 
   node_url?: string | null;
+
+  nodes?: Array<string> | null;
 
   source_rank?: number;
 
