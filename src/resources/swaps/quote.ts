@@ -30,6 +30,8 @@ export interface Quote {
 
   min_receive_amount?: number;
 
+  path?: Array<Quote.Path>;
+
   rate?: number;
 
   receive_amount?: number;
@@ -49,6 +51,14 @@ export interface Quote {
   total_fee?: number;
 
   total_fee_in_usd?: number;
+}
+
+export namespace Quote {
+  export interface Path {
+    order?: number;
+
+    provider?: string;
+  }
 }
 
 export interface QuoteRetrieveResponse {
