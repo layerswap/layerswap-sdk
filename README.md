@@ -117,7 +117,13 @@ const client = new Layerswap({
 });
 
 // Or, configure per-request:
-await client.swaps.quote.retrieve({ amount: 0, destination_network: 'destination_network', destination_token: 'destination_token', source_network: 'source_network', source_token: 'source_token' }, {
+await client.swaps.quote.retrieve({
+  amount: 0,
+  destination_network: 'destination_network',
+  destination_token: 'destination_token',
+  source_network: 'source_network',
+  source_token: 'source_token',
+}, {
   maxRetries: 5,
 });
 ```
@@ -134,7 +140,13 @@ const client = new Layerswap({
 });
 
 // Override per-request:
-await client.swaps.quote.retrieve({ amount: 0, destination_network: 'destination_network', destination_token: 'destination_token', source_network: 'source_network', source_token: 'source_token' }, {
+await client.swaps.quote.retrieve({
+  amount: 0,
+  destination_network: 'destination_network',
+  destination_token: 'destination_token',
+  source_network: 'source_network',
+  source_token: 'source_token',
+}, {
   timeout: 5 * 1000,
 });
 ```
