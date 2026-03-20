@@ -43,6 +43,8 @@ export namespace ListTransferDepositAction {
 
     call_data?: string | null;
 
+    encoded_args?: Array<string> | null;
+
     fee_token?: Shared.Token;
 
     network?: Shared.Network;

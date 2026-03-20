@@ -73,6 +73,8 @@ export namespace PreparedSwapResponse {
 
     call_data?: string | null;
 
+    encoded_args?: Array<string> | null;
+
     fee_token?: Shared.Token;
 
     network?: Shared.Network;
@@ -327,6 +329,8 @@ export interface SwapCreateParams {
   source_token?: string;
 
   use_deposit_address?: boolean;
+
+  use_depository?: boolean;
 
   use_new_deposit_address?: boolean | null;
 }

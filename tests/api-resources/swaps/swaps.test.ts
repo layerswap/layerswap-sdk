@@ -61,6 +61,10 @@ describe('resource swaps', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await client.swaps.list({ address: 'address', include_expired: true, page: 0 });
+    const response = await client.swaps.list({
+      address: 'address',
+      include_expired: true,
+      page: 0,
+    });
   });
 });
