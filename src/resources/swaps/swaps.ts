@@ -17,7 +17,11 @@ export class Swaps extends APIResource {
   quote: QuoteAPI.QuoteResource = new QuoteAPI.QuoteResource(this._client);
 
   /**
-   * Creates a new swap based on the provided request.
+   * Creates a new swap based on the provided request. Token parameters accept either
+   * asset names (e.g. USDC, ETH) or token contract addresses (e.g. 0xa0b8...). For
+   * native tokens via contract address, use the network's zero address (e.g.
+   * 0x0000000000000000000000000000000000000000 for EVM,
+   * 11111111111111111111111111111111 for Solana).
    */
   create(body: SwapCreateParams, options?: Core.RequestOptions): Core.APIPromise<SwapCreateResponse> {
     return this._client.post('/api/v2/swaps', { body, ...options });

@@ -6,7 +6,11 @@ import * as Shared from '../shared';
 
 export class Limits extends APIResource {
   /**
-   * Retrieves the limits for swap route.
+   * Retrieves the limits for swap route. Token parameters accept either asset names
+   * (e.g. USDC, ETH) or token contract addresses (e.g. 0xa0b8...). For native tokens
+   * via contract address, use the network's zero address (e.g.
+   * 0x0000000000000000000000000000000000000000 for EVM,
+   * 11111111111111111111111111111111 for Solana).
    */
   list(query: LimitListParams, options?: Core.RequestOptions): Core.APIPromise<LimitListResponse> {
     return this._client.get('/api/v2/limits', { query, ...options });
