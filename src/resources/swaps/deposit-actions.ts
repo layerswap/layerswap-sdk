@@ -47,6 +47,8 @@ export namespace ListTransferDepositAction {
 
     fee_token?: Shared.Token;
 
+    gas_limit?: string | null;
+
     network?: Shared.Network;
 
     order?: number;
