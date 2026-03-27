@@ -8,7 +8,11 @@ import * as SwapsAPI from '../swaps/swaps';
 
 export class Sources extends APIResource {
   /**
-   * Retrieves all available source routes.
+   * Retrieves all available source routes. Token parameters accept either asset
+   * names (e.g. USDC, ETH) or token contract addresses (e.g. 0xa0b8...). For native
+   * tokens via contract address, use the network's zero address (e.g.
+   * 0x0000000000000000000000000000000000000000 for EVM,
+   * 11111111111111111111111111111111 for Solana).
    */
   list(query?: SourceListParams, options?: Core.RequestOptions): Core.APIPromise<SourceListResponse>;
   list(options?: Core.RequestOptions): Core.APIPromise<SourceListResponse>;
