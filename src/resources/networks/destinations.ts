@@ -3,11 +3,17 @@
 import { APIResource } from '../../resource';
 import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
-import * as DestinationsAPI from './destinations';
 import * as Shared from '../shared';
 import * as SwapsAPI from '../swaps/swaps';
 
 export class Destinations extends APIResource {
+  /**
+   * Retrieves all available destination routes. Token parameters accept either asset
+   * names (e.g. USDC, ETH) or token contract addresses (e.g. 0xa0b8...). For native
+   * tokens via contract address, use the network's zero address (e.g.
+   * 0x0000000000000000000000000000000000000000 for EVM,
+   * 11111111111111111111111111111111 for Solana).
+   */
   list(
     query?: DestinationListParams,
     options?: Core.RequestOptions,
@@ -40,6 +46,8 @@ export namespace DestinationListResponse {
 
     deposit_methods?: Array<string> | null;
 
+    destination_rank?: number;
+
     display_name?: string;
 
     logo?: string;
@@ -50,11 +58,27 @@ export namespace DestinationListResponse {
 
     node_url?: string | null;
 
+    nodes?: Array<string> | null;
+
+    source_rank?: number;
+
     tokens?: Array<Data.Token>;
 
     transaction_explorer_template?: string;
 
-    type?: 'evm' | 'starknet' | 'solana' | 'cosmos' | 'starkex' | 'zksynclite' | 'ton' | 'paradex' | 'tron';
+    type?:
+      | 'evm'
+      | 'starknet'
+      | 'solana'
+      | 'cosmos'
+      | 'starkex'
+      | 'zksynclite'
+      | 'ton'
+      | 'paradex'
+      | 'tron'
+      | 'fuel'
+      | 'bitcoin'
+      | 'hyperliquid';
   }
 
   export namespace Data {
@@ -63,7 +87,11 @@ export namespace DestinationListResponse {
 
       decimals?: number;
 
+      destination_rank?: number;
+
       display_asset?: string;
+
+      group?: string | null;
 
       listing_date?: string;
 
@@ -74,6 +102,8 @@ export namespace DestinationListResponse {
       price_in_usd?: number;
 
       refuel?: SwapsAPI.TokenWithAmount;
+
+      source_rank?: number;
 
       status?: string;
 
@@ -90,7 +120,18 @@ export interface DestinationListParams {
   include_unmatched?: boolean;
 
   network_types?: Array<
-    'evm' | 'starknet' | 'solana' | 'cosmos' | 'starkex' | 'zksynclite' | 'ton' | 'paradex' | 'tron'
+    | 'evm'
+    | 'starknet'
+    | 'solana'
+    | 'cosmos'
+    | 'starkex'
+    | 'zksynclite'
+    | 'ton'
+    | 'paradex'
+    | 'tron'
+    | 'fuel'
+    | 'bitcoin'
+    | 'hyperliquid'
   >;
 
   source_network?: string;
@@ -98,7 +139,9 @@ export interface DestinationListParams {
   source_token?: string;
 }
 
-export namespace Destinations {
-  export import DestinationListResponse = DestinationsAPI.DestinationListResponse;
-  export import DestinationListParams = DestinationsAPI.DestinationListParams;
+export declare namespace Destinations {
+  export {
+    type DestinationListResponse as DestinationListResponse,
+    type DestinationListParams as DestinationListParams,
+  };
 }

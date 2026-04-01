@@ -3,21 +3,33 @@
 import { APIResource } from '../../resource';
 import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
-import * as SwapsAPI from './swaps';
 import * as Shared from '../shared';
 import * as DepositActionsAPI from './deposit-actions';
+import { DepositActionListParams, DepositActions, ListTransferDepositAction } from './deposit-actions';
 import * as LimitsAPI from './limits';
+import { LimitListParams, LimitListResponse, Limits } from './limits';
 import * as QuoteAPI from './quote';
+import { Quote, QuoteResource, QuoteRetrieveParams, QuoteRetrieveResponse } from './quote';
 
 export class Swaps extends APIResource {
   depositActions: DepositActionsAPI.DepositActions = new DepositActionsAPI.DepositActions(this._client);
   limits: LimitsAPI.Limits = new LimitsAPI.Limits(this._client);
   quote: QuoteAPI.QuoteResource = new QuoteAPI.QuoteResource(this._client);
 
+  /**
+   * Creates a new swap based on the provided request. Token parameters accept either
+   * asset names (e.g. USDC, ETH) or token contract addresses (e.g. 0xa0b8...). For
+   * native tokens via contract address, use the network's zero address (e.g.
+   * 0x0000000000000000000000000000000000000000 for EVM,
+   * 11111111111111111111111111111111 for Solana).
+   */
   create(body: SwapCreateParams, options?: Core.RequestOptions): Core.APIPromise<SwapCreateResponse> {
     return this._client.post('/api/v2/swaps', { body, ...options });
   }
 
+  /**
+   * Retrieves the details of a specific swap by its ID.
+   */
   retrieve(
     swapId: string,
     query?: SwapRetrieveParams,
@@ -35,6 +47,9 @@ export class Swaps extends APIResource {
     return this._client.get(`/api/v2/swaps/${swapId}`, { query, ...options });
   }
 
+  /**
+   * Retrieves a list of all swaps.
+   */
   list(query: SwapListParams, options?: Core.RequestOptions): Core.APIPromise<SwapListResponse> {
     return this._client.get('/api/v2/swaps', { query, ...options });
   }
@@ -47,7 +62,7 @@ export interface PreparedSwapResponse {
 
   refuel?: TokenWithAmount;
 
-  reward?: TokenWithAmount;
+  reward?: PreparedSwapResponse.Reward;
 
   swap?: Swap;
 }
@@ -62,7 +77,11 @@ export namespace PreparedSwapResponse {
 
     call_data?: string | null;
 
+    encoded_args?: Array<string> | null;
+
     fee_token?: Shared.Token;
+
+    gas_limit?: string | null;
 
     network?: Shared.Network;
 
@@ -71,6 +90,20 @@ export namespace PreparedSwapResponse {
     to_address?: string;
 
     type?: string;
+  }
+
+  export interface Reward {
+    token?: Shared.Token;
+
+    amount?: number;
+
+    amount_in_usd?: number;
+
+    campaign_type?: string;
+
+    network?: Shared.Network;
+
+    nft_contract_address?: string | null;
   }
 }
 
@@ -201,7 +234,23 @@ export interface SwapQuoteResponse {
 
   refuel?: TokenWithAmount;
 
-  reward?: TokenWithAmount;
+  reward?: SwapQuoteResponse.Reward;
+}
+
+export namespace SwapQuoteResponse {
+  export interface Reward {
+    token?: Shared.Token;
+
+    amount?: number;
+
+    amount_in_usd?: number;
+
+    campaign_type?: string;
+
+    network?: Shared.Network;
+
+    nft_contract_address?: string | null;
+  }
 }
 
 export interface SwapResponse {
@@ -209,9 +258,25 @@ export interface SwapResponse {
 
   refuel?: TokenWithAmount;
 
-  reward?: TokenWithAmount;
+  reward?: SwapResponse.Reward;
 
   swap?: Swap;
+}
+
+export namespace SwapResponse {
+  export interface Reward {
+    token?: Shared.Token;
+
+    amount?: number;
+
+    amount_in_usd?: number;
+
+    campaign_type?: string;
+
+    network?: Shared.Network;
+
+    nft_contract_address?: string | null;
+  }
 }
 
 export interface TokenWithAmount {
@@ -243,7 +308,7 @@ export interface SwapListResponse {
 }
 
 export interface SwapCreateParams {
-  amount?: number;
+  amount?: number | null;
 
   destination_address?: string;
 
@@ -257,6 +322,8 @@ export interface SwapCreateParams {
 
   refuel?: boolean;
 
+  refund_address?: string | null;
+
   slippage?: string | null;
 
   source_address?: string | null;
@@ -268,6 +335,8 @@ export interface SwapCreateParams {
   source_token?: string;
 
   use_deposit_address?: boolean;
+
+  use_depository?: boolean;
 
   use_new_deposit_address?: boolean | null;
 }
@@ -286,26 +355,41 @@ export interface SwapListParams {
   page?: number;
 }
 
-export namespace Swaps {
-  export import PreparedSwapResponse = SwapsAPI.PreparedSwapResponse;
-  export import Swap = SwapsAPI.Swap;
-  export import SwapQuoteResponse = SwapsAPI.SwapQuoteResponse;
-  export import SwapResponse = SwapsAPI.SwapResponse;
-  export import TokenWithAmount = SwapsAPI.TokenWithAmount;
-  export import SwapCreateResponse = SwapsAPI.SwapCreateResponse;
-  export import SwapRetrieveResponse = SwapsAPI.SwapRetrieveResponse;
-  export import SwapListResponse = SwapsAPI.SwapListResponse;
-  export import SwapCreateParams = SwapsAPI.SwapCreateParams;
-  export import SwapRetrieveParams = SwapsAPI.SwapRetrieveParams;
-  export import SwapListParams = SwapsAPI.SwapListParams;
-  export import DepositActions = DepositActionsAPI.DepositActions;
-  export import ListTransferDepositAction = DepositActionsAPI.ListTransferDepositAction;
-  export import DepositActionListParams = DepositActionsAPI.DepositActionListParams;
-  export import Limits = LimitsAPI.Limits;
-  export import LimitListResponse = LimitsAPI.LimitListResponse;
-  export import LimitListParams = LimitsAPI.LimitListParams;
-  export import QuoteResource = QuoteAPI.QuoteResource;
-  export import Quote = QuoteAPI.Quote;
-  export import QuoteRetrieveResponse = QuoteAPI.QuoteRetrieveResponse;
-  export import QuoteRetrieveParams = QuoteAPI.QuoteRetrieveParams;
+Swaps.DepositActions = DepositActions;
+Swaps.Limits = Limits;
+Swaps.QuoteResource = QuoteResource;
+
+export declare namespace Swaps {
+  export {
+    type PreparedSwapResponse as PreparedSwapResponse,
+    type Swap as Swap,
+    type SwapQuoteResponse as SwapQuoteResponse,
+    type SwapResponse as SwapResponse,
+    type TokenWithAmount as TokenWithAmount,
+    type SwapCreateResponse as SwapCreateResponse,
+    type SwapRetrieveResponse as SwapRetrieveResponse,
+    type SwapListResponse as SwapListResponse,
+    type SwapCreateParams as SwapCreateParams,
+    type SwapRetrieveParams as SwapRetrieveParams,
+    type SwapListParams as SwapListParams,
+  };
+
+  export {
+    DepositActions as DepositActions,
+    type ListTransferDepositAction as ListTransferDepositAction,
+    type DepositActionListParams as DepositActionListParams,
+  };
+
+  export {
+    Limits as Limits,
+    type LimitListResponse as LimitListResponse,
+    type LimitListParams as LimitListParams,
+  };
+
+  export {
+    QuoteResource as QuoteResource,
+    type Quote as Quote,
+    type QuoteRetrieveResponse as QuoteRetrieveResponse,
+    type QuoteRetrieveParams as QuoteRetrieveParams,
+  };
 }

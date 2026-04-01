@@ -3,11 +3,17 @@
 import { APIResource } from '../../resource';
 import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
-import * as SourcesAPI from './sources';
 import * as Shared from '../shared';
 import * as SwapsAPI from '../swaps/swaps';
 
 export class Sources extends APIResource {
+  /**
+   * Retrieves all available source routes. Token parameters accept either asset
+   * names (e.g. USDC, ETH) or token contract addresses (e.g. 0xa0b8...). For native
+   * tokens via contract address, use the network's zero address (e.g.
+   * 0x0000000000000000000000000000000000000000 for EVM,
+   * 11111111111111111111111111111111 for Solana).
+   */
   list(query?: SourceListParams, options?: Core.RequestOptions): Core.APIPromise<SourceListResponse>;
   list(options?: Core.RequestOptions): Core.APIPromise<SourceListResponse>;
   list(
@@ -37,6 +43,8 @@ export namespace SourceListResponse {
 
     deposit_methods?: Array<string> | null;
 
+    destination_rank?: number;
+
     display_name?: string;
 
     logo?: string;
@@ -47,11 +55,27 @@ export namespace SourceListResponse {
 
     node_url?: string | null;
 
+    nodes?: Array<string> | null;
+
+    source_rank?: number;
+
     tokens?: Array<Data.Token>;
 
     transaction_explorer_template?: string;
 
-    type?: 'evm' | 'starknet' | 'solana' | 'cosmos' | 'starkex' | 'zksynclite' | 'ton' | 'paradex' | 'tron';
+    type?:
+      | 'evm'
+      | 'starknet'
+      | 'solana'
+      | 'cosmos'
+      | 'starkex'
+      | 'zksynclite'
+      | 'ton'
+      | 'paradex'
+      | 'tron'
+      | 'fuel'
+      | 'bitcoin'
+      | 'hyperliquid';
   }
 
   export namespace Data {
@@ -60,7 +84,11 @@ export namespace SourceListResponse {
 
       decimals?: number;
 
+      destination_rank?: number;
+
       display_asset?: string;
+
+      group?: string | null;
 
       listing_date?: string;
 
@@ -71,6 +99,8 @@ export namespace SourceListResponse {
       price_in_usd?: number;
 
       refuel?: SwapsAPI.TokenWithAmount;
+
+      source_rank?: number;
 
       status?: string;
 
@@ -84,6 +114,8 @@ export interface SourceListParams {
 
   destination_token?: string;
 
+  has_deposit_address?: boolean;
+
   include_swaps?: boolean;
 
   include_unavailable?: boolean;
@@ -91,11 +123,21 @@ export interface SourceListParams {
   include_unmatched?: boolean;
 
   network_types?: Array<
-    'evm' | 'starknet' | 'solana' | 'cosmos' | 'starkex' | 'zksynclite' | 'ton' | 'paradex' | 'tron'
+    | 'evm'
+    | 'starknet'
+    | 'solana'
+    | 'cosmos'
+    | 'starkex'
+    | 'zksynclite'
+    | 'ton'
+    | 'paradex'
+    | 'tron'
+    | 'fuel'
+    | 'bitcoin'
+    | 'hyperliquid'
   >;
 }
 
-export namespace Sources {
-  export import SourceListResponse = SourcesAPI.SourceListResponse;
-  export import SourceListParams = SourcesAPI.SourceListParams;
+export declare namespace Sources {
+  export { type SourceListResponse as SourceListResponse, type SourceListParams as SourceListParams };
 }

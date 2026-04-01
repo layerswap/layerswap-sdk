@@ -1,11 +1,27 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { type Agent } from './_shims/index';
+import { stringifyQuery } from './internal/utils/query';
+import * as Core from './core';
 import * as Errors from './error';
 import * as Uploads from './uploads';
-import { type Agent } from './_shims/index';
-import * as qs from './internal/qs';
-import * as Core from './core';
 import * as API from './resources/index';
+import { Health } from './resources/health';
+import { NetworkListParams, NetworkListResponse, Networks } from './resources/networks/networks';
+import {
+  PreparedSwapResponse,
+  Swap,
+  SwapCreateParams,
+  SwapCreateResponse,
+  SwapListParams,
+  SwapListResponse,
+  SwapQuoteResponse,
+  SwapResponse,
+  SwapRetrieveParams,
+  SwapRetrieveResponse,
+  Swaps,
+  TokenWithAmount,
+} from './resources/swaps/swaps';
 
 export interface ClientOptions {
   /**
@@ -26,8 +42,10 @@ export interface ClientOptions {
    *
    * Note that request timeouts are retried by default, so in a worst-case scenario you may wait
    * much longer than this timeout before the promise succeeds or fails.
+   *
+   * @unit milliseconds
    */
-  timeout?: number;
+  timeout?: number | undefined;
 
   /**
    * An HTTP agent used to manage HTTP(S) connections.
@@ -35,7 +53,7 @@ export interface ClientOptions {
    * If not provided, an agent will be constructed by default in the Node.js environment,
    * otherwise no agent is used.
    */
-  httpAgent?: Agent;
+  httpAgent?: Agent | undefined;
 
   /**
    * Specify a custom `fetch` function implementation.
@@ -51,7 +69,7 @@ export interface ClientOptions {
    *
    * @default 2
    */
-  maxRetries?: number;
+  maxRetries?: number | undefined;
 
   /**
    * Default headers to include with every request to the API.
@@ -59,7 +77,7 @@ export interface ClientOptions {
    * These can be removed in individual requests by explicitly setting the
    * header to `undefined` or `null` in request options.
    */
-  defaultHeaders?: Core.Headers;
+  defaultHeaders?: Core.Headers | undefined;
 
   /**
    * Default query parameters to include with every request to the API.
@@ -67,7 +85,7 @@ export interface ClientOptions {
    * These can be removed in individual requests by explicitly setting the
    * param to `undefined` in request options.
    */
-  defaultQuery?: Core.DefaultQuery;
+  defaultQuery?: Core.DefaultQuery | undefined;
 }
 
 /**
@@ -109,6 +127,7 @@ export class Layerswap extends Core.APIClient {
 
     super({
       baseURL: options.baseURL!,
+      baseURLOverridden: baseURL ? baseURL !== 'https://api.layerswap.io' : false,
       timeout: options.timeout ?? 60000 /* 1 minute */,
       httpAgent: options.httpAgent,
       maxRetries: options.maxRetries,
@@ -123,6 +142,13 @@ export class Layerswap extends Core.APIClient {
   health: API.Health = new API.Health(this);
   swaps: API.Swaps = new API.Swaps(this);
   networks: API.Networks = new API.Networks(this);
+
+  /**
+   * Check whether the base URL is set to its default.
+   */
+  #baseURLOverridden(): boolean {
+    return this.baseURL !== 'https://api.layerswap.io';
+  }
 
   protected override defaultQuery(): Core.DefaultQuery | undefined {
     return this._options.defaultQuery;
@@ -139,8 +165,8 @@ export class Layerswap extends Core.APIClient {
     return { 'X-LS-APIKEY': this.apiKey };
   }
 
-  protected override stringifyQuery(query: Record<string, unknown>): string {
-    return qs.stringify(query, { arrayFormat: 'comma' });
+  protected override stringifyQuery(query: object | Record<string, unknown>): string {
+    return stringifyQuery(query);
   }
 
   static Layerswap = this;
@@ -164,7 +190,45 @@ export class Layerswap extends Core.APIClient {
   static fileFromPath = Uploads.fileFromPath;
 }
 
-export const {
+Layerswap.Health = Health;
+Layerswap.Swaps = Swaps;
+Layerswap.Networks = Networks;
+
+export declare namespace Layerswap {
+  export type RequestOptions = Core.RequestOptions;
+
+  export { Health as Health };
+
+  export {
+    Swaps as Swaps,
+    type PreparedSwapResponse as PreparedSwapResponse,
+    type Swap as Swap,
+    type SwapQuoteResponse as SwapQuoteResponse,
+    type SwapResponse as SwapResponse,
+    type TokenWithAmount as TokenWithAmount,
+    type SwapCreateResponse as SwapCreateResponse,
+    type SwapRetrieveResponse as SwapRetrieveResponse,
+    type SwapListResponse as SwapListResponse,
+    type SwapCreateParams as SwapCreateParams,
+    type SwapRetrieveParams as SwapRetrieveParams,
+    type SwapListParams as SwapListParams,
+  };
+
+  export {
+    Networks as Networks,
+    type NetworkListResponse as NetworkListResponse,
+    type NetworkListParams as NetworkListParams,
+  };
+
+  export type APIError = API.APIError;
+  export type Network = API.Network;
+  export type NetworkMetadata = API.NetworkMetadata;
+  export type NetworkWithTokens = API.NetworkWithTokens;
+  export type Token = API.Token;
+}
+
+export { toFile, fileFromPath } from './uploads';
+export {
   LayerswapError,
   APIError,
   APIConnectionError,
@@ -178,38 +242,6 @@ export const {
   InternalServerError,
   PermissionDeniedError,
   UnprocessableEntityError,
-} = Errors;
-
-export import toFile = Uploads.toFile;
-export import fileFromPath = Uploads.fileFromPath;
-
-export namespace Layerswap {
-  export import RequestOptions = Core.RequestOptions;
-
-  export import Health = API.Health;
-
-  export import Swaps = API.Swaps;
-  export import PreparedSwapResponse = API.PreparedSwapResponse;
-  export import Swap = API.Swap;
-  export import SwapQuoteResponse = API.SwapQuoteResponse;
-  export import SwapResponse = API.SwapResponse;
-  export import TokenWithAmount = API.TokenWithAmount;
-  export import SwapCreateResponse = API.SwapCreateResponse;
-  export import SwapRetrieveResponse = API.SwapRetrieveResponse;
-  export import SwapListResponse = API.SwapListResponse;
-  export import SwapCreateParams = API.SwapCreateParams;
-  export import SwapRetrieveParams = API.SwapRetrieveParams;
-  export import SwapListParams = API.SwapListParams;
-
-  export import Networks = API.Networks;
-  export import NetworkListResponse = API.NetworkListResponse;
-  export import NetworkListParams = API.NetworkListParams;
-
-  export import APIError = API.APIError;
-  export import Network = API.Network;
-  export import NetworkMetadata = API.NetworkMetadata;
-  export import NetworkWithTokens = API.NetworkWithTokens;
-  export import Token = API.Token;
-}
+} from './error';
 
 export default Layerswap;

@@ -2,11 +2,17 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as QuoteAPI from './quote';
 import * as Shared from '../shared';
 import * as SwapsAPI from './swaps';
 
 export class QuoteResource extends APIResource {
+  /**
+   * Retrieves a swap quote based on the provided route request. Token parameters
+   * accept either asset names (e.g. USDC, ETH) or token contract addresses (e.g.
+   * 0xa0b8...). For native tokens via contract address, use the network's zero
+   * address (e.g. 0x0000000000000000000000000000000000000000 for EVM,
+   * 11111111111111111111111111111111 for Solana).
+   */
   retrieve(
     query: QuoteRetrieveParams,
     options?: Core.RequestOptions,
@@ -24,11 +30,19 @@ export interface Quote {
 
   destination_token?: Shared.Token;
 
+  fee_discount?: number;
+
   min_receive_amount?: number;
+
+  path?: Array<Quote.Path>;
+
+  rate?: number;
 
   receive_amount?: number;
 
   refuel_in_source?: number | null;
+
+  requested_amount?: number;
 
   service_fee?: number;
 
@@ -41,6 +55,14 @@ export interface Quote {
   total_fee?: number;
 
   total_fee_in_usd?: number;
+}
+
+export namespace Quote {
+  export interface Path {
+    order?: number;
+
+    provider?: string;
+  }
 }
 
 export interface QuoteRetrieveResponse {
@@ -69,8 +91,10 @@ export interface QuoteRetrieveParams {
   use_deposit_address?: boolean;
 }
 
-export namespace QuoteResource {
-  export import Quote = QuoteAPI.Quote;
-  export import QuoteRetrieveResponse = QuoteAPI.QuoteRetrieveResponse;
-  export import QuoteRetrieveParams = QuoteAPI.QuoteRetrieveParams;
+export declare namespace QuoteResource {
+  export {
+    type Quote as Quote,
+    type QuoteRetrieveResponse as QuoteRetrieveResponse,
+    type QuoteRetrieveParams as QuoteRetrieveParams,
+  };
 }

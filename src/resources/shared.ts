@@ -5,7 +5,7 @@ export interface APIError {
 
   message?: string;
 
-  metadata?: Record<string, unknown>;
+  metadata?: { [key: string]: unknown };
 }
 
 export interface Network {
@@ -17,6 +17,8 @@ export interface Network {
 
   deposit_methods?: Array<string> | null;
 
+  destination_rank?: number;
+
   display_name?: string;
 
   logo?: string;
@@ -27,9 +29,25 @@ export interface Network {
 
   node_url?: string | null;
 
+  nodes?: Array<string> | null;
+
+  source_rank?: number;
+
   transaction_explorer_template?: string;
 
-  type?: 'evm' | 'starknet' | 'solana' | 'cosmos' | 'starkex' | 'zksynclite' | 'ton' | 'paradex' | 'tron';
+  type?:
+    | 'evm'
+    | 'starknet'
+    | 'solana'
+    | 'cosmos'
+    | 'starkex'
+    | 'zksynclite'
+    | 'ton'
+    | 'paradex'
+    | 'tron'
+    | 'fuel'
+    | 'bitcoin'
+    | 'hyperliquid';
 }
 
 export interface NetworkMetadata {
@@ -38,6 +56,10 @@ export interface NetworkMetadata {
   evm_oracle_contract?: string | null;
 
   listing_date?: string;
+
+  watchdog_contract?: string | null;
+
+  zks_paymaster_contract?: string | null;
 }
 
 export interface NetworkWithTokens {
@@ -49,6 +71,8 @@ export interface NetworkWithTokens {
 
   deposit_methods?: Array<string> | null;
 
+  destination_rank?: number;
+
   display_name?: string;
 
   logo?: string;
@@ -59,11 +83,27 @@ export interface NetworkWithTokens {
 
   node_url?: string | null;
 
+  nodes?: Array<string> | null;
+
+  source_rank?: number;
+
   tokens?: Array<Token>;
 
   transaction_explorer_template?: string;
 
-  type?: 'evm' | 'starknet' | 'solana' | 'cosmos' | 'starkex' | 'zksynclite' | 'ton' | 'paradex' | 'tron';
+  type?:
+    | 'evm'
+    | 'starknet'
+    | 'solana'
+    | 'cosmos'
+    | 'starkex'
+    | 'zksynclite'
+    | 'ton'
+    | 'paradex'
+    | 'tron'
+    | 'fuel'
+    | 'bitcoin'
+    | 'hyperliquid';
 }
 
 export interface Token {
@@ -71,7 +111,11 @@ export interface Token {
 
   decimals?: number;
 
+  destination_rank?: number;
+
   display_asset?: string;
+
+  group?: string | null;
 
   listing_date?: string;
 
@@ -80,6 +124,8 @@ export interface Token {
   precision?: number;
 
   price_in_usd?: number;
+
+  source_rank?: number;
 
   symbol?: string;
 }

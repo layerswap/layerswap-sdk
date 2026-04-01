@@ -6,7 +6,7 @@ This library provides convenient access to the Layerswap REST API from server-si
 
 The REST API documentation can be found on [layerswapapi.readme.io](https://layerswapapi.readme.io/). The full API of this library can be found in [api.md](api.md).
 
-It is generated with [Stainless](https://www.stainlessapi.com/).
+It is generated with [Stainless](https://www.stainless.com/).
 
 ## Installation
 
@@ -26,19 +26,15 @@ const client = new Layerswap({
   apiKey: process.env['LAYERSWAP_API_KEY'], // This is the default and can be omitted
 });
 
-async function main() {
-  const quote = await client.swaps.quote.retrieve({
-    amount: 123,
-    destination_network: 'ARBITRUM_MAINNET',
-    destination_token: 'ETH',
-    source_network: 'OPTIMISM_MAINNET',
-    source_token: 'ETH',
-  });
+const quote = await client.swaps.quote.retrieve({
+  amount: 0,
+  destination_network: 'ARBITRUM_MAINNET',
+  destination_token: 'ETH',
+  source_network: 'OPTIMISM_MAINNET',
+  source_token: 'ETH',
+});
 
-  console.log(quote.data);
-}
-
-main();
+console.log(quote.data);
 ```
 
 ### Request & Response types
@@ -53,18 +49,14 @@ const client = new Layerswap({
   apiKey: process.env['LAYERSWAP_API_KEY'], // This is the default and can be omitted
 });
 
-async function main() {
-  const params: Layerswap.Swaps.QuoteRetrieveParams = {
-    amount: 0,
-    destination_network: 'destination_network',
-    destination_token: 'destination_token',
-    source_network: 'source_network',
-    source_token: 'source_token',
-  };
-  const quote: Layerswap.Swaps.QuoteRetrieveResponse = await client.swaps.quote.retrieve(params);
-}
-
-main();
+const params: Layerswap.Swaps.QuoteRetrieveParams = {
+  amount: 0,
+  destination_network: 'destination_network',
+  destination_token: 'destination_token',
+  source_network: 'source_network',
+  source_token: 'source_token',
+};
+const quote: Layerswap.Swaps.QuoteRetrieveResponse = await client.swaps.quote.retrieve(params);
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
@@ -77,30 +69,26 @@ a subclass of `APIError` will be thrown:
 
 <!-- prettier-ignore -->
 ```ts
-async function main() {
-  const quote = await client.swaps.quote
-    .retrieve({
-      amount: 0,
-      destination_network: 'destination_network',
-      destination_token: 'destination_token',
-      source_network: 'source_network',
-      source_token: 'source_token',
-    })
-    .catch(async (err) => {
-      if (err instanceof Layerswap.APIError) {
-        console.log(err.status); // 400
-        console.log(err.name); // BadRequestError
-        console.log(err.headers); // {server: 'nginx', ...}
-      } else {
-        throw err;
-      }
-    });
-}
-
-main();
+const quote = await client.swaps.quote
+  .retrieve({
+    amount: 0,
+    destination_network: 'destination_network',
+    destination_token: 'destination_token',
+    source_network: 'source_network',
+    source_token: 'source_token',
+  })
+  .catch(async (err) => {
+    if (err instanceof Layerswap.APIError) {
+      console.log(err.status); // 400
+      console.log(err.name); // BadRequestError
+      console.log(err.headers); // {server: 'nginx', ...}
+    } else {
+      throw err;
+    }
+  });
 ```
 
-Error codes are as followed:
+Error codes are as follows:
 
 | Status Code | Error Type                 |
 | ----------- | -------------------------- |
@@ -129,7 +117,13 @@ const client = new Layerswap({
 });
 
 // Or, configure per-request:
-await client.swaps.quote.retrieve({ amount: 0, destination_network: 'destination_network', destination_token: 'destination_token', source_network: 'source_network', source_token: 'source_token' }, {
+await client.swaps.quote.retrieve({
+  amount: 0,
+  destination_network: 'destination_network',
+  destination_token: 'destination_token',
+  source_network: 'source_network',
+  source_token: 'source_token',
+}, {
   maxRetries: 5,
 });
 ```
@@ -146,7 +140,13 @@ const client = new Layerswap({
 });
 
 // Override per-request:
-await client.swaps.quote.retrieve({ amount: 0, destination_network: 'destination_network', destination_token: 'destination_token', source_network: 'source_network', source_token: 'source_token' }, {
+await client.swaps.quote.retrieve({
+  amount: 0,
+  destination_network: 'destination_network',
+  destination_token: 'destination_token',
+  source_network: 'source_network',
+  source_token: 'source_token',
+}, {
   timeout: 5 * 1000,
 });
 ```
@@ -312,7 +312,7 @@ await client.swaps.quote.retrieve(
 This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) conventions, though certain backwards-incompatible changes may be released as minor versions:
 
 1. Changes that only affect static types, without breaking runtime behavior.
-2. Changes to library internals which are technically public but not intended or documented for external use. _(Please open a GitHub issue to let us know if you are relying on such internals)_.
+2. Changes to library internals which are technically public but not intended or documented for external use. _(Please open a GitHub issue to let us know if you are relying on such internals.)_
 3. Changes that we do not expect to impact the vast majority of users in practice.
 
 We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.
@@ -324,6 +324,15 @@ We are keen for your feedback; please open an [issue](https://www.github.com/lay
 TypeScript >= 4.5 is supported.
 
 The following runtimes are supported:
+
+- Web browsers (Up-to-date Chrome, Firefox, Safari, Edge, and more)
+- Node.js 18 LTS or later ([non-EOL](https://endoflife.date/nodejs)) versions.
+- Deno v1.28.0 or higher.
+- Bun 1.0 or later.
+- Cloudflare Workers.
+- Vercel Edge Runtime.
+- Jest 28 or greater with the `"node"` environment (`"jsdom"` is not supported at this time).
+- Nitro v2.6 or greater.
 
 Note that React Native is not supported at this time.
 
