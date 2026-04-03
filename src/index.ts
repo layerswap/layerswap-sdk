@@ -1,215 +1,314 @@
-// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+export type {
+  LsNetworkType,
+  LsToken,
+  LsNetwork,
+  LsRoute,
+  LsLimits,
+  LsQuote,
+  LsTokenWithAmount,
+  LsQuoteResponse,
+  LsSwapStatus,
+  LsTransaction,
+  LsDepositAction,
+  LsExchange,
+  LsSwap,
+  LsSwapResponse,
+  LsDetailedQuote,
+  LsTransactionStatus,
+  LsApiResponse,
+  LayerSwapQuoteRequest,
+  LayerSwapCreateRequest,
+  LayerSwapGetSwapsRequest,
+  LayerSwapGetSourcesRequest,
+  LayerSwapGetDestinationsRequest,
+  LayerSwapGetNetworksRequest,
+  LayerSwapGetTransactionStatusRequest,
+} from "./types";
 
-import * as Errors from './error';
-import * as Uploads from './uploads';
-import { type Agent } from './_shims/index';
-import * as qs from './internal/qs';
-import * as Core from './core';
-import * as API from './resources/index';
+import type {
+  LsApiResponse,
+  LsDepositAction,
+  LsDetailedQuote,
+  LsLimits,
+  LsNetwork,
+  LsQuote,
+  LsQuoteResponse,
+  LsRoute,
+  LsSwap,
+  LsSwapResponse,
+  LsTransactionStatus,
+  LayerSwapCreateRequest,
+  LayerSwapQuoteRequest,
+  LayerSwapGetSwapsRequest,
+  LayerSwapGetSourcesRequest,
+  LayerSwapGetDestinationsRequest,
+  LayerSwapGetNetworksRequest,
+  LayerSwapGetTransactionStatusRequest,
+} from "./types";
 
-export interface ClientOptions {
-  /**
-   * Defaults to process.env['LAYERSWAP_API_KEY'].
-   */
-  apiKey?: string | undefined;
+import { LayerSwapApiError } from "./types";
+export { LayerSwapApiError } from "./types";
 
-  /**
-   * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
-   *
-   * Defaults to process.env['LAYERSWAP_BASE_URL'].
-   */
-  baseURL?: string | null | undefined;
+const DEFAULT_BASE_URL = "https://api.layerswap.io";
 
-  /**
-   * The maximum amount of time (in milliseconds) that the client should wait for a response
-   * from the server before timing out a single request.
-   *
-   * Note that request timeouts are retried by default, so in a worst-case scenario you may wait
-   * much longer than this timeout before the promise succeeds or fails.
-   */
-  timeout?: number;
-
-  /**
-   * An HTTP agent used to manage HTTP(S) connections.
-   *
-   * If not provided, an agent will be constructed by default in the Node.js environment,
-   * otherwise no agent is used.
-   */
-  httpAgent?: Agent;
-
-  /**
-   * Specify a custom `fetch` function implementation.
-   *
-   * If not provided, we use `node-fetch` on Node.js and otherwise expect that `fetch` is
-   * defined globally.
-   */
-  fetch?: Core.Fetch | undefined;
-
-  /**
-   * The maximum number of times that the client will retry a request in case of a
-   * temporary failure, like a network error or a 5XX error from the server.
-   *
-   * @default 2
-   */
-  maxRetries?: number;
-
-  /**
-   * Default headers to include with every request to the API.
-   *
-   * These can be removed in individual requests by explicitly setting the
-   * header to `undefined` or `null` in request options.
-   */
-  defaultHeaders?: Core.Headers;
-
-  /**
-   * Default query parameters to include with every request to the API.
-   *
-   * These can be removed in individual requests by explicitly setting the
-   * param to `undefined` in request options.
-   */
-  defaultQuery?: Core.DefaultQuery;
+export interface LayerSwapApiConfig {
+  apiKey: string;
+  baseUrl?: string;
 }
 
 /**
- * API Client for interfacing with the Layerswap API.
+ * Low-level HTTP client for the LayerSwap REST API v2.
+ *
+ * Zero dependencies — uses native `fetch` and `URLSearchParams`.
+ * Works in Node 18+, Deno, Bun, browsers, and Cloudflare Workers.
  */
-export class Layerswap extends Core.APIClient {
-  apiKey: string;
+export class LayerSwapApi {
+  private readonly baseUrl: string;
+  private readonly apiKey: string;
 
-  private _options: ClientOptions;
+  constructor(config: LayerSwapApiConfig) {
+    this.apiKey = config.apiKey;
+    this.baseUrl = (config.baseUrl ?? DEFAULT_BASE_URL).replace(/\/+$/, "");
+  }
 
-  /**
-   * API Client for interfacing with the Layerswap API.
-   *
-   * @param {string | undefined} [opts.apiKey=process.env['LAYERSWAP_API_KEY'] ?? undefined]
-   * @param {string} [opts.baseURL=process.env['LAYERSWAP_BASE_URL'] ?? https://api.layerswap.io] - Override the default base URL for the API.
-   * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
-   * @param {number} [opts.httpAgent] - An HTTP agent used to manage HTTP(s) connections.
-   * @param {Core.Fetch} [opts.fetch] - Specify a custom `fetch` function implementation.
-   * @param {number} [opts.maxRetries=2] - The maximum number of times the client will retry a request.
-   * @param {Core.Headers} opts.defaultHeaders - Default headers to include with every request to the API.
-   * @param {Core.DefaultQuery} opts.defaultQuery - Default query parameters to include with every request to the API.
-   */
-  constructor({
-    baseURL = Core.readEnv('LAYERSWAP_BASE_URL'),
-    apiKey = Core.readEnv('LAYERSWAP_API_KEY'),
-    ...opts
-  }: ClientOptions = {}) {
-    if (apiKey === undefined) {
-      throw new Errors.LayerswapError(
-        "The LAYERSWAP_API_KEY environment variable is missing or empty; either provide it, or instantiate the Layerswap client with an apiKey option, like new Layerswap({ apiKey: 'My API Key' }).",
+  // ============================================================
+  // Route discovery
+  // ============================================================
+
+  /** Get available source networks and tokens. */
+  async getSources(
+    params?: LayerSwapGetSourcesRequest
+  ): Promise<LsRoute[]> {
+    const qs = new URLSearchParams();
+    if (params?.destinationNetwork) qs.set("destination_network", params.destinationNetwork);
+    if (params?.destinationToken) qs.set("destination_token", params.destinationToken);
+    if (params?.includeSwaps != null) qs.set("include_swaps", String(params.includeSwaps));
+    if (params?.includeUnavailable != null) qs.set("include_unavailable", String(params.includeUnavailable));
+    if (params?.includeUnmatched != null) qs.set("include_unmatched", String(params.includeUnmatched));
+    if (params?.hasDepositAddress != null) qs.set("has_deposit_address", String(params.hasDepositAddress));
+    if (params?.networkTypes?.length) qs.set("network_types", params.networkTypes.join(","));
+    return this.get<LsRoute[]>("/api/v2/sources", qs);
+  }
+
+  /** Get available destination networks and tokens. */
+  async getDestinations(
+    params?: LayerSwapGetDestinationsRequest
+  ): Promise<LsRoute[]> {
+    const qs = new URLSearchParams();
+    if (params?.sourceNetwork) qs.set("source_network", params.sourceNetwork);
+    if (params?.sourceToken) qs.set("source_token", params.sourceToken);
+    if (params?.includeSwaps != null) qs.set("include_swaps", String(params.includeSwaps));
+    if (params?.includeUnavailable != null) qs.set("include_unavailable", String(params.includeUnavailable));
+    if (params?.includeUnmatched != null) qs.set("include_unmatched", String(params.includeUnmatched));
+    if (params?.networkTypes?.length) qs.set("network_types", params.networkTypes.join(","));
+    return this.get<LsRoute[]>("/api/v2/destinations", qs);
+  }
+
+  /** Get all available networks with their tokens. */
+  async getNetworks(
+    params?: LayerSwapGetNetworksRequest
+  ): Promise<LsNetwork[]> {
+    const qs = new URLSearchParams();
+    if (params?.networkTypes?.length) qs.set("network_types", params.networkTypes.join(","));
+    return this.get<LsNetwork[]>("/api/v2/networks", qs);
+  }
+
+  // ============================================================
+  // Quote & limits
+  // ============================================================
+
+  /** Get min/max transfer limits for a route. */
+  async getLimits(request: LayerSwapQuoteRequest): Promise<LsLimits> {
+    return this.get<LsLimits>("/api/v2/limits", this.quoteParams(request));
+  }
+
+  /** Get a swap quote with fee breakdown. */
+  async getQuote(request: LayerSwapQuoteRequest): Promise<LsQuote> {
+    const response = await this.get<LsQuoteResponse>(
+      "/api/v2/quote",
+      this.quoteParams(request)
+    );
+    return response.quote;
+  }
+
+  /** Get detailed quote information with fee breakdown and routing paths. */
+  async getDetailedQuote(
+    request: LayerSwapQuoteRequest
+  ): Promise<LsDetailedQuote[]> {
+    return this.get<LsDetailedQuote[]>(
+      "/api/v2/detailed_quote",
+      this.quoteParams(request)
+    );
+  }
+
+  // ============================================================
+  // Swap lifecycle
+  // ============================================================
+
+  /** Create a new swap. Returns the full response including swap, deposit actions, and quote. */
+  async createSwap(request: LayerSwapCreateRequest): Promise<LsSwapResponse> {
+    return this.post<LsSwapResponse>("/api/v2/swaps", {
+      source_network: request.sourceNetwork,
+      source_token: request.sourceToken,
+      destination_network: request.destinationNetwork,
+      destination_token: request.destinationToken,
+      amount: request.amount,
+      destination_address: request.destinationAddress,
+      ...(request.sourceAddress && { source_address: request.sourceAddress }),
+      refuel: request.refuel ?? false,
+      use_deposit_address: request.useDepositAddress ?? false,
+      ...(request.useNewDepositAddress != null && {
+        use_new_deposit_address: request.useNewDepositAddress,
+      }),
+      ...(request.slippage && { slippage: request.slippage }),
+      ...(request.referenceId && { reference_id: request.referenceId }),
+      ...(request.sourceExchange && { source_exchange: request.sourceExchange }),
+      ...(request.destinationExchange && {
+        destination_exchange: request.destinationExchange,
+      }),
+    });
+  }
+
+  /** List swaps for a given address. */
+  async getSwaps(params: LayerSwapGetSwapsRequest): Promise<LsSwap[]> {
+    const qs = new URLSearchParams();
+    qs.set("address", params.address);
+    if (params.page != null) qs.set("page", String(params.page));
+    if (params.includeExpired != null) qs.set("include_expired", String(params.includeExpired));
+    return this.get<LsSwap[]>("/api/v2/swaps", qs);
+  }
+
+  /** Get a swap by ID. */
+  async getSwap(swapId: string): Promise<LsSwapResponse> {
+    return this.get<LsSwapResponse>(
+      `/api/v2/swaps/${encodeURIComponent(swapId)}`
+    );
+  }
+
+  /** Get a swap by transaction hash. */
+  async getSwapByTransactionHash(
+    transactionHash: string
+  ): Promise<LsSwapResponse> {
+    return this.get<LsSwapResponse>(
+      `/api/v2/swaps/by_transaction_hash/${encodeURIComponent(transactionHash)}`
+    );
+  }
+
+  /** Get deposit actions for a swap. */
+  async getDepositActions(
+    swapId: string,
+    sourceAddress?: string
+  ): Promise<LsDepositAction[]> {
+    const qs = new URLSearchParams();
+    if (sourceAddress) qs.set("source_address", sourceAddress);
+    return this.get<LsDepositAction[]>(
+      `/api/v2/swaps/${encodeURIComponent(swapId)}/deposit_actions`,
+      qs
+    );
+  }
+
+  /** Speed up deposit detection by providing the transaction hash. */
+  async speedUpDeposit(
+    swapId: string,
+    transactionHash: string
+  ): Promise<void> {
+    await this.post<unknown>(
+      `/api/v2/swaps/${encodeURIComponent(swapId)}/deposit_speedup`,
+      { transaction_id: transactionHash }
+    );
+  }
+
+  // ============================================================
+  // Status
+  // ============================================================
+
+  /** Check API health. */
+  async health(): Promise<void> {
+    const url = `${this.baseUrl}/api/v2/health`;
+    const response = await fetch(url, {
+      method: "GET",
+      headers: this.headers(),
+    });
+    if (!response.ok) {
+      throw new LayerSwapApiError(
+        response.status,
+        undefined,
+        `LayerSwap API health check failed (HTTP ${response.status})`
+      );
+    }
+  }
+
+  /** Get transaction status on a network. */
+  async getTransactionStatus(
+    params: LayerSwapGetTransactionStatusRequest
+  ): Promise<LsTransactionStatus> {
+    const qs = new URLSearchParams();
+    qs.set("network", params.network);
+    qs.set("transaction_id", params.transactionId);
+    return this.get<LsTransactionStatus>("/api/v2/transaction_status", qs);
+  }
+
+  // ============================================================
+  // Internals
+  // ============================================================
+
+  private quoteParams(request: LayerSwapQuoteRequest): URLSearchParams {
+    const params = new URLSearchParams();
+    params.set("source_network", request.sourceNetwork);
+    params.set("source_token", request.sourceToken);
+    params.set("destination_network", request.destinationNetwork);
+    params.set("destination_token", request.destinationToken);
+    params.set("amount", String(request.amount));
+    if (request.refuel) params.set("refuel", "true");
+    if (request.slippage) params.set("slippage", request.slippage);
+    if (request.sourceAddress) params.set("source_address", request.sourceAddress);
+    if (request.useDepositAddress != null) params.set("use_deposit_address", String(request.useDepositAddress));
+    return params;
+  }
+
+  private async get<T>(path: string, params?: URLSearchParams): Promise<T> {
+    const qs = params?.toString();
+    const url = `${this.baseUrl}${path}${qs ? `?${qs}` : ""}`;
+    const response = await fetch(url, {
+      method: "GET",
+      headers: this.headers(),
+    });
+    return this.unwrap<T>(response);
+  }
+
+  private async post<T>(path: string, body: unknown): Promise<T> {
+    const url = `${this.baseUrl}${path}`;
+    const response = await fetch(url, {
+      method: "POST",
+      headers: { ...this.headers(), "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+    return this.unwrap<T>(response);
+  }
+
+  private headers(): Record<string, string> {
+    return { "X-LS-APIKEY": this.apiKey };
+  }
+
+  private async unwrap<T>(response: Response): Promise<T> {
+    const json = (await response.json()) as LsApiResponse<T>;
+
+    if (!response.ok || json.error) {
+      throw new LayerSwapApiError(
+        response.status,
+        json.error?.code,
+        json.error?.message ?? `LayerSwap API error (HTTP ${response.status})`
       );
     }
 
-    const options: ClientOptions = {
-      apiKey,
-      ...opts,
-      baseURL: baseURL || `https://api.layerswap.io`,
-    };
+    if (json.data === null || json.data === undefined) {
+      throw new LayerSwapApiError(
+        response.status,
+        undefined,
+        "LayerSwap API returned empty data"
+      );
+    }
 
-    super({
-      baseURL: options.baseURL!,
-      timeout: options.timeout ?? 60000 /* 1 minute */,
-      httpAgent: options.httpAgent,
-      maxRetries: options.maxRetries,
-      fetch: options.fetch,
-    });
-
-    this._options = options;
-
-    this.apiKey = apiKey;
+    return json.data;
   }
-
-  health: API.Health = new API.Health(this);
-  swaps: API.Swaps = new API.Swaps(this);
-  networks: API.Networks = new API.Networks(this);
-
-  protected override defaultQuery(): Core.DefaultQuery | undefined {
-    return this._options.defaultQuery;
-  }
-
-  protected override defaultHeaders(opts: Core.FinalRequestOptions): Core.Headers {
-    return {
-      ...super.defaultHeaders(opts),
-      ...this._options.defaultHeaders,
-    };
-  }
-
-  protected override authHeaders(opts: Core.FinalRequestOptions): Core.Headers {
-    return { 'X-LS-APIKEY': this.apiKey };
-  }
-
-  protected override stringifyQuery(query: Record<string, unknown>): string {
-    return qs.stringify(query, { arrayFormat: 'comma' });
-  }
-
-  static Layerswap = this;
-  static DEFAULT_TIMEOUT = 60000; // 1 minute
-
-  static LayerswapError = Errors.LayerswapError;
-  static APIError = Errors.APIError;
-  static APIConnectionError = Errors.APIConnectionError;
-  static APIConnectionTimeoutError = Errors.APIConnectionTimeoutError;
-  static APIUserAbortError = Errors.APIUserAbortError;
-  static NotFoundError = Errors.NotFoundError;
-  static ConflictError = Errors.ConflictError;
-  static RateLimitError = Errors.RateLimitError;
-  static BadRequestError = Errors.BadRequestError;
-  static AuthenticationError = Errors.AuthenticationError;
-  static InternalServerError = Errors.InternalServerError;
-  static PermissionDeniedError = Errors.PermissionDeniedError;
-  static UnprocessableEntityError = Errors.UnprocessableEntityError;
-
-  static toFile = Uploads.toFile;
-  static fileFromPath = Uploads.fileFromPath;
 }
-
-export const {
-  LayerswapError,
-  APIError,
-  APIConnectionError,
-  APIConnectionTimeoutError,
-  APIUserAbortError,
-  NotFoundError,
-  ConflictError,
-  RateLimitError,
-  BadRequestError,
-  AuthenticationError,
-  InternalServerError,
-  PermissionDeniedError,
-  UnprocessableEntityError,
-} = Errors;
-
-export import toFile = Uploads.toFile;
-export import fileFromPath = Uploads.fileFromPath;
-
-export namespace Layerswap {
-  export import RequestOptions = Core.RequestOptions;
-
-  export import Health = API.Health;
-
-  export import Swaps = API.Swaps;
-  export import PreparedSwapResponse = API.PreparedSwapResponse;
-  export import Swap = API.Swap;
-  export import SwapQuoteResponse = API.SwapQuoteResponse;
-  export import SwapResponse = API.SwapResponse;
-  export import TokenWithAmount = API.TokenWithAmount;
-  export import SwapCreateResponse = API.SwapCreateResponse;
-  export import SwapRetrieveResponse = API.SwapRetrieveResponse;
-  export import SwapListResponse = API.SwapListResponse;
-  export import SwapCreateParams = API.SwapCreateParams;
-  export import SwapRetrieveParams = API.SwapRetrieveParams;
-  export import SwapListParams = API.SwapListParams;
-
-  export import Networks = API.Networks;
-  export import NetworkListResponse = API.NetworkListResponse;
-  export import NetworkListParams = API.NetworkListParams;
-
-  export import APIError = API.APIError;
-  export import Network = API.Network;
-  export import NetworkMetadata = API.NetworkMetadata;
-  export import NetworkWithTokens = API.NetworkWithTokens;
-  export import Token = API.Token;
-}
-
-export default Layerswap;
