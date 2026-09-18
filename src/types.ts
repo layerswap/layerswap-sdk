@@ -100,12 +100,10 @@ export interface LsQuoteResponse {
 export type LsSwapStatus =
   | "created"
   | "user_transfer_pending"
-  | "user_transfer_delayed"
   | "ls_transfer_pending"
   | "completed"
   | "failed"
   | "expired"
-  | "cancelled"
   | "pending_refund"
   | "refunded";
 
